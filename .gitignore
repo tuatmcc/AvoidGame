@@ -880,4 +880,6 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+.vsconfig
+
 # End of https://www.toptal.com/developers/gitignore/api/unity,rider,visualstudio,visualstudiocode,intellij+all,jetbrains+all,microsoftoffice,python,vim
