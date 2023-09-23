@@ -6,4 +6,5 @@
 
 <https://tuatmcc.kibe.la/notes/3674>
 
-unity 2022.3.10f1
+- unity 2022.3.10f1
+- Universal RP
