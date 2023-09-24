@@ -27,36 +27,60 @@ package "Calibration" <<Rectangle>> {
 
 package "Play" <<Rectangle>> {
     class "PlayManager" as playManager {
-        game_objects
-        score
+        game_state
+        player_speed
+        player_pos
+        --
+        start()
+        finish()
+        exit()
     }
     
-    class "PlusScoreObject" as plusScoreObject {
+    class "TimeManager" as timeManager {
+        time
+        --
+        start()
+        stop()
+    }
+    
+    class "StageGenerator" as stageGenerator {
+        amount
+        --
+        Generate()
+    }
+    
+    class "PlusSpeedObject" as plusSpeedObject {
         position
     }
     
-    class "MinusScoreObject" as minusScoreObject {
+    class "MinusSpeedObject" as minusSpeedObject {
         position
     }
     
-    abstract class "ScoreObject" as scoreObject {
-    
+    abstract class "ItemBase" as itemBase {
+        Acceleration/deceleration amount
     }
     
     class "Player" as player {
         calibrate_data
         pose
-        position
+    }
+    
+    interface "IItemCollectible" as iItemCollectible {
+        
     }
     
     class "UI" as playUi {
-        score
+        speed_text
+        player_pos
     }
 }
 
 package "Result" <<Rectangle>> {
     class "UI" as resultUi {
         score
+        --
+        next()
     }
 }
 
@@ -64,7 +88,7 @@ package "Static" <<Rectangle>> {
     entity "ResultData" as resultData {
         result_id [PK]
         --
-        score
+        result
         time_stamp
     }
     
@@ -74,20 +98,23 @@ package "Static" <<Rectangle>> {
 }
 
 ' Menu
+resultData <-- menuUi
 
 ' Calibration
 calibrater <-- calibrationUi
 calibrationData <-- calibrater
 
 ' Play
-playManager <-- scoreObject
-playManager <-- playUi
+playManager <-- itemBase
+timeManager <-- playUi
+timeManager <-- playManager
 playManager <-- player
-
+iItemCollectible <|-- player
 calibrationData <-- player
-resultData <-- playManager
-scoreObject <|-- plusScoreObject
-scoreObject <|-- minusScoreObject
+resultData <-- timeManager
+itemBase <|-- plusSpeedObject
+itemBase <|-- minusSpeedObject
+stageGenerator <-- itemBase
 
 ' Result
 resultData <-- resultUi
