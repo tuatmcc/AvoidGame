@@ -20,8 +20,12 @@ package "Calibration" <<Rectangle>> {
     class "UI" as calibrationUi {
         data
         --
-        play()
+        start()
         exit()
+    }
+    
+    class "PlayerModel" as playerModel {
+        
     }
 }
 
@@ -85,24 +89,31 @@ package "Result" <<Rectangle>> {
 }
 
 package "Static" <<Rectangle>> {
-    entity "ResultData" as resultData {
-        result_id [PK]
-        --
+    class "ResultRepository" as resultRepository {
         result
         time_stamp
+        --
+        save()
+        get()
     }
     
     class "CalibrationData" as calibrationData {
         data
     }
+    
+    class "Motioninput" as motionInput {
+        pose
+    }
 }
 
 ' Menu
-resultData <-- menuUi
+resultRepository <-- menuUi
 
 ' Calibration
 calibrater <-- calibrationUi
 calibrationData <-- calibrater
+motionInput <-- playerModel
+calibrater <-- playerModel
 
 ' Play
 playManager <-- itemBase
@@ -111,12 +122,13 @@ timeManager <-- playManager
 playManager <-- player
 iItemCollectible <|-- player
 calibrationData <-- player
-resultData <-- timeManager
+resultRepository <-- timeManager
 itemBase <|-- plusSpeedObject
 itemBase <|-- minusSpeedObject
 stageGenerator <-- itemBase
+motionInput <-- player
 
 ' Result
-resultData <-- resultUi
+resultRepository <-- resultUi
 
 @enduml
