@@ -1,0 +1,134 @@
+﻿@startuml
+
+left to right direction
+
+package "Menu" <<Rectangle>> {
+    class "UI" as menuUi {
+        --
+        play()
+        checkResult()
+    }
+}
+
+package "Calibration" <<Rectangle>> {
+    class "Calibrater" as calibrater {
+        data
+        --
+        calibrate()
+    }
+
+    class "UI" as calibrationUi {
+        data
+        --
+        start()
+        exit()
+    }
+    
+    class "PlayerModel" as playerModel {
+        
+    }
+}
+
+package "Play" <<Rectangle>> {
+    class "PlayManager" as playManager {
+        game_state
+        player_speed
+        player_pos
+        --
+        start()
+        finish()
+        exit()
+    }
+    
+    class "TimeManager" as timeManager {
+        time
+        --
+        start()
+        stop()
+    }
+    
+    class "StageGenerator" as stageGenerator {
+        amount
+        --
+        Generate()
+    }
+    
+    class "PlusSpeedObject" as plusSpeedObject {
+        position
+    }
+    
+    class "MinusSpeedObject" as minusSpeedObject {
+        position
+    }
+    
+    abstract class "ItemBase" as itemBase {
+        Acceleration/deceleration amount
+    }
+    
+    class "Player" as player {
+        calibrate_data
+        pose
+    }
+    
+    interface "IItemCollectible" as iItemCollectible {
+        
+    }
+    
+    class "UI" as playUi {
+        speed_text
+        player_pos
+    }
+}
+
+package "Result" <<Rectangle>> {
+    class "UI" as resultUi {
+        score
+        --
+        next()
+    }
+}
+
+package "Static" <<Rectangle>> {
+    class "ResultRepository" as resultRepository {
+        result
+        time_stamp
+        --
+        save()
+        get()
+    }
+    
+    class "CalibrationData" as calibrationData {
+        data
+    }
+    
+    class "Motioninput" as motionInput {
+        pose
+    }
+}
+
+' Menu
+resultRepository <-- menuUi
+
+' Calibration
+calibrater <-- calibrationUi
+calibrationData <-- calibrater
+motionInput <-- playerModel
+calibrater <-- playerModel
+
+' Play
+playManager <-- itemBase
+timeManager <-- playUi
+timeManager <-- playManager
+playManager <-- player
+iItemCollectible <|-- player
+calibrationData <-- player
+resultRepository <-- timeManager
+itemBase <|-- plusSpeedObject
+itemBase <|-- minusSpeedObject
+stageGenerator <-- itemBase
+motionInput <-- player
+
+' Result
+resultRepository <-- resultUi
+
+@enduml
