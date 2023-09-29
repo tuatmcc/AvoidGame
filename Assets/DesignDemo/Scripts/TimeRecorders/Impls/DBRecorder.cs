@@ -8,9 +8,14 @@ using Zenject;
 /// <summary>
 /// DBにタイムを記録する
 /// </summary>
-public class DBRecorder : ITimeRecordable
+public class DBRecorder : MonoBehaviour, ITimeRecordable
 {
     public event Action OnTimeRecorded;
+
+    private void Start()
+    {
+        
+    }
 
     public List<float> GetTimeRanking(int num)
     {

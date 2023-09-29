@@ -7,9 +7,14 @@ using Zenject;
 /// <summary>
 /// UnityPlayerPrefsにタイムを保存する
 /// </summary>
-public class PrefsRecorder : ITimeRecordable
+public class PrefsRecorder : MonoBehaviour, ITimeRecordable
 {
     public event Action OnTimeRecorded;
+
+    private void Start()
+    {
+        
+    }
 
     public List<float> GetTimeRanking(int num)
     {

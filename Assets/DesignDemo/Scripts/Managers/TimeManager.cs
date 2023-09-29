@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Jobs;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 /// <summary>
@@ -23,12 +24,13 @@ public class TimeManager : MonoBehaviour
 
     private float _mainTimer;
 
-    [Inject] GameStateManager _gameStateManager;
-    [Inject] ITimeRecordable _timeRecordable;
+    [Inject] private GameStateManager _gameStateManager;
+    private ITimeRecordable _timeRecordable;
 
     public void Start()
     {
         _gameStateManager.OnGameStateChanged += ChangeCount;
+        _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
     }
 
     private void ChangeCount(GameState gameState)
