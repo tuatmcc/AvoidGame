@@ -26,12 +26,15 @@ public class GameStateManager : MonoBehaviour
     private GameState _gameState;
     
     [Inject] private TimeManager _timeManager;
-    
+
+    private void Awake()
+    {
+        GameState = GameState.Menu;
+    }
+
     private void Start()
     {
-        OnGameStateChanged += ChangeGameState;
-        
-        GameState = GameState.Playing;
+        OnGameStateChanged += ChangeGameState;   
     }
 
     /// <summary>
@@ -43,11 +46,14 @@ public class GameStateManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Menu:
+                Debug.Log("GameState Changhed to : Menu");
                 break;
             case GameState.Playing:
+                Debug.Log("GameState Changhed to : Playing");
                 _timeManager.StartCount();
                 break;
             case GameState.Result:
+                Debug.Log("GameState Changhed to : Result");
                 _timeManager.StopCount();
                 break;
         }

@@ -5,7 +5,6 @@ using Zenject;
 
 public class SpeedUpItem : ItemBase
 {
-    // Start is called before the first frame update
     void Start()
     {
         OnItemCollectorHit += OnOnItemCollectorHit;
@@ -13,7 +12,6 @@ public class SpeedUpItem : ItemBase
 
     [Inject] SpeedManager _speedManager;
 
-    // Update is called once per frame
     private void OnOnItemCollectorHit(Collider itemCollector)
     {
         if(itemCollector.TryGetComponent(out IItemCollectable itemCollectable))

@@ -10,6 +10,8 @@ using Zenject;
 /// </summary>
 public class TimeManager : MonoBehaviour
 {
+    private bool counting = false;
+
     public event Action<int> OnTimeChanged;
 
     public int MainTimer
@@ -50,14 +52,17 @@ public class TimeManager : MonoBehaviour
 
     public void StartCount()
     {
+        if(counting) return; 
         MainTimer = 0;
         StartCoroutine(CountCoroutine());
+        counting = true;
     }
 
     public void StopCount()
     {
         StopCoroutine(CountCoroutine());
         _timeRecordable.RecordTime(MainTimer);
+        counting = false;
     }
     
     private IEnumerator CountCoroutine()
