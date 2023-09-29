@@ -7,6 +7,10 @@ using Zenject;
 /// </summary>
 public class GameStateManager : MonoBehaviour
 {
+    /// <summary>
+    /// Stateが変わるごとに呼ばれる
+    /// Stateごとに用意したほうが便利かも
+    /// </summary>
     public event Action<GameState> OnGameStateChanged;
     
     public GameState GameState

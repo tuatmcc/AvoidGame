@@ -10,9 +10,9 @@ using Zenject;
 /// </summary>
 public class TimeManager : MonoBehaviour
 {
-    public event Action<float> OnTimeChanged;
+    public event Action<int> OnTimeChanged;
 
-    public float MainTimer
+    public int MainTimer
     {
         get => _mainTimer;
         set
@@ -22,7 +22,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private float _mainTimer;
+    private int _mainTimer;
 
     [Inject] private GameStateManager _gameStateManager;
     private ITimeRecordable _timeRecordable;
