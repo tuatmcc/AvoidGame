@@ -72,6 +72,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -8311734399780741906}
   m_SourcePrefab: {fileID: 100100000, guid: 1b40d200e6a1d71ba8c84278db3f1242, type: 3}
+--- !u!95 &2764263036808584144 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9012488755130867243, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    type: 3}
+  m_PrefabInstance: {fileID: 6579310814840276475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8932712762366909200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
@@ -92,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   server: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 2764263036808584144}
   ground:
     serializedVersion: 2
     m_Bits: 0
