@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -16,9 +17,9 @@ public class TimePresenter : MonoBehaviour
         _timeManager.OnTimeChanged += ChangeTimeLeftText;
     }
 
-    private void ChangeTimeLeftText(int time)
+    private void ChangeTimeLeftText(TimeSpan time)
     {
-        timeLeftText.text = $"{time:000}";
+        timeLeftText.text = $"{time.Minutes:00}:{time.Seconds:00}:{time.Milliseconds:000}";
     }
     
     private void Reset()

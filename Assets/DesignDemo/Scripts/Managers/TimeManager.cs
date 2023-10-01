@@ -12,19 +12,21 @@ public class TimeManager : MonoBehaviour
 {
     private bool counting = false;
 
-    public event Action<int> OnTimeChanged;
+    private long start_time;
 
-    public int MainTimer
+    public event Action<TimeSpan> OnTimeChanged;
+
+    public long MainTimer
     {
         get => _mainTimer;
         set
         {
             _mainTimer = value;
-            OnTimeChanged?.Invoke(value);
+            OnTimeChanged?.Invoke(new TimeSpan(MainTimer));
         }
     }
 
-    private int _mainTimer;
+    private long _mainTimer;
 
     [Inject] private GameStateManager _gameStateManager;
     private ITimeRecordable _timeRecordable;
@@ -50,27 +52,25 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (counting)
+        {
+            MainTimer = DateTime.Now.Ticks - start_time;
+        }
+    }
+
     public void StartCount()
     {
         if(counting) return; 
         MainTimer = 0;
-        StartCoroutine(CountCoroutine());
+        start_time = DateTime.Now.Ticks;
         counting = true;
     }
 
     public void StopCount()
     {
-        StopCoroutine(CountCoroutine());
         _timeRecordable.RecordTime(MainTimer);
         counting = false;
-    }
-    
-    private IEnumerator CountCoroutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSecondsRealtime(1);
-            MainTimer++;
-        }
     }
 }
