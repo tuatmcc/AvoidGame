@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class CSVRecorder : MonoBehaviour, ITimeRecordable
 {
-    private string _csvPath = Application.dataPath + "/../record/csv";
+    private string _csvPath = Application.dataPath + "/../record.csv";
     public event Action OnTimeRecorded;
-    
+
     public List<float> GetTimeRanking(int num)
     {
         if (!File.Exists(_csvPath))
