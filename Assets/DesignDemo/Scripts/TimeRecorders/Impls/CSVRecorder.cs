@@ -19,6 +19,6 @@ public class CSVRecorder : MonoBehaviour, ITimeRecordable
 
     public void RecordTime(float time)
     {
-        File.AppendAllText(_csvPath, "\n" + time);
+        File.AppendAllText(_csvPath, time + "\n");
     }
 }
