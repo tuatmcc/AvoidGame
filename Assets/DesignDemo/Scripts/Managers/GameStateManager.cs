@@ -39,6 +39,7 @@ public class GameStateManager : MonoBehaviour
 
     /// <summary>
     /// 状態が変更されたときの処理
+    /// ここにはなるべく記述しないほうが良いかも
     /// </summary>
     /// <param name="gameState"></param>
     private void ChangeGameState(GameState gameState)
@@ -50,11 +51,9 @@ public class GameStateManager : MonoBehaviour
                 break;
             case GameState.Playing:
                 Debug.Log("GameState Changhed to : Playing");
-                _timeManager.StartCount();
                 break;
             case GameState.Result:
                 Debug.Log("GameState Changhed to : Result");
-                _timeManager.StopCount();
                 break;
         }
     }
