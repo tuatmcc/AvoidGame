@@ -2,30 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSwitcher : MonoBehaviour
+namespace Tracking
 {
-    public Avatar[] avatars;
-
-    int index = -1;
-    bool initialized;
-
-    private void Update()
+    public class CharacterSwitcher : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        public Avatar[] avatars;
+
+        int index = -1;
+        bool initialized;
+
+        private void Update()
         {
-            if(!initialized)
+            if (Input.GetMouseButtonDown(0))
             {
-                foreach(Avatar a in avatars)
+                if (!initialized)
                 {
-                    a.gameObject.SetActive(false);
+                    foreach (Avatar a in avatars)
+                    {
+                        a.gameObject.SetActive(false);
+                    }
+
+                    initialized = true;
                 }
-                initialized = true;
+
+                if (index >= 0)
+                    avatars[index].gameObject.SetActive(false);
+                ++index;
+                if (index >= avatars.Length) index = 0;
+                avatars[index].gameObject.SetActive(true);
             }
-            if(index >=0)
-                avatars[index].gameObject.SetActive(false);
-            ++index;
-            if (index >= avatars.Length) index = 0;
-            avatars[index].gameObject.SetActive(true);
         }
     }
 }
