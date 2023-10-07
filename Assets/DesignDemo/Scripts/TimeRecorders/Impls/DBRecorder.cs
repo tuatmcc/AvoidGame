@@ -17,12 +17,12 @@ public class DBRecorder : MonoBehaviour, ITimeRecordable
         
     }
 
-    public List<float> GetTimeRanking(int num)
+    public List<long> GetTimeRanking()
     {
         throw new System.NotImplementedException();
     }
 
-    public void RecordTime(float time)
+    public void RecordTime(long time)
     {
         OnTimeRecorded?.Invoke();
     }
