@@ -78,12 +78,12 @@ GameObject:
   m_Component:
   - component: {fileID: 669293895635064680}
   m_Layer: 5
-  m_Name: DetailResultPanel
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &669293895635064680
 RectTransform:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 9214790667917026134}
   - component: {fileID: 6435948927833063974}
   m_Layer: 5
-  m_Name: BackGround
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b757a3cdb903b6c47b892e2bad1e33f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4866ea3e8e2d3e44a452e09af02e523, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
