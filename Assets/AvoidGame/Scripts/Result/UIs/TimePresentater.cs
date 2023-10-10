@@ -23,11 +23,11 @@ public class TimePresentater : MonoBehaviour
     {
         if(targetRank != 0 && targetRank > timeList.Count)
         {
-            timeText.text = $"99:99:999";
+            timeText.text = $"99:99.999";
             return;
         }
         TimeSpan timeSpan = new TimeSpan(targetRank == 0 ? time : timeList[targetRank - 1]);
-        timeText.text = $"{timeSpan.Minutes:00}:{timeSpan.Seconds:00}:{timeSpan.Milliseconds:000}";
+        timeText.text = $"{timeSpan.Minutes:00}:{timeSpan.Seconds:00}.{timeSpan.Milliseconds:000}";
     }
 
     private void Reset()

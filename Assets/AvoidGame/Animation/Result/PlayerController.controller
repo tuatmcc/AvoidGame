@@ -13,7 +13,7 @@ AnimatorStateTransition:
     m_EventTreshold: 1
   - m_ConditionMode: 4
     m_ConditionEvent: Ranking
-    m_EventTreshold: 4
+    m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3579724755171188638}
   m_Solo: 0
@@ -192,7 +192,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 2nd and 3rd
+  m_Name: from 2nd to 5th
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

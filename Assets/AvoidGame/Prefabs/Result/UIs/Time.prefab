@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1162622804180285367}
   - component: {fileID: 2837809268841838063}
   - component: {fileID: 2870489449068621730}
+  - component: {fileID: 1295638220917324971}
   m_Layer: 5
   m_Name: New
   m_TagString: Untagged
@@ -126,6 +127,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRank: 0
+--- !u!95 &1295638220917324971
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797514277983609786}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bddba5b2a20e25a469bd5266d26d4344, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3206946561781398576
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3102538982274045137}
   - component: {fileID: 2827641363743539265}
-  - component: {fileID: 758409700026076529}
   m_Layer: 5
   m_Name: HorizonalLayout
   m_TagString: Untagged
@@ -191,27 +212,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!95 &758409700026076529
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3206946561781398576}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bddba5b2a20e25a469bd5266d26d4344, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7766881791631089350
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1st
+  m_text: "N\u4F4D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c34e5d2b23e12e46988cefe30273a7c, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9dac341187cfe93448f5f29245dae570, type: 2}
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00:000
+  m_text: 00:00.000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c34e5d2b23e12e46988cefe30273a7c, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9dac341187cfe93448f5f29245dae570, type: 2}
