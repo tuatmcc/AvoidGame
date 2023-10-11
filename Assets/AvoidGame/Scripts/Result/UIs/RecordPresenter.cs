@@ -18,7 +18,8 @@ public class RecordPresenter : MonoBehaviour
 
     void Start()
     {
-        _sceneManager.OnRecordGot += SetNewRecordImage;
+        var _data = _sceneManager.GetTimeData();
+        SetNewRecordImage(_data.timeList, _data.playerTime);
     }
 
     private void SetNewRecordImage(List<long> timeList, long time)

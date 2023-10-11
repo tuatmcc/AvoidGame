@@ -10,13 +10,10 @@ using Zenject;
 public class ResultSceneManager : MonoBehaviour
 {
     public event Action<ResultSceneSubState> OnSubStateChanged;
-    public event Action<List<long>, long> OnRecordGot;
 
     // [Inject] ITimeRecordable _timeRecordable;
 
     private List<long> _records;
-
-    private bool calledEvent = false;
 
     public ResultSceneSubState ResultSceneSubState
     {
@@ -31,7 +28,7 @@ public class ResultSceneManager : MonoBehaviour
 
     private ResultSceneSubState _resultSceneSubState = ResultSceneSubState.LoadingRecord;
 
-    void Start()
+    private void Awake()
     {
         // _records = _timeRecordable.GetTimeRanking();
 
@@ -49,17 +46,19 @@ public class ResultSceneManager : MonoBehaviour
         _records.Sort();
     }
 
-    void Update()
+    void Start()
     {
-        if (!calledEvent)
-        {
-            OnRecordGot?.Invoke(_records, _records[1]);
-            _resultSceneSubState = ResultSceneSubState.ShowDetail;
-
-            calledEvent = true;
-        }
         
     }
 
+    void Update()
+    {
+
+    }
+
+    public (List<long> timeList, long playerTime) GetTimeData()
+    {
+        return (_records, _records[1]);
+    }
 
 }

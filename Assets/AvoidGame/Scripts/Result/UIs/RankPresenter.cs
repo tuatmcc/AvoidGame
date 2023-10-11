@@ -12,7 +12,8 @@ public class RankPresenter : MonoBehaviour
     void Start()
     {
         rankText = GetComponent<TMP_Text>();
-        _sceneManager.OnRecordGot += SetRankText;
+        var _data = _sceneManager.GetTimeData();
+        SetRankText(_data.timeList, _data.playerTime);
     }
 
     private void SetRankText(List<long> timeList, long time)

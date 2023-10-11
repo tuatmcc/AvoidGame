@@ -16,7 +16,8 @@ public class TimePresentater : MonoBehaviour
 
     void Start()
     {
-        _sceneManager.OnRecordGot += SetTimeText;
+        var _data = _sceneManager.GetTimeData();
+        SetTimeText(_data.timeList, _data.playerTime);
     }
 
     void SetTimeText(List<long> timeList, long time)

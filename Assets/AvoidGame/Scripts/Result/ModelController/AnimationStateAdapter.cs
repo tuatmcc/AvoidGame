@@ -11,7 +11,8 @@ public class AnimationStateAdapter : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        _sceneManager.OnRecordGot += ChangeAnimation;
+        var _data = _sceneManager.GetTimeData();
+        ChangeAnimation(_data.timeList, _data.playerTime);
     }
 
     private void ChangeAnimation(List<long> timeList, long time)
