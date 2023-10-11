@@ -156,3 +156,6 @@ sysinfo.txt
 
 # Visual Studio Config File
 .vsconfig
+
+# unitypackage.meta File
+*.unitypackage.meta
