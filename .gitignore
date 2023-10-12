@@ -153,4 +153,12 @@ sysinfo.txt
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,rider
+
+# Visual Studio Config File
+.vsconfig
+
+# unitypackage.meta File
+*.unitypackage.meta
+
+# Record file
 record.csv
