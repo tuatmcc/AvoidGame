@@ -8,7 +8,7 @@ using Zenject;
 /// <summary>
 /// 指定された順位のタイムを表示する
 /// </summary>
-public class TimePresentater : MonoBehaviour
+public class ResultTimePresenter : MonoBehaviour
 {
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private int targetRank;
