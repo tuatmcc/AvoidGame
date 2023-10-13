@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 16.0.10.0 for Windows">
+<title>VRChat用Emote01説明書</title>
+<STYLE type="text/css">
+<!--
+TD{
+  font-size : 13px;
+  line-height : 19px;
+}
+-->
+</STYLE>
+</head>
+<BODY>
+<DIV align="center">
+  <BR>
+  <BR>
+  <img src="img/TopImg01.png" width="300" height="300" border="0"><BR>
+  2021年12月20日 更新　　2019年 04月19日 作成<br>
+  <br>
+  <hr>
+  <table cellspacing="3" cellpadding="8" width="600" bgcolor="#00a69d">
+    <TBODY>
+      <TR>
+        <TD align="left"><FONT color="#ffffff" size="+1"><B>ファイルについて</B></FONT></TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><img src="img/02/img02_0010.png" width="450" height="514" border="0"><br>
+        【EmoteSet_Free_v***.unitypackage】をインストールすると、上図のように Emote01～03のフォルダに分かれて、その中にAnimationClipファイルが入っています。<br>
+        <br>
+        一番下の［Emote**_AnimatorController］に、アバターのモーションを確認するためのステートが予め組み立てていますので、これをアバターに組み込めば
+        すぐにScene上で確認することができます。（やり方は後述）<br>
+        <br>
+        <br>
+        <hr>
+        </TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><img src="img/02/img02_0011.png" width="248" height="126" border="0"><br>
+        <a href="img/02/img02_0012.png" target="_blank"><img src="img/02/img02_0012.png" width="450" height="338" border="0"></a><br>
+        ［OneLoopDivision］フォルダ内には、一部のモーションで短いループになっている部分を切り抜き・分割したAnimationClipファイルが入っていますので活用してください。<br>
+        <br>
+        <br>
+        <hr>
+        </TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><img src="img/02/img02_0013.png" width="213" height="105" border="0"><br>
+        ［SDK2］フォルダ内には、旧バージョンに入れていた、SDK2.0の仕様上の問題でループになっている１モーションをひたすら繋げたAnimationClipが入っています。<br>
+        SDK3.0-Avatarから このAnimationClipは必要ないので、どうしてもSDK2.0でないとダメだという方以外は無視してください。<br>
+        <br>
+        </TD>
+      </TR>
+    </TBODY>
+  </table>
+  <br>
+  <br>
+  <hr>
+  <table cellspacing="3" cellpadding="8" width="600" bgcolor="#00a69d">
+    <tbody>
+      <tr>
+        <td align="left"><font color="#ffffff" size="+1"><b>VRChatで利用する方法</b></font></td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff" align="left"><a href="https://necocoya.booth.pm/items/2291899" target="_blank"><img src="img/02/img02_0020.png" width="250" height="250" border="0"></a>　<a href="https://necocoya.booth.pm/items/2357888" target="_blank"><img src="img/02/img02_0021.png" width="250" height="250" border="0"></a><br>
+        本モーションをVRChatで利用したい場合、別で配布している［<a href="https://necocoya.booth.pm/items/2291899" target="_blank">EmoteBox</a>］か［<a href="https://necocoya.booth.pm/items/2357888" target="_blank">A3Box</a>］を利用すれば、VRChat上でEmoteを利用することができますので、皆様ぜひご利用ください。（難易度は前者の方が簡単です）<br>
+        <br>
+        なお、組み込み方はそちらの説明書の方を参照してください。本モーションファイルがそのまま使えます。<br>
+        <br>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <hr>
+  <table cellspacing="3" cellpadding="8" width="600" bgcolor="#00a69d">
+    <TBODY>
+      <TR>
+        <TD align="left"><FONT color="#ffffff" size="+1"><B>Unity上でのモーション確認方法</B></FONT></TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><img src="img/02/img02_0030.png" width="450" height="297" border="0"><br>
+        Unity上で［Emote詰め合わせ］のAnimationClip（以下 本モーション）を アバターに組み込んで動きを確認したい場合、以下の３つの方法があります。<br>
+        <br>
+        ①：Inspectorのウィンドウで確認<br>
+        ②：Animationウィンドウで確認<br>
+        ③：Animatorウィンドウで確認<br>
+        <br>
+        <br>
+        <hr>
+        </TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><b>①：Inspectorウィンドウで確認</b><br>
+        <hr>
+        <img src="img/02/img02_0040.png" width="250" height="551" border="0"><br>
+        <b><font color="#0000cc">特に加工しないで さくっと動作を確認したい場合</font></b>は、こちらの方法が便利です。<br>
+        <br>
+        <hr>
+        <a href="img/02/img02_0041.png" target="_blank"><img src="img/02/img02_0041.png" width="450" height="497" border="0"></a><br>
+        まず、動作を確認したいAnimationClipファイルを選択してください。そして、Inspectorの人形が写っている部分に、動作を確認したいアバターをドラッグアンドドロップをします。<br>
+        <br>
+        <img src="img/02/img02_0042.png" width="350" height="445" border="0"><br>
+        すると、ドロップしたアバターに変わるので、あとは左上の再生ボタンを押すとモーションを確認することができます。<br>
+        <br>
+        <br>
+        <hr>
+        </TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><b>②：Animationウィンドウで確認</b><br>
+        <hr>
+        <img src="img/02/img02_0050.png" width="400" height="321" border="0"><br>
+        Sceneウィンドウで動作を確認したい場合は、Animationウィンドウで確認します。<br>
+        こちらの特徴としては、<b><font color="#0000cc">ゲーム再生しなくてもモーションを確認することができるし、AnimationClipを加工したり表情などのBlendShapeキーを入れたい場合</font></b>に、こちらの方法を使います。<br>
+        ただし、<b><font color="#cc0000">欠点として 若干動きがモッサリします</font></b>。キーの密度が濃いと それが顕著に出ます。　正確な動作を確認したいときや動画をキャプチャしたい場合は、次項の［③：Animatorウィンドウの方法］で確認してください。<br>
+        <br>
+        <hr>
+        <a href="img/02/img02_0051.png" target="_blank"><img src="img/02/img02_0051.png" width="450" height="294" border="0"></a><br>
+        まずは、動かしたいアバターを選択し、InspectorのAnimatorの[Controller]に、各フォルダ内にある［Emote**_AnimatorController］を設置してください。<br>
+        <br>
+        <img src="img/02/img02_0052.png" width="450" height="424" border="0"><br>
+        <br>
+        <img src="img/02/img02_0053.png" width="450" height="410" border="0"><br>
+        あとは、Animationウィンドウの左上にあるタブをクリックして、確認したいモーションを選択し、再生ボタンを押すと アバターがアニメーションします。<br>
+        （ ゲーム再生無しでアニメーションすると、DynamicBone（揺れもの）やConstraint（関節などの補助ボーン）が動作しないので、それらも含めて確認したい場合はゲーム再生してからAnimationウィンドウを再生してください
+        ）<br>
+        <br>
+        <hr>
+        <a href="img/02/img02_0054.png" target="_blank"><img src="img/02/img02_0054.png" width="450" height="320" border="0"></a><br>
+        <img src="img/02/img02_0055.png" width="400" height="320" border="0"><br>
+        なお、この時にAnimationウィンドウの左上にある［●録画ボタン］をONにして、表情などのBlendshapesを操作すると、キーフレームが打たれて
+        表情付きのEmoteを作成することができます。<br>
+        （ただし、これをVRChat-SDK3.0で利用する場合は工夫が必要です）<br>
+        <br>
+        <br>
+        <hr>
+        </TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"><b>③：Animatorウィンドウで確認</b><br>
+        <hr>
+        <img src="img/02/img02_0060.png" width="400" height="281" border="0"><br>
+        <b><font color="#0000cc">Scene・Gameウィンドウでかつ、軽くてモッサリしない正確な動きのモーションで確認したい場合や、動画をキャプチャしたい場合</font></b>は、ゲーム再生からのAnimatorウィンドウでの操作がオススメです。<br>
+        <br>
+        <hr>
+        <a href="img/02/img02_0051.png" target="_blank"><img src="img/02/img02_0051.png" width="450" height="294" border="0"></a><br>
+        まずは、②と同じように、動かしたいアバターを選択し、InspectorのAnimatorの[Controller]に、各フォルダ内にある［Emote**_AnimatorController］を設置してください。<br>
+        <br>
+        <hr>
+        <a href="img/02/img02_0061.png" target="_blank"><img src="img/02/img02_0061.png" width="450" height="316" border="0"></a><br>
+        次にゲーム再生をして、AnimatorウィンドウのParameterに、各動作をするレイヤーがあるので、確認したいモーション名のレイヤーの［●］をクリックすると、アバターがそのモーションを取ります。<br>
+        <br>
+        <br>
+        <hr>
+        </TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left">※VRChatにアップする予定のあるアバターの場合、<b>アップロードする前に設置したAnimatorControllerは必ず外してください</b>。</TD>
+      </TR>
+    </TBODY>
+  </table>
+  <br>
+  <br>
+  <hr>
+  <table cellspacing="3" cellpadding="8" width="600" bgcolor="#00a69d">
+    <TBODY>
+      <TR>
+        <TD align="left"><FONT color="#ffffff" size="+1"><B>VRChatで利用する方法</B></FONT></TD>
+      </TR>
+      <TR>
+        <TD bgcolor="#ffffff" align="left"></TD>
+      </TR>
+    </TBODY>
+  </table>
+  <br>
+  <BR>
+  <TABLE cellspacing="3" cellpadding="8" width="600" bgcolor="#00a69d">
+    <TBODY>
+      <TR>
+        <td bgcolor="#ffffff" align="right">Presented by<a href="http://necocoya.mints.ne.jp/" target="_blank"><img border="0" src="http://necocoya.mints.ne.jp/banner/banner01.jpg" width="200" height="40"></a></td>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+  <BR>
+</DIV>
+</BODY>
+</HTML>

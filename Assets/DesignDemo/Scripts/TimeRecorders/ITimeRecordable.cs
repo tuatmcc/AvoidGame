@@ -17,11 +17,11 @@ public interface ITimeRecordable
     /// タイムを記録する
     /// </summary>
     /// <param name="time"></param>
-    public void RecordTime(float time);
+    public void RecordTime(long time);
 
     /// <summary>
-    /// タイム上位を取得する
+    /// タイム一覧を取得する
     /// </summary>
     /// <returns></returns>
-    public List<float> GetTimeRanking(int num);
+    public List<long> GetTimeRanking();
 }
