@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Tracking
 {
-    /// <sumemary>
+    /// <summary>
     /// Cache various values which will be reused during the runtime.
     /// </summary>
     public class CalibrationData
