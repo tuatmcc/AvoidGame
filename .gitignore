@@ -159,3 +159,6 @@ sysinfo.txt
 
 # unitypackage.meta File
 *.unitypackage.meta
+
+# Record file
+record.csv

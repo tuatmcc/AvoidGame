@@ -34,7 +34,7 @@ public class TimeManager : MonoBehaviour
     public void Start()
     {
         _gameStateManager.OnGameStateChanged += ChangeCount;
-        _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
+        // _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
     }
 
     private void ChangeCount(GameState gameState)
