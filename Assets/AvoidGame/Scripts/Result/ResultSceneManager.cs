@@ -7,58 +7,60 @@ using Zenject;
 /// <summary>
 /// Resultシーンを管理
 /// </summary>
-public class ResultSceneManager : MonoBehaviour
+namespace Result
 {
-    public event Action<ResultSceneSubState> OnSubStateChanged;
-
-    // [Inject] ITimeRecordable _timeRecordable;
-
-    private List<long> _records;
-
-    public ResultSceneSubState ResultSceneSubState
+    public class ResultSceneManager : MonoBehaviour
     {
-        get { return _resultSceneSubState; }
-        set 
-        { 
-            _resultSceneSubState = value;
-            OnSubStateChanged?.Invoke(value);
+        public event Action<ResultSceneSubState> OnSubStateChanged;
+
+        // [Inject] ITimeRecordable _timeRecordable;
+
+        private List<long> _records;
+
+        public ResultSceneSubState ResultSceneSubState
+        {
+            get { return _resultSceneSubState; }
+            set 
+            { 
+                _resultSceneSubState = value;
+                OnSubStateChanged?.Invoke(value);
+            }
+
         }
 
-    }
+        private ResultSceneSubState _resultSceneSubState = ResultSceneSubState.LoadingRecord;
 
-    private ResultSceneSubState _resultSceneSubState = ResultSceneSubState.LoadingRecord;
-
-    private void Awake()
-    {
-        // _records = _timeRecordable.GetTimeRanking();
-
-        //test
-        _records = new List<long>
+        private void Awake()
         {
-            100000000,
-            200000000,
-            300000000,
-            400000000,
-            500000000,
-            600000000
-        };
+            // _records = _timeRecordable.GetTimeRanking();
 
-        _records.Sort();
-    }
+            //test
+            _records = new List<long>
+            {
+                100000000,
+                200000000,
+                300000000,
+                400000000,
+                500000000,
+                600000000
+            };
 
-    void Start()
-    {
+            _records.Sort();
+        }
+
+        void Start()
+        {
         
+        }
+
+        void Update()
+        {
+
+        }
+
+        public (List<long> timeList, long playerTime) GetTimeData()
+        {
+            return (_records, _records[1]);
+        }
     }
-
-    void Update()
-    {
-
-    }
-
-    public (List<long> timeList, long playerTime) GetTimeData()
-    {
-        return (_records, _records[1]);
-    }
-
 }

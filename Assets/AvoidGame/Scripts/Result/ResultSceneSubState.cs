@@ -1,7 +1,10 @@
-public enum ResultSceneSubState
+namespace Result
 {
-    LoadingRecord,
-    ShowDetail,
-    ShowRanking,
-    WaitForReset
+    public enum ResultSceneSubState
+    {
+        LoadingRecord,
+        ShowDetail,
+        ShowRanking,
+        WaitForReset
+    }
 }

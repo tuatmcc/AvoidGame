@@ -4,21 +4,24 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class RankPresenter : MonoBehaviour
+namespace Result.UI
 {
-    [SerializeField] private TMP_Text rankText;
-    [SerializeField] private int targetRank;
-    [Inject] private ResultSceneManager _sceneManager;
-    void Start()
+    public class RankPresenter : MonoBehaviour
     {
-        rankText = GetComponent<TMP_Text>();
-        var _data = _sceneManager.GetTimeData();
-        SetRankText(_data.timeList, _data.playerTime);
-    }
+        [SerializeField] private TMP_Text rankText;
+        [SerializeField] private int targetRank;
+        [Inject] private ResultSceneManager _sceneManager;
+        void Start()
+        {
+            rankText = GetComponent<TMP_Text>();
+            var _data = _sceneManager.GetTimeData();
+            SetRankText(_data.timeList, _data.playerTime);
+        }
 
-    private void SetRankText(List<long> timeList, long time)
-    {
-        targetRank = targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank;
-        rankText.text = $"{targetRank}位";
+        private void SetRankText(List<long> timeList, long time)
+        {
+            targetRank = targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank;
+            rankText.text = $"{targetRank}位";
+        }
     }
 }
