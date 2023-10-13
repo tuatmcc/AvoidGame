@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectionController : MonoBehaviour
+namespace Result.ModelController
 {
-    void Start()
+    public class DirectionController : MonoBehaviour
     {
-        Vector3 p = Camera.main.transform.position;
-        p.y = transform.position.y;
-        transform.LookAt(p);
+        void Start()
+        {
+            Vector3 p = Camera.main.transform.position;
+            p.y = transform.position.y;
+            transform.LookAt(p);
+        }
     }
 }

@@ -4,30 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class RecordPresenter : MonoBehaviour
+namespace Result.UI
 {
-    private Image image;
-    [SerializeField] private int targetRank;
-    [Inject] ResultSceneManager _sceneManager;
-
-    private void Awake()
+   public class RecordPresenter : MonoBehaviour
     {
-        image = GetComponent<Image>();
-        image.enabled = false;
-    }
+        private Image image;
+        [SerializeField] private int targetRank;
+        [Inject] ResultSceneManager _sceneManager;
 
-    void Start()
-    {
-        var _data = _sceneManager.GetTimeData();
-        SetNewRecordImage(_data.timeList, _data.playerTime);
-    }
-
-    private void SetNewRecordImage(List<long> timeList, long time)
-    {
-        if (targetRank == 0) return;
-        if(timeList.IndexOf(time) + 1 == targetRank)
+        private void Awake()
         {
-            image.enabled = true;
+            image = GetComponent<Image>();
+            image.enabled = false;
+        }
+
+        void Start()
+        {
+            var _data = _sceneManager.GetTimeData();
+            SetNewRecordImage(_data.timeList, _data.playerTime);
+        }
+
+        private void SetNewRecordImage(List<long> timeList, long time)
+        {
+            if (targetRank == 0) return;
+            if(timeList.IndexOf(time) + 1 == targetRank)
+            {
+                image.enabled = true;
+            }
         }
     }
 }
