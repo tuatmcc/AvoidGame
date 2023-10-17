@@ -114,7 +114,7 @@ MonoBehaviour:
   - position: {x: 0, y: 0, z: 0}
     tangent: {x: 1, y: 0, z: 0}
     roll: 0
-  - position: {x: 1.0568542, y: 0, z: 40.143005}
+  - position: {x: 0, y: 0, z: 40.143005}
     tangent: {x: 0, y: 0, z: 0}
     roll: 0
   - position: {x: 25.153564, y: 0, z: 77.138565}
@@ -295,8 +295,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3468579717554944377, guid: d4f268d5484c358409cd1e4ff2efc28e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4873518388662980941}
   m_SourcePrefab: {fileID: 100100000, guid: d4f268d5484c358409cd1e4ff2efc28e, type: 3}
+--- !u!1 &3691417700404129614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3468579717554944377, guid: d4f268d5484c358409cd1e4ff2efc28e,
+    type: 3}
+  m_PrefabInstance: {fileID: 223018578231809591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4873518388662980941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691417700404129614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fd0e834deaf804abd1d4f601a0c6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9111621470330450540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9037221714866447451, guid: d4f268d5484c358409cd1e4ff2efc28e,
