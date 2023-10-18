@@ -31,12 +31,19 @@ namespace Tracking
                 Mathf.Abs(
                     (ik.leftHand.position.y - ik.leftFoot.position.y + ik.rightHand.position.y -
                      ik.rightFoot.position.y) / (leftHand.Y + rightHand.Y - leftFoot.Y - rightFoot.Y));
-            // neckMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
-            neckMultiplier = new Vector3(1, 1.4f, 1);
+
+            neckMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
+            neckMultiplier = new Vector3(upperMultiplierX, 1.4f, 1);
             leftForearmMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
             leftHandMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
             rightForearmMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
             rightHandMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
+
+            rightFootMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
+            rightShinMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
+
+            leftHandMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
+            leftShinMultiplier = new Vector3(upperMultiplierX, upperMultiplierY, upperMultiplierX);
         }
 
         public void Retarget(Landmark[] landmarks)
@@ -64,6 +71,13 @@ namespace Tracking
             ik.rightForearm.position = new Vector3(-rightForearmMultiplier.x * (rightHand.X - 0.5f),
                 hight - rightForearmMultiplier.y * rightHand.Y,
                 rightForearmMultiplier.z * rightHand.Z * thickness);
+
+            ik.leftFoot.position = new Vector3(-leftFootMultiplier.x * (leftHand.X - 0.5f),
+                hight - leftFootMultiplier.y * leftHand.Y,
+                leftFootMultiplier.z * leftHand.Z * thickness);
+            ik.leftShin.position = new Vector3(-leftShinMultiplier.x * (leftHand.X - 0.5f),
+                hight - leftShinMultiplier.y * leftHand.Y,
+                leftShinMultiplier.z * leftHand.Z * thickness);
         }
     }
 }
