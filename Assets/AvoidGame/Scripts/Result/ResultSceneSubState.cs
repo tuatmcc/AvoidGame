@@ -1,4 +1,4 @@
-namespace Result
+namespace AvoidGame.Result
 {
     public enum ResultSceneSubState
     {

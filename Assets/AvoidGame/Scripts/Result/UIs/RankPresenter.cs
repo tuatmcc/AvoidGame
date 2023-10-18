@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace Result.UI
+namespace AvoidGame.Result.UI
 {
     public class RankPresenter : MonoBehaviour
     {
