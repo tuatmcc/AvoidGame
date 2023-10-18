@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Result.UI
+namespace AvoidGame.Result.UI
 {
    public class RecordPresenter : MonoBehaviour
     {

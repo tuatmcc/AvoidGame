@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Result.ModelController
+namespace AvoidGame.Result.ModelController
 {
     public class DirectionController : MonoBehaviour
     {
