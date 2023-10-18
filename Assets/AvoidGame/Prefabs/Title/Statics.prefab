@@ -31,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4276413021629297391}
+  - {fileID: 5974259494555856197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9140581334630051279
@@ -45,6 +46,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88e47b65ed0f60419e59cb6f5d2e808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3236366777390241097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5974259494555856197}
+  - component: {fileID: 3389036033801340156}
+  - component: {fileID: 4745044171313529695}
+  m_Layer: 0
+  m_Name: ProjectContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5974259494555856197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3236366777390241097}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1058.8981, y: 1027.3403, z: -1438.4103}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7217498704338128542}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3389036033801340156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3236366777390241097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 4745044171313529695}
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 0
+  _parentNewObjectsUnderContext: 1
+  _editorReflectionBakingCoverageMode: 0
+  _buildsReflectionBakingCoverageMode: 0
+  _settings:
+    _ensureDeterministicDestructionOrderOnApplicationQuit: 0
+    _displayWarningWhenResolvingDuringInstall: 1
+    _validationRootResolveMethod: 0
+    _validationErrorResponse: 0
+    _constructorChoiceStrategy: 0
+    _signalSettings:
+      _defaultSyncMode: 0
+      _missingHandlerDefaultResponse: 2
+      _requireStrictUnsubscribe: 0
+      _defaultAsyncTickPriority: 1
+--- !u!114 &4745044171313529695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3236366777390241097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f4d5c2543c2594ea34fe2f80938806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameStateManager: {fileID: 4158536865481607888}
+  _timeManager: {fileID: 4009700183553371417}
 --- !u!1001 &8621287313397210818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +192,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 825e45545a47faf4786d0ea19238e909, type: 3}
+--- !u!114 &4009700183553371417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4612150222068069339, guid: 825e45545a47faf4786d0ea19238e909,
+    type: 3}
+  m_PrefabInstance: {fileID: 8621287313397210818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d00a0ee1c78bd4c84840a5dfa9794b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4158536865481607888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5625805300804785170, guid: 825e45545a47faf4786d0ea19238e909,
+    type: 3}
+  m_PrefabInstance: {fileID: 8621287313397210818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696466dc31aa6d6429fecdd3623cfb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4276413021629297391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5547354874851552301, guid: 825e45545a47faf4786d0ea19238e909,
