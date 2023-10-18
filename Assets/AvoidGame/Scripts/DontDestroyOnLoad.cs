@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyOnLoad : MonoBehaviour
+namespace AvoidGame
 {
-    void Start()
+    public class DontDestroyOnLoad : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
+        void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }
