@@ -6,13 +6,13 @@ namespace Tracking
 {
     public class Receiver
     {
-        private UdpClient _udpClient;
+        private readonly UdpClient _udpClient;
 
         public string ReceivedMessage { get; private set; } = null;
 
-        public Receiver()
+        public Receiver(int port = 5000)
         {
-            _udpClient = new UdpClient(5000);
+            _udpClient = new UdpClient(port);
         }
 
         public async UniTask StartReceiver(CancellationToken token)
