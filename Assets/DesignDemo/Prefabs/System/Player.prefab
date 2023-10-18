@@ -115,13 +115,13 @@ MonoBehaviour:
     tangent: {x: 1, y: 0, z: 0}
     roll: 0
   - position: {x: 0, y: 0, z: 40.143005}
-    tangent: {x: 0, y: 0, z: 0}
+    tangent: {x: 0.39935875, y: 0, z: 1.0256996}
     roll: 0
   - position: {x: 25.153564, y: 0, z: 77.138565}
-    tangent: {x: 1, y: 0, z: 0}
+    tangent: {x: -0.56290054, y: 0, z: 1.8229065}
     roll: 0
   - position: {x: -48.2695, y: 0, z: 118.76207}
-    tangent: {x: 1, y: 0, z: 0}
+    tangent: {x: -1.2327499, y: 0, z: 2.5454254}
     roll: 0
   - position: {x: 0.5605774, y: 0, z: 202.04956}
     tangent: {x: 73.40152, y: 0, z: -0.6851196}
@@ -222,16 +222,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: 6307061174692750567, guid: d4f268d5484c358409cd1e4ff2efc28e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7448859073614584282, guid: d4f268d5484c358409cd1e4ff2efc28e,
         type: 3}
       propertyPath: m_Path
       value: 
       objectReference: {fileID: 7447105080203167579}
-    - target: {fileID: 7448859073614584282, guid: d4f268d5484c358409cd1e4ff2efc28e,
-        type: 3}
-      propertyPath: m_Position
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7448859073614584282, guid: d4f268d5484c358409cd1e4ff2efc28e,
         type: 3}
       propertyPath: m_UpdateMethod

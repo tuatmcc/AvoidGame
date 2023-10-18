@@ -16,7 +16,7 @@ public class Player : MonoBehaviour, IItemCollectable
     {
         default_speed = PlayerConstants.default_player_speed;
         cart = GetComponent<Cinemachine.CinemachineDollyCart>();
-        cart.m_Speed = 0;
+        cart.m_Speed = 0f;
 
         _gameStateManager.OnGameStateChanged += StartRace;
         _speedManager.OnSpeedChanged += ChangeSpeed;
