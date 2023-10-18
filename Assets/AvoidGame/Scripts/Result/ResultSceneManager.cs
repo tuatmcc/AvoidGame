@@ -7,7 +7,7 @@ using Zenject;
 /// <summary>
 /// Resultシーンを管理
 /// </summary>
-namespace Result
+namespace AvoidGame.Result
 {
     public class ResultSceneManager : MonoBehaviour
     {
