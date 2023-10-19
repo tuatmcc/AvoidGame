@@ -6,9 +6,9 @@ namespace AvoidGame
 {
     public class DontDestroyOnLoad : MonoBehaviour
     {
-        void Start()
+        private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this);
         }
     }
 }
