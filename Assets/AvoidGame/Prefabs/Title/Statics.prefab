@@ -90,7 +90,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294375ffe23d31444a2da96d8ee2e468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingUI: {fileID: 6278820766007886700}
+  loadAtLeast: 3
+  _canvas: {fileID: 6263517176833435781}
+  scenes:
+  - sceneName: Calibration
+    targetState: 1
+  - sceneName: Play
+    targetState: 2
+  - sceneName: Result
+    targetState: 3
 --- !u!1001 &8432188648209006994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,9 +173,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8432188648209006994}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6278820766007886700 stripped
+--- !u!1 &6263517176833435781 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2461213751956423422, guid: b9880459a452a9e459c44e397ebcbf3b,
+  m_CorrespondingSourceObject: {fileID: 2587702031399692567, guid: b9880459a452a9e459c44e397ebcbf3b,
     type: 3}
   m_PrefabInstance: {fileID: 8432188648209006994}
   m_PrefabAsset: {fileID: 0}

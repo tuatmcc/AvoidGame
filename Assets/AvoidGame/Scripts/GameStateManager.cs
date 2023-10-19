@@ -52,7 +52,7 @@ namespace AvoidGame
                     Debug.Log("GameState Changhed to : Menu");
                     break;
                 case GameState.Calibration:
-                    Debug.Log("GameState Changhed to : Playing");
+                    Debug.Log("GameState Changhed to : Calibration");
                     break ;
                 case GameState.Playing:
                     Debug.Log("GameState Changhed to : Playing");
