@@ -8,7 +8,7 @@ namespace AvoidGame.DI
     public class ManagerInstaller : MonoInstaller
     {
         [SerializeField] private GameStateManager _gameStateManager;
-        [SerializeField] TimeManager _timeManager;
+        [SerializeField] private TimeManager _timeManager;
 
         public override void InstallBindings()
         {
