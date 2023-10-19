@@ -20,8 +20,6 @@ namespace AvoidGame
 
         [Inject] private GameStateManager _gameStateManager;
 
-        private bool sceneLoaded = false;
-
         private void Awake()
         {
             _loadingCanvas = _canvas.GetComponent<Canvas>();
@@ -49,19 +47,17 @@ namespace AvoidGame
         {
             float waited = 0f;
             _loadingCanvas.enabled = true;
-            SceneManager.LoadSceneAsync(sceneName);
-            while(waited < loadAtLeast || !sceneLoaded)
+            while(waited < loadAtLeast)
             {
                 yield return new WaitForSeconds(0.1f);
                 waited += 0.1f;
             }
-            _loadingCanvas.enabled = false;
-            sceneLoaded = false;
+            SceneManager.LoadSceneAsync(sceneName);
         }
 
         private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            sceneLoaded = true;
+            _loadingCanvas.enabled = false;
         }
     }
 }
