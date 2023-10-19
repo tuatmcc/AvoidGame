@@ -31,12 +31,11 @@ namespace AvoidGame
         private long _mainTimer;
 
         [Inject] private GameStateManager _gameStateManager;
-        private ITimeRecordable _timeRecordable;
+        [Inject] private ITimeRecordable _timeRecordable;
 
         public void Start()
         {
             _gameStateManager.OnGameStateChanged += ChangeCount;
-            // _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
         }
 
         private void ChangeCount(GameState gameState)
