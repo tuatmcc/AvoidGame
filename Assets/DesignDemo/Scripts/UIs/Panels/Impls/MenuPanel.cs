@@ -1,7 +1,10 @@
-﻿/// <summary>
-/// メニューのパネル
-/// </summary>
-public class MenuPanel : PanelBase
+namespace DesignDemo
 {
-    public override GameState TargetState => GameState.Menu;
+    /// <summary>
+    /// メニューのパネル
+    /// </summary>
+    public class MenuPanel : PanelBase
+    {
+        public override GameState TargetState => GameState.Menu;
+    }
 }
