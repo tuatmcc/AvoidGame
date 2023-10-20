@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Jobs;
 using UnityEngine.SceneManagement;
 using Zenject;
-using AvoidGame.System.TimeRecorder;
+using AvoidGame.TimeRecorder;
 
 /// <summary>
 /// ゲームの時間を管理する
@@ -32,12 +32,11 @@ namespace AvoidGame
         private long _mainTimer;
 
         [Inject] private GameStateManager _gameStateManager;
-        private ITimeRecordable _timeRecordable;
+        [Inject] private ITimeRecordable _timeRecordable;
 
         public void Start()
         {
             _gameStateManager.OnGameStateChanged += ChangeCount;
-            // _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
         }
 
         private void ChangeCount(GameState gameState)
