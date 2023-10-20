@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 複数のシーンを扱うならあったほうが良い？
-/// MenuシーンとResultシーンが必要かについては諸説あり
-/// </summary>
-public class SceneManager : MonoBehaviour
+namespace DesignDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// 複数のシーンを扱うならあったほうが良い？
+    /// MenuシーンとResultシーンが必要かについては諸説あり
+    /// </summary>
+    public class SceneManager : MonoBehaviour
     {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

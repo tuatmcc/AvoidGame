@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace DesignDemo
+namespace AvoidGame.System.TimeRecorder
 {
     public class CSVRecorder : MonoBehaviour, ITimeRecordable
     {

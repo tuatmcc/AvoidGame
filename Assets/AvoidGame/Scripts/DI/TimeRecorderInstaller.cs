@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using AvoidGame.System.TimeRecorder;
 
 namespace AvoidGame.DI
 {

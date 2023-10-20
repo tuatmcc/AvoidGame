@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DesignDemo
+namespace AvoidGame.System.TimeRecorder
 {
     /// <summary>
     /// タイムを記録、取得できる

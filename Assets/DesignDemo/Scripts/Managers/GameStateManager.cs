@@ -2,59 +2,62 @@ using System;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// ゲームの進行管理
-/// </summary>
-public class GameStateManager : MonoBehaviour
+namespace DesignDemo
 {
     /// <summary>
-    /// Stateが変わるごとに呼ばれる
-    /// Stateごとに用意したほうが便利かも
+    /// ゲームの進行管理
     /// </summary>
-    public event Action<GameState> OnGameStateChanged;
-    
-    public GameState GameState
+    public class GameStateManager : MonoBehaviour
     {
-        get => _gameState;
-        set
+        /// <summary>
+        /// Stateが変わるごとに呼ばれる
+        /// Stateごとに用意したほうが便利かも
+        /// </summary>
+        public event Action<GameState> OnGameStateChanged;
+    
+        public GameState GameState
         {
-            _gameState = value;
-            OnGameStateChanged?.Invoke(_gameState);
+            get => _gameState;
+            set
+            {
+                _gameState = value;
+                OnGameStateChanged?.Invoke(_gameState);
+            }
         }
-    }
 
-    private GameState _gameState;
+        private GameState _gameState;
     
-    [Inject] private TimeManager _timeManager;
+        [Inject] private TimeManager _timeManager;
 
-    private void Awake()
-    {
-        GameState = GameState.Menu;
-    }
-
-    private void Start()
-    {
-        OnGameStateChanged += ChangeGameState;   
-    }
-
-    /// <summary>
-    /// 状態が変更されたときの処理
-    /// ここにはなるべく記述しないほうが良いかも
-    /// </summary>
-    /// <param name="gameState"></param>
-    private void ChangeGameState(GameState gameState)
-    {
-        switch (gameState)
+        private void Awake()
         {
-            case GameState.Menu:
-                Debug.Log("GameState Changhed to : Menu");
-                break;
-            case GameState.Playing:
-                Debug.Log("GameState Changhed to : Playing");
-                break;
-            case GameState.Result:
-                Debug.Log("GameState Changhed to : Result");
-                break;
+            GameState = GameState.Menu;
+        }
+
+        private void Start()
+        {
+            OnGameStateChanged += ChangeGameState;   
+        }
+
+        /// <summary>
+        /// 状態が変更されたときの処理
+        /// ここにはなるべく記述しないほうが良いかも
+        /// </summary>
+        /// <param name="gameState"></param>
+        private void ChangeGameState(GameState gameState)
+        {
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    Debug.Log("GameState Changhed to : Menu");
+                    break;
+                case GameState.Playing:
+                    Debug.Log("GameState Changhed to : Playing");
+                    break;
+                case GameState.Result:
+                    Debug.Log("GameState Changhed to : Result");
+                    break;
+            }
         }
     }
 }

@@ -1,37 +1,40 @@
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// プレイヤー
-/// アイテムの取得を行う
-/// </summary>
-public class Player : MonoBehaviour, IItemCollectable
+namespace DesignDemo
 {
-    private float default_speed;
-    private Cinemachine.CinemachineDollyCart cart;
-    [Inject] SpeedManager _speedManager;
-    [Inject] GameStateManager _gameStateManager;
-
-    private void Start()
+    /// <summary>
+    /// プレイヤー
+    /// アイテムの取得を行う
+    /// </summary>
+    public class Player : MonoBehaviour, IItemCollectable
     {
-        default_speed = PlayerConstants.default_player_speed;
-        cart = GetComponent<Cinemachine.CinemachineDollyCart>();
-        cart.m_Speed = 0f;
+        private float default_speed;
+        private Cinemachine.CinemachineDollyCart cart;
+        [Inject] SpeedManager _speedManager;
+        [Inject] GameStateManager _gameStateManager;
 
-        _gameStateManager.OnGameStateChanged += StartRace;
-        _speedManager.OnSpeedChanged += ChangeSpeed;
-    }
-
-    private void StartRace(GameState gameState)
-    {
-        if(gameState == GameState.Playing)
+        private void Start()
         {
-            cart.m_Speed = default_speed;
-        }
-    }
+            default_speed = PlayerConstants.default_player_speed;
+            cart = GetComponent<Cinemachine.CinemachineDollyCart>();
+            cart.m_Speed = 0f;
 
-    private void ChangeSpeed(float speed)
-    {
-        cart.m_Speed = default_speed * speed;
+            _gameStateManager.OnGameStateChanged += StartRace;
+            _speedManager.OnSpeedChanged += ChangeSpeed;
+        }
+
+        private void StartRace(GameState gameState)
+        {
+            if(gameState == GameState.Playing)
+            {
+                cart.m_Speed = default_speed;
+            }
+        }
+
+        private void ChangeSpeed(float speed)
+        {
+            cart.m_Speed = default_speed * speed;
+        }
     }
 }
