@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class ToPlaying : MonoBehaviour
+namespace DesignDemo
 {
-    [Inject] GameStateManager _gameStateManager;
-    void Update()
+    public class ToPlaying : MonoBehaviour
     {
-        if(_gameStateManager.GameState != GameState.Playing) { 
-            _gameStateManager.GameState = GameState.Playing;
+        [Inject] GameStateManager _gameStateManager;
+        void Update()
+        {
+            if(_gameStateManager.GameState != GameState.Playing) { 
+                _gameStateManager.GameState = GameState.Playing;
+            }
         }
-    }
 
+    }
 }

@@ -2,27 +2,30 @@ using System;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// アイテム
-/// </summary>
-public abstract class ItemBase : MonoBehaviour
+namespace DesignDemo
 {
-    public virtual bool DestroyOnItemCollectorHit => true;
-    
-    public event Action<Collider> OnItemCollectorHit;
-    
-    [Inject] private GameStateManager gameStateManager;
-
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// アイテム
+    /// </summary>
+    public abstract class ItemBase : MonoBehaviour
     {
-        if (gameStateManager.GameState != GameState.Playing) return;
-        if (!other.TryGetComponent(out IItemCollectable _)) return;
-        
-        OnItemCollectorHit?.Invoke(other);
-        
-        if (DestroyOnItemCollectorHit)
+        public virtual bool DestroyOnItemCollectorHit => true;
+    
+        public event Action<Collider> OnItemCollectorHit;
+    
+        [Inject] private GameStateManager gameStateManager;
+
+        private void OnTriggerEnter(Collider other)
         {
-            Destroy(gameObject);
+            if (gameStateManager.GameState != GameState.Playing) return;
+            if (!other.TryGetComponent(out IItemCollectable _)) return;
+        
+            OnItemCollectorHit?.Invoke(other);
+        
+            if (DestroyOnItemCollectorHit)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

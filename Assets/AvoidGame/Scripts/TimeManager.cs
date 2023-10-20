@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Jobs;
 using UnityEngine.SceneManagement;
 using Zenject;
+using AvoidGame.System.TimeRecorder;
 
 /// <summary>
 /// ゲームの時間を管理する

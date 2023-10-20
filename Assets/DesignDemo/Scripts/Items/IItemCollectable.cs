@@ -1,6 +1,9 @@
-﻿/// <summary>
-/// アイテムを取得できる
-/// </summary>
-public interface IItemCollectable
+namespace DesignDemo
 {
+    /// <summary>
+    /// アイテムを取得できる
+    /// </summary>
+    public interface IItemCollectable
+    {
+    }
 }

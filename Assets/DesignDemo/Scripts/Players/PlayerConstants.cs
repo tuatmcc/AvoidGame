@@ -1,7 +1,10 @@
-/// <summary>
-/// プレイヤーの設定
-/// </summary>
-public static class PlayerConstants
+namespace DesignDemo
 {
-    public static float default_player_speed = 5.0f;
+    /// <summary>
+    /// プレイヤーの設定
+    /// </summary>
+    public static class PlayerConstants
+    {
+        public static float default_player_speed = 5.0f;
+    }
 }
