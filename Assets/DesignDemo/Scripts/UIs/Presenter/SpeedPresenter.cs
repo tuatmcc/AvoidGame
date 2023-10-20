@@ -2,27 +2,30 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// スコアのUIを更新する
-/// </summary>
-public class SpeedPresenter : MonoBehaviour
+namespace DesignDemo
 {
-    [SerializeField] private TMP_Text scoreText;
-
-    [Inject] private SpeedManager _speedManager;
-
-    private void Awake()
+    /// <summary>
+    /// スコアのUIを更新する
+    /// </summary>
+    public class SpeedPresenter : MonoBehaviour
     {
-        _speedManager.OnSpeedChanged += ChangeSpeedText;
-    }
+        [SerializeField] private TMP_Text scoreText;
 
-    private void ChangeSpeedText(float spped)
-    {
-        scoreText.text = $"{spped:0.0}";
-    }
+        [Inject] private SpeedManager _speedManager;
 
-    private void Reset()
-    {
-        scoreText = GetComponent<TMP_Text>();
+        private void Awake()
+        {
+            _speedManager.OnSpeedChanged += ChangeSpeedText;
+        }
+
+        private void ChangeSpeedText(float spped)
+        {
+            scoreText.text = $"{spped:0.0}";
+        }
+
+        private void Reset()
+        {
+            scoreText = GetComponent<TMP_Text>();
+        }
     }
 }

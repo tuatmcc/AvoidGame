@@ -8,3 +8,7 @@
 
 - unity 2022.3.10f1
 - Universal RP
+
+## [tuatmcc/MediaPipeSocket](https://github.com/tuatmcc/MediaPipeSocket)
+
+モーションキャプチャ用のPythonリポジトリ

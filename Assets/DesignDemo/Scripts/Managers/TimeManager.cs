@@ -5,72 +5,75 @@ using UnityEngine.Jobs;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-/// <summary>
-/// ゲームの時間を管理する
-/// </summary>
-public class TimeManager : MonoBehaviour
+namespace DesignDemo
 {
-    private bool counting = false;
-
-    private long start_time;
-
-    public event Action<TimeSpan> OnTimeChanged;
-
-    public long MainTimer
+    /// <summary>
+    /// ゲームの時間を管理する
+    /// </summary>
+    public class TimeManager : MonoBehaviour
     {
-        get => _mainTimer;
-        set
+        private bool counting = false;
+
+        private long start_time;
+
+        public event Action<TimeSpan> OnTimeChanged;
+
+        public long MainTimer
         {
-            _mainTimer = value;
-            OnTimeChanged?.Invoke(new TimeSpan(MainTimer));
+            get => _mainTimer;
+            set
+            {
+                _mainTimer = value;
+                OnTimeChanged?.Invoke(new TimeSpan(MainTimer));
+            }
         }
-    }
 
-    private long _mainTimer;
+        private long _mainTimer;
 
-    [Inject] private GameStateManager _gameStateManager;
-    private ITimeRecordable _timeRecordable;
+        [Inject] private GameStateManager _gameStateManager;
+        private ITimeRecordable _timeRecordable;
 
-    public void Start()
-    {
-        _gameStateManager.OnGameStateChanged += ChangeCount;
-        _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
-    }
-
-    private void ChangeCount(GameState gameState)
-    {
-        switch (gameState)
+        public void Start()
         {
-            case GameState.Playing:
-                StartCount();
-                break;
-            case GameState.Result:
-                StopCount(); 
-                break;
-            default:
-                break;
+            _gameStateManager.OnGameStateChanged += ChangeCount;
+            // _timeRecordable = GameObject.Find("Static").GetComponent<ITimeRecordable>();
         }
-    }
 
-    private void Update()
-    {
-        if (counting)
+        private void ChangeCount(GameState gameState)
         {
-            MainTimer = DateTime.Now.Ticks - start_time;
+            switch (gameState)
+            {
+                case GameState.Playing:
+                    StartCount();
+                    break;
+                case GameState.Result:
+                    StopCount(); 
+                    break;
+                default:
+                    break;
+            }
         }
-    }
 
-    public void StartCount()
-    {
-        if(counting) return; 
-        MainTimer = 0;
-        start_time = DateTime.Now.Ticks;
-        counting = true;
-    }
+        private void Update()
+        {
+            if (counting)
+            {
+                MainTimer = DateTime.Now.Ticks - start_time;
+            }
+        }
 
-    public void StopCount()
-    {
-        _timeRecordable.RecordTime(MainTimer);
-        counting = false;
+        public void StartCount()
+        {
+            if(counting) return; 
+            MainTimer = 0;
+            start_time = DateTime.Now.Ticks;
+            counting = true;
+        }
+
+        public void StopCount()
+        {
+            _timeRecordable.RecordTime(MainTimer);
+            counting = false;
+        }
     }
 }

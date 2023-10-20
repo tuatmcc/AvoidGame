@@ -1,9 +1,15 @@
+# Mono
+
+mono[-_]crash*
+
 # Created by https://www.toptal.com/developers/gitignore/api/unity,rider
 # Edit at https://www.toptal.com/developers/gitignore?templates=unity,rider
 
 ### Rider ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+.idea/*
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -153,3 +159,12 @@ sysinfo.txt
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,rider
+
+# Visual Studio Config File
+.vsconfig
+
+# unitypackage.meta File
+*.unitypackage.meta
+
+# Record file
+record.csv
