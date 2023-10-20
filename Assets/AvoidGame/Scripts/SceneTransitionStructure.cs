@@ -3,7 +3,7 @@ namespace AvoidGame
     [System.Serializable]
     public struct SceneTransitionStructure
     {
-        public string sceneName;
+        public SceneName sceneName;
         public GameState targetState;
     }
 }

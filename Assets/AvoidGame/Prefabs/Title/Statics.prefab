@@ -93,11 +93,11 @@ MonoBehaviour:
   loadAtLeast: 3
   _canvas: {fileID: 6263517176833435781}
   scenes:
-  - sceneName: Calibration
+  - sceneName: 1
     targetState: 1
-  - sceneName: Play
+  - sceneName: 2
     targetState: 2
-  - sceneName: Result
+  - sceneName: 0
     targetState: 3
 --- !u!1001 &8432188648209006994
 PrefabInstance:
