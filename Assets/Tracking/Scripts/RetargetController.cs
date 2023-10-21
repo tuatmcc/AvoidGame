@@ -7,9 +7,8 @@ namespace Tracking
 {
     public class RetargetController : MonoBehaviour
     {
-        public Vector3 lowerBodyMultiplier = Vector3.one;
-        public Vector3 upperBodyMultiplier = Vector3.one;
-        [FormerlySerializedAs("heelY")] public float floorY = 0f;
+        public Vector3 bodyMultiplier = Vector3.one;
+        public float floorY = 0f;
 
         [SerializeField] private PoseIKHolder ik;
 
@@ -28,39 +27,27 @@ namespace Tracking
             var leftHeel = landmarks[(int)LandmarkIndex.LEFT_HEEL];
             var rightHeel = landmarks[(int)LandmarkIndex.RIGHT_HEEL];
             var armLength = Mathf.Abs(leftWrist.X - rightWrist.X);
-            var lowerBodyHeight = Mathf.Abs(leftHip.Y + rightHip.Y - leftAnkle.Y - rightAnkle.Y);
             var bodyHeight = Mathf.Abs(leftWrist.Y + rightWrist.Y - leftAnkle.Y - rightAnkle.Y);
-            // y base
+
+
             floorY = 1 - (leftHeel.Y + rightHeel.Y) / 2f;
-            // x
-            upperBodyMultiplier.x = -Mathf.Abs(ik.leftWrist.position.x - ik.rightWrist.position.x) / armLength;
-            lowerBodyMultiplier.x = upperBodyMultiplier.x;
-            // y
-            lowerBodyMultiplier.y = Mathf.Abs(ik.hip.position.y -
-                                              (ik.rightFoot.position.y + ik.leftFoot.position.y) / 2) /
-                                    lowerBodyHeight;
-            upperBodyMultiplier.y =
-                Mathf.Abs(ik.leftElbow.position.y + ik.rightElbow.position.y - ik.leftFoot.position.y -
-                          ik.rightFoot.position.y) /
-                bodyHeight;
-            // z
-            lowerBodyMultiplier.z = 0.8f;
-            upperBodyMultiplier.z = 0.8f;
+            bodyMultiplier.x = -Mathf.Abs(ik.leftWrist.position.x - ik.rightWrist.position.x) / armLength;
+            bodyMultiplier.y = Mathf.Abs(ik.leftElbow.position.y + ik.rightElbow.position.y -
+                                   ik.rightFoot.position.y + ik.leftFoot.position.y) /
+                               bodyHeight;
+            bodyMultiplier.z = 0.5f;
         }
 
         private Vector3 ScaleLowerBody(float x, float y, float z)
         {
             y = 1 - y;
-            return Vector3.Scale(lowerBodyMultiplier, new Vector3(x - 0.5f, y - floorY, z)) -
-                   floorY * Vector3.up;
+            return Vector3.Scale(bodyMultiplier, new Vector3(x - 0.5f, y - floorY, z));
         }
 
         private Vector3 ScaleUpperBody(float x, float y, float z, float hipY)
         {
             y = 1 - y;
-            hipY = 1 - hipY;
-            return Vector3.Scale(upperBodyMultiplier, new Vector3(x - 0.5f, y - hipY, z)) +
-                   ik.hip.position.y * Vector3.up;
+            return Vector3.Scale(bodyMultiplier, new Vector3(x - 0.5f, y - floorY, z));
         }
 
         public void Retarget(Landmark[] landmarks)
@@ -95,9 +82,9 @@ namespace Tracking
 
             // upper body
             ik.neck.position = ScaleUpperBody(
-                (leftShoulder.X + rightShoulder.X + nose.X) / 3f,
-                (leftShoulder.Y + rightShoulder.Y + nose.Y) / 3f,
-                (leftShoulder.Z + rightShoulder.Z + nose.Z) / 3f, hipY);
+                (leftShoulder.X + rightShoulder.X) / 2f,
+                (leftShoulder.Y + rightShoulder.Y) / 2f,
+                (leftShoulder.Z + rightShoulder.Z) / 2f, hipY);
             ik.leftWrist.position = ScaleUpperBody(leftHand.X, leftHand.Y, leftHand.Z, hipY);
             ik.rightWrist.position = ScaleUpperBody(rightHand.X, rightHand.Y, rightHand.Z, hipY);
             ik.leftElbow.position = ScaleUpperBody(leftForearm.X, leftForearm.Y, leftForearm.Z, hipY);

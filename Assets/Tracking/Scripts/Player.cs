@@ -16,7 +16,7 @@ namespace Tracking
 
         [SerializeField] private GameObject landmark;
 
-        private TPoseData _tPoseData = new TPoseData();
+        private readonly BasicPoseAccumulator _basicPoseAccumulator = new BasicPoseAccumulator();
         private bool _retargetStarted = false;
         private bool _retargetFinished = false;
         private float _timeElapsed = 0f;
@@ -50,7 +50,7 @@ namespace Tracking
             if (_timeElapsed <= 5f)
             {
                 if (_receiver.ReceivedMessage != null)
-                    _tPoseData.AccumulateLandmarks(
+                    _basicPoseAccumulator.AccumulateLandmarks(
                         JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage));
                 return;
             }
@@ -58,7 +58,7 @@ namespace Tracking
             if (_timeElapsed > 5f && !_retargetFinished)
             {
                 _retargetFinished = true;
-                retargetController.CalcRetargetMultiplier(_tPoseData.GetAverageLandmarks());
+                retargetController.CalcRetargetMultiplier(_basicPoseAccumulator.GetAverageLandmarks());
                 return;
             }
 

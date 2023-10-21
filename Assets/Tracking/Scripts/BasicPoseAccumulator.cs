@@ -3,11 +3,11 @@ using Tracking.MediaPipe;
 
 namespace Tracking
 {
-    public class TPoseData
+    public class BasicPoseAccumulator
     {
         private readonly AccumulatedLandmark[] _accumulatedLandmarks = new AccumulatedLandmark[33];
 
-        public TPoseData()
+        public BasicPoseAccumulator()
         {
             for (var i = 0; i < _accumulatedLandmarks.Length; i++)
             {
