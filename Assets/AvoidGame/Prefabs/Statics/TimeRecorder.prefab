@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2520548790531611858}
-  - component: {fileID: 3244589177769450988}
+  - component: {fileID: 2596160662162767966}
   m_Layer: 0
   m_Name: TimeRecorder
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3244589177769450988
+--- !u!114 &2596160662162767966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2796031981383923311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc73c5cc03a6b145a2fb1e13b00dba1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf417a7204e94c4294e4e9a3af94893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
