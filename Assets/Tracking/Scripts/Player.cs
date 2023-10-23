@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace Tracking
 {
+    /// <summary>
+    /// Debug class for controlling the whole process
+    /// </summary>
     public class Player : MonoBehaviour
     {
         private Receiver _receiver;
@@ -16,7 +19,7 @@ namespace Tracking
 
         [SerializeField] private GameObject landmark;
 
-        private readonly BasicPoseAccumulator _basicPoseAccumulator = new BasicPoseAccumulator();
+        private readonly PoseAccumulator _poseAccumulator = new PoseAccumulator();
         private bool _retargetStarted = false;
         private bool _retargetFinished = false;
         private float _timeElapsed = 0f;
@@ -50,7 +53,7 @@ namespace Tracking
             if (_timeElapsed <= 5f)
             {
                 if (_receiver.ReceivedMessage != null)
-                    _basicPoseAccumulator.AccumulateLandmarks(
+                    _poseAccumulator.AccumulateLandmarks(
                         JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage));
                 return;
             }
@@ -58,7 +61,7 @@ namespace Tracking
             if (_timeElapsed > 5f && !_retargetFinished)
             {
                 _retargetFinished = true;
-                retargetController.CalcRetargetMultiplier(_basicPoseAccumulator.GetAverageLandmarks());
+                retargetController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
                 return;
             }
 

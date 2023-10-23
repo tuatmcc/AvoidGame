@@ -3,6 +3,9 @@ using Tracking.MediaPipe;
 
 namespace Tracking
 {
+    /// <summary>
+    /// Values of a landmark accumulated over time during calibration
+    /// </summary>
     public class AccumulatedLandmark
     {
         private readonly List<Landmark> _data = new List<Landmark>();

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1123190541651494758}
   - component: {fileID: 743838741914858696}
   m_Layer: 0
-  m_Name: Landmark
+  m_Name: Landmark Debug Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

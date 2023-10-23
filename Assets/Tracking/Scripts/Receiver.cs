@@ -10,7 +10,7 @@ namespace Tracking
 
         public string ReceivedMessage { get; private set; } = null;
 
-        public Receiver(int port = 5000)
+        public Receiver(int port = 8080)
         {
             _udpClient = new UdpClient(port);
         }
