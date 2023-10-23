@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Looped: 0
   m_Waypoints:
   - position: {x: 0, y: 0, z: -5}
-    tangent: {x: 1, y: 0, z: 0}
+    tangent: {x: 0, y: 0, z: 0}
     roll: 0
   - position: {x: 2.397853, y: 0, z: -0.41068053}
     tangent: {x: 0, y: 0, z: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
     tangent: {x: 1.4160604, y: 0, z: 2.0677538}
     roll: 0
   - position: {x: 21.17856, y: 0, z: 6.3340893}
-    tangent: {x: 0.47297382, y: 0, z: 0.25553846}
+    tangent: {x: 0, y: 0, z: 0}
     roll: 0
 --- !u!1 &6909733221186834072
 GameObject:
@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 5418159343375859727, guid: e3caf62a630a32544b4b48b8836d8660,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5418159343375859727, guid: e3caf62a630a32544b4b48b8836d8660,
         type: 3}
@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 5418159343375859727, guid: e3caf62a630a32544b4b48b8836d8660,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5418159343375859727, guid: e3caf62a630a32544b4b48b8836d8660,
         type: 3}
