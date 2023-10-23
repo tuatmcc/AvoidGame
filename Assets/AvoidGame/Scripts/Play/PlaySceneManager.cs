@@ -8,6 +8,7 @@ namespace AvoidGame.Play
 {
     public class PlaySceneManager : MonoBehaviour
     {
+        public event Action OnCountStart;
         public event Action<int> OnCountChanged;
 
         [SerializeField] private float waitForCountdown = 0f;
@@ -29,12 +30,12 @@ namespace AvoidGame.Play
         private IEnumerator CountDown()
         {
             var count = countdown;
-            OnCountChanged?.Invoke(count);
+            OnCountStart?.Invoke();
             while (count > 0)
             {
+                OnCountChanged?.Invoke(count);
                 yield return new WaitForSeconds(1);
                 count--;
-                OnCountChanged?.Invoke(count);
             }
             _gameStateManager.GameState = GameState.Playing;
         }

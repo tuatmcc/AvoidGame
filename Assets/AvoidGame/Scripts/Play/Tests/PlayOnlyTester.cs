@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 using AvoidGame;
 
-namespace AvoidGame.Test
+namespace AvoidGame.Play.Test
 {
     public class PlayOnlyTester : MonoBehaviour
     {
