@@ -54,11 +54,14 @@ MonoBehaviour:
   - position: {x: 0, y: 0, z: -5}
     tangent: {x: 1, y: 0, z: 0}
     roll: 0
-  - position: {x: 1.2030611, y: 0, z: -1.686662}
-    tangent: {x: -0.8340838, y: 0, z: 0.68176675}
+  - position: {x: 2.397853, y: 0, z: -0.41068053}
+    tangent: {x: 0, y: 0, z: 0}
     roll: 0
-  - position: {x: 2.854412, y: 0, z: 2.1372073}
-    tangent: {x: 0.9578495, y: 0, z: 0.50203633}
+  - position: {x: 4.0393753, y: 0, z: 5.8621244}
+    tangent: {x: 1.4160604, y: 0, z: 2.0677538}
+    roll: 0
+  - position: {x: 21.17856, y: 0, z: 6.3340893}
+    tangent: {x: 0.47297382, y: 0, z: 0.25553846}
     roll: 0
 --- !u!1 &6909733221186834072
 GameObject:
@@ -101,6 +104,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7973769680907420650}
     m_Modifications:
+    - target: {fileID: 1138959495470192395, guid: e3caf62a630a32544b4b48b8836d8660,
+        type: 3}
+      propertyPath: path
+      value: 
+      objectReference: {fileID: 2831719794352795914}
     - target: {fileID: 2642020980880163104, guid: e3caf62a630a32544b4b48b8836d8660,
         type: 3}
       propertyPath: m_LocalPosition.y

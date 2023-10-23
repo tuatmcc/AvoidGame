@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace AvoidGame.Play
 {
@@ -11,6 +12,7 @@ namespace AvoidGame.Play
     public class SpeedManager : MonoBehaviour
     {
         public event Action<float> OnSpeedChanged;
+        [Inject] GameStateManager _gameStateManager;
 
         /// <summary>
         /// スピード倍率
@@ -29,7 +31,8 @@ namespace AvoidGame.Play
 
         private void Start()
         {
-            Speed = 1.0f;
+            Speed = 0f;
+            _gameStateManager.OnGameStateChanged += PlayStart;
         }
 
         /// <summary>
@@ -39,6 +42,14 @@ namespace AvoidGame.Play
         public void AddPlayerSpeed(float add)
         {
             Speed += add;
+        }
+
+        private void PlayStart(GameState gameState)
+        {
+            if(gameState == GameState.Playing)
+            {
+                Speed = 1f;
+            }
         }
     }
 }

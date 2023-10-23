@@ -60,6 +60,9 @@ namespace AvoidGame
                 case GameState.Playing:
                     Debug.Log("GameState Changhed to : Playing");
                     break;
+                case GameState.Finished:
+                    Debug.Log("GameState Changhed to : Finished");
+                    break;
                 case GameState.Result:
                     Debug.Log("GameState Changhed to : Result");
                     break;

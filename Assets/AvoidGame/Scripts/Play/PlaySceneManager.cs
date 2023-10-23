@@ -18,17 +18,13 @@ namespace AvoidGame.Play
 
         void Start()
         {
-            StartCoroutine(WaitForCountdown());
+            StartCoroutine(Countdown());
         }
 
-        private IEnumerator WaitForCountdown()
+        private IEnumerator Countdown()
         {
             yield return new WaitForSeconds(waitForCountdown);
-            StartCoroutine(CountDown());
-        }
 
-        private IEnumerator CountDown()
-        {
             var count = countdown;
             OnCountStart?.Invoke();
             while (count > 0)
@@ -38,6 +34,11 @@ namespace AvoidGame.Play
                 count--;
             }
             _gameStateManager.GameState = GameState.Playing;
+        }
+
+        public void Finished()
+        {
+            _gameStateManager.GameState = GameState.Finished;
         }
     }
 }

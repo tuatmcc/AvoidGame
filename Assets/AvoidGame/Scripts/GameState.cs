@@ -9,6 +9,7 @@ namespace AvoidGame
         Calibration,
         CountDown,
         Playing,
+        Finished,
         Result,
     }
 }

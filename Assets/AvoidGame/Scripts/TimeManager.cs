@@ -36,17 +36,17 @@ namespace AvoidGame
 
         public void Start()
         {
-            _gameStateManager.OnGameStateChanged += ChangeCount;
+            _gameStateManager.OnGameStateChanged += ChangeTimerCondition;
         }
 
-        private void ChangeCount(GameState gameState)
+        private void ChangeTimerCondition(GameState gameState)
         {
             switch (gameState)
             {
                 case GameState.Playing:
                     StartCount();
                     break;
-                case GameState.Result:
+                case GameState.Finished:
                     StopCount(); 
                     break;
                 default:

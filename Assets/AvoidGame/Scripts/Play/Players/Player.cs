@@ -9,8 +9,10 @@ namespace AvoidGame.Play.Player
     /// </summary>
     public class Player : MonoBehaviour
     {
+        [SerializeField] Cinemachine.CinemachinePath path;
         private float default_speed;
         private Cinemachine.CinemachineDollyCart cart;
+        [Inject] PlaySceneManager _playSceneManager;
         [Inject] SpeedManager _speedManager;
         [Inject] GameStateManager _gameStateManager;
 
@@ -22,6 +24,15 @@ namespace AvoidGame.Play.Player
 
             _gameStateManager.OnGameStateChanged += StartRace;
             _speedManager.OnSpeedChanged += ChangeSpeed;
+            
+        }
+
+        private void Update()
+        {
+            if(cart.m_Position == path.PathLength && _gameStateManager.GameState == GameState.Playing)
+            {
+                _playSceneManager.Finished();   
+            }
         }
 
         private void StartRace(GameState gameState)
@@ -32,6 +43,10 @@ namespace AvoidGame.Play.Player
             }
         }
 
+        /// <summary>
+        /// スピードの変更をcartに反映
+        /// </summary>
+        /// <param name="speed"></param>
         private void ChangeSpeed(float speed)
         {
             cart.m_Speed = default_speed * speed;
