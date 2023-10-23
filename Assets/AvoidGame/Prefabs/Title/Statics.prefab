@@ -97,8 +97,8 @@ MonoBehaviour:
     targetState: 1
   - sceneName: 2
     targetState: 2
-  - sceneName: 0
-    targetState: 3
+  - sceneName: 3
+    targetState: 4
 --- !u!1001 &8432188648209006994
 PrefabInstance:
   m_ObjectHideFlags: 0

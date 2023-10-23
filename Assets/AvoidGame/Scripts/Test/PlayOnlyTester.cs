@@ -11,7 +11,7 @@ namespace AvoidGame.Test
         [Inject] GameStateManager gameStateManager;
         private void Start()
         {
-            gameStateManager.GameState = GameState.Playing;
+            gameStateManager.GameState = GameState.CountDown;
         }
     }
 }
