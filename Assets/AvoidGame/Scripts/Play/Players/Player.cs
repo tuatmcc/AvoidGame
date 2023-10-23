@@ -7,7 +7,7 @@ namespace AvoidGame.Play.Player
     /// プレイヤー
     /// アイテムの取得を行う
     /// </summary>
-    public class Player : MonoBehaviour, IItemCollectable
+    public class Player : MonoBehaviour
     {
         private float default_speed;
         private Cinemachine.CinemachineDollyCart cart;

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4326769030728565351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2642020980880163104}
+  m_Layer: 0
+  m_Name: PlayerCameraRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2642020980880163104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326769030728565351}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5418159343375859727}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4937398511867323327
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +40,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5418159343375859727}
+  - component: {fileID: 4140614115671296797}
+  - component: {fileID: 1138959495470192395}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -28,6 +61,133 @@ Transform:
   m_LocalPosition: {x: 0.1671709, y: 0.98655546, z: -0.36270422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8297626063578150042}
+  - {fileID: 2642020980880163104}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4140614115671296797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4937398511867323327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a9c787e5d1bbf48a389834c4a9641c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Path: {fileID: 0}
+  m_UpdateMethod: 0
+  m_PositionUnits: 1
+  m_Speed: 0
+  m_Position: 0
+--- !u!114 &1138959495470192395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4937398511867323327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f55936185e06bb46b3867f5025b549f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &6401287292054663371
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5418159343375859727}
+    m_Modifications:
+    - target: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_Name
+      value: Neocchi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8042577753042114245}
+  m_SourcePrefab: {fileID: 100100000, guid: 1b40d200e6a1d71ba8c84278db3f1242, type: 3}
+--- !u!4 &8297626063578150042 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    type: 3}
+  m_PrefabInstance: {fileID: 6401287292054663371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8677528687792975392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    type: 3}
+  m_PrefabInstance: {fileID: 6401287292054663371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8042577753042114245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677528687792975392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf7f56d95702f746869fc39277560ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
