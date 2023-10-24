@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1448690595291358348}
   - component: {fileID: 5016945058602768131}
   - component: {fileID: -5326125596640025061}
+  - component: {fileID: 3874441693627764895}
   m_Layer: 0
   m_Name: SpeedDownItem
   m_TagString: Untagged
@@ -118,3 +119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838832b471952c54db595072e49d0185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3874441693627764895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824293076073003644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 2

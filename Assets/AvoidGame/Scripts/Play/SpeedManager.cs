@@ -42,6 +42,10 @@ namespace AvoidGame.Play
         public void AddPlayerSpeed(float add)
         {
             Speed += add;
+            if(Speed < 0.1f)
+            {
+                Speed = 0.1f;
+            }
         }
 
         private void PlayStart(GameState gameState)
