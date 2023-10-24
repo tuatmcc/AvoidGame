@@ -1,4 +1,4 @@
-namespace AvoidGame
+namespace AvoidGame.Play.Items
 {
     /// <summary>
     /// アイテムを取得できる

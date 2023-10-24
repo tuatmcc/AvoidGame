@@ -54,14 +54,20 @@ MonoBehaviour:
   - position: {x: 0, y: 0, z: -5}
     tangent: {x: 0, y: 0, z: 0}
     roll: 0
-  - position: {x: 2.397853, y: 0, z: -0.41068053}
-    tangent: {x: 0, y: 0, z: 0}
+  - position: {x: 5.508274, y: 0, z: 3.0565324}
+    tangent: {x: 1.2334876, y: 0, z: 2.8707666}
     roll: 0
-  - position: {x: 4.0393753, y: 0, z: 5.8621244}
+  - position: {x: 7.4653234, y: 0, z: 14.8703}
     tangent: {x: 1.4160604, y: 0, z: 2.0677538}
     roll: 0
-  - position: {x: 21.17856, y: 0, z: 6.3340893}
-    tangent: {x: 0, y: 0, z: 0}
+  - position: {x: 14.852964, y: 0, z: 11.377603}
+    tangent: {x: 1.6955013, y: 0, z: -2.386901}
+    roll: 0
+  - position: {x: 16.831717, y: 0, z: 1.8254302}
+    tangent: {x: 4.081213, y: 0, z: -4.153554}
+    roll: 0
+  - position: {x: 17.1951, y: 0, z: -10.630113}
+    tangent: {x: -3.816311, y: 0, z: -4.9711037}
     roll: 0
 --- !u!1 &6909733221186834072
 GameObject:
