@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9140581334630051279}
   m_Layer: 0
   m_Name: Statics
-  m_TagString: PassiveInTest
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6813193109964480290}
-  - component: {fileID: 6596540409889183468}
+  - component: {fileID: 4410066440903971195}
   m_Layer: 0
   m_Name: SceneTransitionManager
   m_TagString: Untagged
@@ -78,7 +78,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7217498704338128542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6596540409889183468
+--- !u!114 &4410066440903971195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,12 +87,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4089741408832485720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 294375ffe23d31444a2da96d8ee2e468, type: 3}
+  m_Script: {fileID: 11500000, guid: fa5de1f60c64cb84e9a119c3556b413a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   loadAtLeast: 3
   _canvas: {fileID: 6263517176833435781}
+  _from: 0
+  _to: 3
   scenes:
+  - sceneName: 0
+    targetState: 0
   - sceneName: 1
     targetState: 1
   - sceneName: 2

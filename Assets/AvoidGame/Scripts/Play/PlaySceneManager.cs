@@ -13,6 +13,7 @@ namespace AvoidGame.Play
 
         [SerializeField] private float waitForCountdown = 0f;
         [SerializeField] private int countdown = 0;
+        [SerializeField] private float waitAfterFinished = 0f;
 
         [Inject] private GameStateManager _gameStateManager;
 
@@ -39,6 +40,13 @@ namespace AvoidGame.Play
         public void Finished()
         {
             _gameStateManager.GameState = GameState.Finished;
+            StartCoroutine(TransitToResult());
+        }
+
+        private IEnumerator TransitToResult()
+        {
+            yield return new WaitForSeconds(waitAfterFinished);
+            _gameStateManager.GameState = GameState.Result;
         }
     }
 }

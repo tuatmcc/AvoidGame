@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AvoidGame/Scenes/Result.unity
     guid: 4ab16737bad697341987fd4802b04a43
+  - enabled: 1
+    path: Assets/AvoidGame/Scenes/Tester.unity
+    guid: 2e1b7b51aea906d4bb8366ab1b59999e
   m_configObjects: {}
