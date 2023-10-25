@@ -46,10 +46,9 @@ namespace AvoidGame.Tester
                     break;
                 }
             }
-
             _gameStateManager.OnGameStateChanged += SceneTransition;
-            SceneManager.sceneLoaded += SceneLoaded;
 
+            SceneManager.sceneLoaded += SceneLoaded;
             StartCoroutine(LoadScene(_from.ToString()));
         }
 

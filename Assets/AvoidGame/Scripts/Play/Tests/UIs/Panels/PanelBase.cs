@@ -23,5 +23,10 @@ namespace AvoidGame.Play.Test.UI
         {
             gameObject.SetActive(gameState == TargetState);
         }
+
+        private void OnDisable()
+        {
+            _gameStateManager.OnGameStateChanged -= ChangePanelActivation;
+        }
     }
 }
