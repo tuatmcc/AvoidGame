@@ -49,13 +49,19 @@ namespace AvoidGame
             switch (gameState)
             {
                 case GameState.Title:
-                    Debug.Log("GameState Changhed to : Menu");
+                    Debug.Log("GameState Changhed to : Title");
                     break;
                 case GameState.Calibration:
                     Debug.Log("GameState Changhed to : Calibration");
                     break ;
+                case GameState.CountDown:
+                    Debug.Log("GameState Changhed to : CountDown");
+                    break;
                 case GameState.Playing:
                     Debug.Log("GameState Changhed to : Playing");
+                    break;
+                case GameState.Finished:
+                    Debug.Log("GameState Changhed to : Finished");
                     break;
                 case GameState.Result:
                     Debug.Log("GameState Changhed to : Result");

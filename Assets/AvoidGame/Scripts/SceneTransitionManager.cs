@@ -38,7 +38,7 @@ namespace AvoidGame
             {
                 if(s.targetState == gameState)
                 {
-                    StartCoroutine(LoadScene(s.sceneName));
+                    StartCoroutine(LoadScene(s.sceneName.ToString()));
                 }
             }
         }

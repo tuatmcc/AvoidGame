@@ -7,7 +7,9 @@ namespace AvoidGame
     {
         Title,
         Calibration,
+        CountDown,
         Playing,
+        Finished,
         Result,
     }
 }
