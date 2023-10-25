@@ -1,10 +1,14 @@
+using System.Collections.Generic;
+using AvoidGame.Calibration.MediaPipe;
 using Cysharp.Threading.Tasks;
-using Tracking.MediaPipe;
-using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine;
 
-namespace Tracking
+namespace AvoidGame.Calibration
 {
+    /// <summary>
+    /// Debug class for controlling the whole process
+    /// </summary>
     public class Player : MonoBehaviour
     {
         private Receiver _receiver;
@@ -13,10 +17,13 @@ namespace Tracking
 
         [SerializeField] private RetargetController retargetController;
 
-        private TPoseData _tPoseData = new TPoseData();
+        [SerializeField] private GameObject landmark;
+
+        private readonly PoseAccumulator _poseAccumulator = new PoseAccumulator();
         private bool _retargetStarted = false;
         private bool _retargetFinished = false;
         private float _timeElapsed = 0f;
+        private readonly List<GameObject> _debugLandmark = new List<GameObject>();
 
 
         private void Start()
@@ -24,6 +31,12 @@ namespace Tracking
             _receiver = new Receiver();
             var token = this.GetCancellationTokenOnDestroy();
             _receiver.StartReceiver(token).Forget();
+
+            if (landmark)
+            {
+                for (int i = 0; i < 33; i++)
+                    _debugLandmark.Add(Instantiate(landmark));
+            }
         }
 
         private void Update()
@@ -37,23 +50,29 @@ namespace Tracking
 
             _timeElapsed += Time.deltaTime;
 
-            if (_timeElapsed <= 10f)
+            if (_timeElapsed <= 5f)
             {
                 if (_receiver.ReceivedMessage != null)
-                    _tPoseData.AccumulateLandmarks(
+                    _poseAccumulator.AccumulateLandmarks(
                         JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage));
                 return;
             }
 
-            if (_timeElapsed > 10f && !_retargetFinished)
+            if (_timeElapsed > 5f && !_retargetFinished)
             {
                 _retargetFinished = true;
-                retargetController.CalcRetargetMultiplier(_tPoseData.GetAverageLandmarks());
+                retargetController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
                 return;
             }
 
             var landmarks = JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage);
             retargetController.Retarget(landmarks);
+
+            if (landmark)
+                for (int i = 0; i < 33; i++)
+                {
+                    _debugLandmark[i].transform.position = new Vector3(landmarks[i].X, landmarks[i].Y, landmarks[i].Z);
+                }
         }
     }
 }

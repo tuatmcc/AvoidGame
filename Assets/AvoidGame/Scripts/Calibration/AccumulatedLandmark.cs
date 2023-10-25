@@ -1,8 +1,11 @@
 using System.Collections.Generic;
-using Tracking.MediaPipe;
+using AvoidGame.Calibration.MediaPipe;
 
-namespace Tracking
+namespace AvoidGame.Calibration
 {
+    /// <summary>
+    /// Values of a landmark accumulated over time during calibration
+    /// </summary>
     public class AccumulatedLandmark
     {
         private readonly List<Landmark> _data = new List<Landmark>();
