@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.Timeline;
 
-namespace AvoidGame
+namespace AvoidGame.Calibration
 {
     /// <summary>
     /// Holds the IK points and visualizes them

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using AvoidGame.Calibration.MediaPipe;
 using Cysharp.Threading.Tasks;
-using Tracking.MediaPipe;
-using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine;
 
-namespace AvoidGame
+namespace AvoidGame.Calibration
 {
     /// <summary>
     /// Debug class for controlling the whole process

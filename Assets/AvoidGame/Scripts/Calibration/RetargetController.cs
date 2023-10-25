@@ -1,7 +1,7 @@
-using Tracking.MediaPipe;
+using AvoidGame.Calibration.MediaPipe;
 using UnityEngine;
 
-namespace AvoidGame
+namespace AvoidGame.Calibration
 {
     /// <summary>
     /// Calculates the retargeting of the pose and holds the multiplier.

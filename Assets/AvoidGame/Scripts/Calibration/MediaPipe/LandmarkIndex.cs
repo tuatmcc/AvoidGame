@@ -1,4 +1,4 @@
-namespace AvoidGame
+namespace AvoidGame.Calibration.MediaPipe
 {
     public enum LandmarkIndex
     {

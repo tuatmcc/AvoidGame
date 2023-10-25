@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Tracking.MediaPipe;
+using AvoidGame.Calibration.MediaPipe;
 
-namespace AvoidGame
+namespace AvoidGame.Calibration
 {
     /// <summary>
     /// Values of a landmark accumulated over time during calibration

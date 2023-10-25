@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Tracking.MediaPipe
+namespace AvoidGame.Calibration.MediaPipe
 {
     public class MediaPipePose
     {

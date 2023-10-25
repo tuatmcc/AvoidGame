@@ -1,8 +1,8 @@
+using System.Net.Sockets;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using System.Net.Sockets;
 
-namespace AvoidGame
+namespace AvoidGame.Calibration
 {
     public class Receiver
     {

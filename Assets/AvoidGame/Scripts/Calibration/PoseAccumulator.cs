@@ -1,7 +1,6 @@
-using UnityEngine;
-using Tracking.MediaPipe;
+using AvoidGame.Calibration.MediaPipe;
 
-namespace AvoidGame
+namespace AvoidGame.Calibration
 {
     /// <summary>
     /// Accumulates T Pose landmark data for calibration
