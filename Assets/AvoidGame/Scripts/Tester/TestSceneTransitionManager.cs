@@ -29,6 +29,11 @@ namespace AvoidGame.Tester
         {
             _loadingCanvas = _canvas.GetComponent<Canvas>();
             _loadingCanvas.enabled = false;
+
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
+            {
+                obj.SetActive(false);
+            }
         }
 
         private void Start()
