@@ -51,7 +51,7 @@ namespace Tracking.Mock
                 case GameState.Menu:
                     Debug.Log("GameState Changed to : Menu");
                     break;
-                case GameState.Calibration:
+                case GameState.Calibrating:
                     Debug.Log("GameState Changed to : Calibration");
                     break;
                 case GameState.Playing:

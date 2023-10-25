@@ -6,7 +6,7 @@
     public enum GameState
     {
         Menu,
-        Calibration,
+        Calibrating,
         Playing,
         Result,
     }

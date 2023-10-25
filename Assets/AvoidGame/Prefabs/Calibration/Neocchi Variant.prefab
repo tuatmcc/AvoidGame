@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &678434598181180141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5024745346504794176}
+  m_Layer: 0
+  m_Name: Hip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5024745346504794176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678434598181180141}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.12581971, y: -0.00000011826194, z: 0.000000014998886, w: 0.9920532}
+  m_LocalPosition: {x: 0, y: 0.7654145, z: 0.074216}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1157389191422233641}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2395988512580702196
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8606045075700280043}
   m_Layer: 0
-  m_Name: Shin.R
+  m_Name: Knee.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,14 +97,16 @@ Transform:
   - {fileID: 6751709230484818560}
   - {fileID: 3445926095722551183}
   - {fileID: 154298336964574961}
+  - {fileID: 3845157247026716783}
   - {fileID: 2016177979392717459}
+  - {fileID: 5024745346504794176}
   - {fileID: 2897516223054706038}
-  - {fileID: 7434399347786702565}
   - {fileID: 7848562068073070270}
+  - {fileID: 7434399347786702565}
   - {fileID: 5399918063076642096}
   - {fileID: 642109665496088837}
-  - {fileID: 6674317867116245560}
   - {fileID: 8606045075700280043}
+  - {fileID: 6674317867116245560}
   - {fileID: 6370259037410962074}
   m_Father: {fileID: 434904963790650813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7848562068073070270}
   m_Layer: 0
-  m_Name: ForeHand.R
+  m_Name: Elbow.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5399918063076642096}
   m_Layer: 0
-  m_Name: Hand.R
+  m_Name: Wrist.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +295,7 @@ MonoBehaviour:
     m_Hint: {fileID: 7848562068073070270}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
-    m_HintWeight: 1
+    m_HintWeight: 0.5
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &4864094029969795041
@@ -306,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 642109665496088837}
   m_Layer: 0
-  m_Name: Shin.L
+  m_Name: Knee.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,7 +413,7 @@ MonoBehaviour:
     m_Hint: {fileID: 2897516223054706038}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
-    m_HintWeight: 1
+    m_HintWeight: 0.5
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &7834726399774548737
@@ -449,7 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2897516223054706038}
   m_Layer: 0
-  m_Name: ForeArm.L
+  m_Name: Elbow.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -520,11 +553,90 @@ MonoBehaviour:
     m_Tip: {fileID: 2295432874655947631}
     m_Target: {fileID: 2016177979392717459}
     m_ChainRotationWeight: 1
-    m_TipRotationWeight: 1
+    m_TipRotationWeight: 0.9
     m_MaxIterations: 15
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!1 &8797589101773928812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3845157247026716783}
+  - component: {fileID: 283169424901237173}
+  m_Layer: 0
+  m_Name: ConstraintHip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3845157247026716783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797589101773928812}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0000000010978014, y: 0.7654149, z: 0.074216045}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1157389191422233641}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &283169424901237173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797589101773928812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10bdb03db33fb148b858a4a3b646cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_ConstrainedObject: {fileID: 4459594340216663620}
+    m_SourceObjects:
+      m_Length: 1
+      m_Item0:
+        transform: {fileID: 5024745346504794176}
+        weight: 1
+      m_Item1:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item2:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item3:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item4:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item5:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item6:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item7:
+        transform: {fileID: 0}
+        weight: 0
+    m_Offset: {x: 0, y: 0, z: 0}
+    m_ConstrainedAxes:
+      x: 1
+      y: 1
+      z: 1
+    m_MaintainOffset: 0
 --- !u!1 &8828992747680450807
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7434399347786702565}
   m_Layer: 0
-  m_Name: Hand.L
+  m_Name: Wrist.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1520,14 +1632,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f14702a3c649e2b219d34cd03b34c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugIK: 0
+  ikDebugPointPrefab: {fileID: 4198472772038802745, guid: 8a6047506027f38ce827e5be2747d91f,
+    type: 3}
   neck: {fileID: 2016177979392717459}
-  leftForearm: {fileID: 2897516223054706038}
-  leftHand: {fileID: 7434399347786702565}
-  rightForearm: {fileID: 7848562068073070270}
-  rightHand: {fileID: 5399918063076642096}
-  leftShin: {fileID: 642109665496088837}
+  hip: {fileID: 5024745346504794176}
+  leftShoulder: {fileID: 0}
+  rightShoulder: {fileID: 0}
+  leftElbow: {fileID: 2897516223054706038}
+  rightElbow: {fileID: 7848562068073070270}
+  leftWrist: {fileID: 7434399347786702565}
+  rightWrist: {fileID: 5399918063076642096}
+  leftKnee: {fileID: 642109665496088837}
+  rightKnee: {fileID: 8606045075700280043}
   leftFoot: {fileID: 6674317867116245560}
-  rightShin: {fileID: 8606045075700280043}
   rightFoot: {fileID: 6370259037410962074}
 --- !u!114 &7640501081858227604
 MonoBehaviour:
@@ -1541,15 +1659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d0b8b264d84c65a4c2697d20e9ac71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neckMultiplier: {x: 1, y: 1, z: 1}
-  leftForearmMultiplier: {x: 1, y: 1, z: 1}
-  leftHandMultiplier: {x: 1, y: 1, z: 1}
-  rightForearmMultiplier: {x: 1, y: 1, z: 1}
-  rightHandMultiplier: {x: 1, y: 1, z: 1}
-  leftShinMultiplier: {x: 1, y: 1, z: 1}
-  leftFootMultiplier: {x: 1, y: 1, z: 1}
-  rightShinMultiplier: {x: 1, y: 1, z: 1}
-  rightFootMultiplier: {x: 1, y: 1, z: 1}
   ik: {fileID: 654725323304214367}
 --- !u!114 &7407605069020203952
 MonoBehaviour:
@@ -1565,6 +1674,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIKHolder: {fileID: 654725323304214367}
   retargetController: {fileID: 7640501081858227604}
+  landmark: {fileID: 4198472772038802745, guid: 2d7c9010dd98a2c4ea18ff18d4704668,
+    type: 3}
 --- !u!4 &9078438975543412639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2788696245796029028, guid: 1b40d200e6a1d71ba8c84278db3f1242,
