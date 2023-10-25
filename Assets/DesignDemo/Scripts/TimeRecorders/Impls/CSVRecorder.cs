@@ -16,12 +16,13 @@ namespace DesignDemo
         {
             if (!File.Exists(_csvPath))
                 return new List<long>();
-            return File.ReadLines(_csvPath).SkipLast(1).Select(v => long.Parse(v)).ToList();
+            return File.ReadLines(_csvPath).Select(v => long.Parse(v)).ToList();
         }
 
         public void RecordTime(long time)
         {
             File.AppendAllText(_csvPath, time + "\n");
+            OnTimeRecorded?.Invoke();
         }
     }
 }

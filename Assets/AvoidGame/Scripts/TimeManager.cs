@@ -69,11 +69,10 @@ namespace AvoidGame
             start_time = DateTime.Now.Ticks;
             counting = true;
         }
-
         public void StopCount()
         {
-            _timeRecordable.RecordTime(MainTimer);
             counting = false;
+            _timeRecordable.RecordTime(MainTimer);
         }
     }
 }

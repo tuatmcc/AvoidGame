@@ -20,7 +20,7 @@ namespace AvoidGame.Result.UI
 
         private void SetRankText(List<long> timeList, long time)
         {
-            targetRank = targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank;
+            targetRank = (targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank);
             rankText.text = $"{targetRank}位";
         }
     }
