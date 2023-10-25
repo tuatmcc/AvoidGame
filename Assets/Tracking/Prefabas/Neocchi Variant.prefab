@@ -295,7 +295,7 @@ MonoBehaviour:
     m_Hint: {fileID: 7848562068073070270}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
-    m_HintWeight: 1
+    m_HintWeight: 0.5
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &4864094029969795041
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Hint: {fileID: 2897516223054706038}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
-    m_HintWeight: 1
+    m_HintWeight: 0.5
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &7834726399774548737
@@ -1659,12 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d0b8b264d84c65a4c2697d20e9ac71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowerBodyMultiplier: {x: 1, y: 1, z: 1}
-  upperBodyMultiplier: {x: 1, y: 1, z: 1}
-  floorY: 0
   ik: {fileID: 654725323304214367}
-  debugIKPrefab: {fileID: 4198472772038802745, guid: 8a6047506027f38ce827e5be2747d91f,
-    type: 3}
 --- !u!114 &7407605069020203952
 MonoBehaviour:
   m_ObjectHideFlags: 0
