@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5de1f60c64cb84e9a119c3556b413a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadAtLeast: 3
+  loadAtLeast: 0
   _canvas: {fileID: 6263517176833435781}
   _from: 0
   _to: 3
