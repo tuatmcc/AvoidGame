@@ -307,6 +307,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2526672468453108393, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2764263036808584144, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
         type: 3}
       propertyPath: m_Controller
@@ -316,6 +321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407605069020203952, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
+        type: 3}
+      propertyPath: retargetController
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7640501081858227604, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
         type: 3}
@@ -377,7 +387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Neocchi Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7640501081858227604, guid: 395f6560a4ed9148e9b4a6b7c4184d8b, type: 3}
+    - {fileID: 7407605069020203952, guid: 395f6560a4ed9148e9b4a6b7c4184d8b, type: 3}
+    - {fileID: 654725323304214367, guid: 395f6560a4ed9148e9b4a6b7c4184d8b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5721196635947583644, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
@@ -422,6 +435,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04ab02891ec29254f9359210f80944c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  builder: {fileID: 7971249502909728024}
+--- !u!114 &7971249502909728024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6714180284733391516, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3725073193040775044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8995896627501092632 stripped
