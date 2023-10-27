@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 /// <summary>
-/// シーン遷移を管理する
+/// シーン遷移を管理する(テスト用)
 /// </summary>
 namespace AvoidGame.Tester
 {
@@ -30,14 +30,12 @@ namespace AvoidGame.Tester
             _loadingCanvas = _canvas.GetComponent<Canvas>();
             _loadingCanvas.enabled = false;
 
+            // テスト時に無効化すべきGameObjectを無効に
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
                 obj.SetActive(false);
             }
-        }
-
-        private void Start()
-        {
+            // GameStateを開始Stateに設定してロック
             foreach (SceneTransitionStructure s in scenes)
             {
                 if(s.sceneName == _from)
@@ -46,6 +44,11 @@ namespace AvoidGame.Tester
                     break;
                 }
             }
+            _gameStateManager.LockGameState();
+        }
+
+        private void Start()
+        {
             _gameStateManager.OnGameStateChanged += SceneTransition;
 
             SceneManager.sceneLoaded += SceneLoaded;
@@ -71,6 +74,10 @@ namespace AvoidGame.Tester
         private IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
+            if(sceneName == _from.ToString())
+            {
+                waited = loadAtLeast;
+            }
             _loadingCanvas.enabled = true;
             while(waited < loadAtLeast)
             {
@@ -87,6 +94,7 @@ namespace AvoidGame.Tester
             {
                 obj.SetActive(false);
             }
+            _gameStateManager.UnlockGameState();
         }
     }
 }

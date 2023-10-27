@@ -27,6 +27,9 @@ namespace AvoidGame.Play.Player
             
         }
 
+        /// <summary>
+        /// 終点に達したらGameStateをfinishedに
+        /// </summary>
         private void Update()
         {
             if(cart.m_Position == path.PathLength && _gameStateManager.GameState == GameState.Playing)

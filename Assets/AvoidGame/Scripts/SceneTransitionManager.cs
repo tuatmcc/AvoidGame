@@ -20,18 +20,28 @@ namespace AvoidGame
 
         [Inject] private GameStateManager _gameStateManager;
 
+        /// <summary>
+        /// ロード画面用canvasを取得
+        /// </summary>
         private void Awake()
         {
             _loadingCanvas = _canvas.GetComponent<Canvas>();
             _loadingCanvas.enabled = false;
         }
 
+        /// <summary>
+        /// イベント登録
+        /// </summary>
         private void Start()
         {
             _gameStateManager.OnGameStateChanged += SceneTransition;
             SceneManager.sceneLoaded += SceneLoaded;
         }
 
+        /// <summary>
+        /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
+        /// </summary>
+        /// <param name="gameState"></param>
         private void SceneTransition(GameState gameState)
         {
             foreach(SceneTransitionStructure s in scenes)
@@ -43,6 +53,11 @@ namespace AvoidGame
             }
         }
 
+        /// <summary>
+        /// canvasを有効にした後loadAtLeast時間待ってからロードを開始
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <returns></returns>
         private IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
@@ -55,6 +70,11 @@ namespace AvoidGame
             SceneManager.LoadSceneAsync(sceneName);
         }
 
+        /// <summary>
+        /// ロードが終了したらcanvasを無効に
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="loadSceneMode"></param>
         private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             _loadingCanvas.enabled = false;
