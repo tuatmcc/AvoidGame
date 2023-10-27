@@ -10,29 +10,39 @@ namespace AvoidGame
 {
     public class SceneTransitionManager : MonoBehaviour
     {
-        [SerializeField] private float loadAtLeast = 0f;
+        [SerializeField] protected private float loadAtLeast = 0f;
 
-        [SerializeField] private GameObject _canvas;
+        [SerializeField] protected private GameObject _canvas;
 
-        private Canvas _loadingCanvas;
+        protected private Canvas _loadingCanvas;
 
-        [SerializeField] private List<SceneTransitionStructure> scenes;
+        [SerializeField] protected private List<SceneTransitionStructure> scenes;
 
-        [Inject] private GameStateManager _gameStateManager;
+        [Inject] protected private GameStateManager _gameStateManager;
 
-        private void Awake()
+        /// <summary>
+        /// ロード画面用canvasを取得
+        /// </summary>
+        virtual public void Awake()
         {
             _loadingCanvas = _canvas.GetComponent<Canvas>();
             _loadingCanvas.enabled = false;
         }
 
-        private void Start()
+        /// <summary>
+        /// イベント登録
+        /// </summary>
+        virtual public void Start()
         {
             _gameStateManager.OnGameStateChanged += SceneTransition;
             SceneManager.sceneLoaded += SceneLoaded;
         }
 
-        private void SceneTransition(GameState gameState)
+        /// <summary>
+        /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
+        /// </summary>
+        /// <param name="gameState"></param>
+        protected virtual private void SceneTransition(GameState gameState)
         {
             foreach(SceneTransitionStructure s in scenes)
             {
@@ -43,7 +53,12 @@ namespace AvoidGame
             }
         }
 
-        private IEnumerator LoadScene(string sceneName)
+        /// <summary>
+        /// canvasを有効にした後loadAtLeast時間待ってからロードを開始
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <returns></returns>
+        protected virtual private IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
             _loadingCanvas.enabled = true;
@@ -55,7 +70,12 @@ namespace AvoidGame
             SceneManager.LoadSceneAsync(sceneName);
         }
 
-        private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        /// <summary>
+        /// ロードが終了したらcanvasを無効に
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="loadSceneMode"></param>
+        protected virtual private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             _loadingCanvas.enabled = false;
         }

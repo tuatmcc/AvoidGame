@@ -16,14 +16,18 @@ namespace AvoidGame
         /// Stateごとに用意したほうが便利かも
         /// </summary>
         public event Action<GameState> OnGameStateChanged;
-
+    
+        private bool gameStateLocked = false;
         public GameState GameState
         {
             get => _gameState;
             set
             {
-                _gameState = value;
-                OnGameStateChanged?.Invoke(_gameState);
+                if (!gameStateLocked)
+                {
+                    _gameState = value;
+                    OnGameStateChanged?.Invoke(_gameState);
+                }
             }
         }
 
@@ -58,27 +62,25 @@ namespace AvoidGame
         /// <param name="gameState"></param>
         private void ChangeGameState(GameState gameState)
         {
-            switch (gameState)
-            {
-                case GameState.Title:
-                    Debug.Log("GameState Changhed to : Title");
-                    break;
-                case GameState.Calibration:
-                    Debug.Log("GameState Changhed to : Calibration");
-                    break;
-                case GameState.CountDown:
-                    Debug.Log("GameState Changhed to : CountDown");
-                    break;
-                case GameState.Playing:
-                    Debug.Log("GameState Changhed to : Playing");
-                    break;
-                case GameState.Finished:
-                    Debug.Log("GameState Changhed to : Finished");
-                    break;
-                case GameState.Result:
-                    Debug.Log("GameState Changhed to : Result");
-                    break;
-            }
+            Debug.Log($"GameState Changhed to : {gameState}");
+        }
+
+        /// <summary>
+        /// GameStateをロックする
+        /// </summary>
+        /// <returns></returns>
+        public bool LockGameState()
+        {
+            if(gameStateLocked) return false;
+            gameStateLocked = true;
+            return true;
+        }
+
+        public bool UnlockGameState()
+        {
+            if(!gameStateLocked) return false ;
+            gameStateLocked = false;
+            return true;
         }
     }
 }
