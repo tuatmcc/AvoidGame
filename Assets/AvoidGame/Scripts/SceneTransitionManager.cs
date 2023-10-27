@@ -10,20 +10,20 @@ namespace AvoidGame
 {
     public class SceneTransitionManager : MonoBehaviour
     {
-        [SerializeField] private float loadAtLeast = 0f;
+        [SerializeField] protected private float loadAtLeast = 0f;
 
-        [SerializeField] private GameObject _canvas;
+        [SerializeField] protected private GameObject _canvas;
 
-        private Canvas _loadingCanvas;
+        protected private Canvas _loadingCanvas;
 
-        [SerializeField] private List<SceneTransitionStructure> scenes;
+        [SerializeField] protected private List<SceneTransitionStructure> scenes;
 
-        [Inject] private GameStateManager _gameStateManager;
+        [Inject] protected private GameStateManager _gameStateManager;
 
         /// <summary>
         /// ロード画面用canvasを取得
         /// </summary>
-        private void Awake()
+        virtual public void Awake()
         {
             _loadingCanvas = _canvas.GetComponent<Canvas>();
             _loadingCanvas.enabled = false;
@@ -32,7 +32,7 @@ namespace AvoidGame
         /// <summary>
         /// イベント登録
         /// </summary>
-        private void Start()
+        virtual public void Start()
         {
             _gameStateManager.OnGameStateChanged += SceneTransition;
             SceneManager.sceneLoaded += SceneLoaded;
@@ -42,7 +42,7 @@ namespace AvoidGame
         /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
         /// </summary>
         /// <param name="gameState"></param>
-        private void SceneTransition(GameState gameState)
+        protected virtual private void SceneTransition(GameState gameState)
         {
             foreach(SceneTransitionStructure s in scenes)
             {
@@ -58,7 +58,7 @@ namespace AvoidGame
         /// </summary>
         /// <param name="sceneName"></param>
         /// <returns></returns>
-        private IEnumerator LoadScene(string sceneName)
+        protected virtual private IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
             _loadingCanvas.enabled = true;
@@ -75,7 +75,7 @@ namespace AvoidGame
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="loadSceneMode"></param>
-        private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        protected virtual private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             _loadingCanvas.enabled = false;
         }
