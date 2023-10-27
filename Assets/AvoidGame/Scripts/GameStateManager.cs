@@ -1,12 +1,14 @@
+using AvoidGame.Calibration;
+using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// ゲームの進行管理
-/// </summary>
 namespace AvoidGame
 {
+    /// <summary>
+    /// ゲームの進行管理
+    /// </summary>
     public class GameStateManager : MonoBehaviour
     {
         /// <summary>
@@ -29,18 +31,28 @@ namespace AvoidGame
             }
         }
 
+        public RetargetController RetargetController { get; set; }
+        public Receiver Receiver { get; private set; }
+
+
         private GameState _gameState;
-    
+
         [Inject] private TimeManager _timeManager;
 
         private void Awake()
         {
             GameState = GameState.Title;
+            Receiver = new Receiver();
+            RetargetController = new RetargetController();
         }
 
         private void Start()
         {
-            OnGameStateChanged += ChangeGameState;   
+            OnGameStateChanged += ChangeGameState;
+
+            // Start Receiver
+            var token = this.GetCancellationTokenOnDestroy();
+            Receiver.StartReceiver(token).Forget();
         }
 
         /// <summary>

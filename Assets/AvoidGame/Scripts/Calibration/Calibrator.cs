@@ -3,21 +3,25 @@ using AvoidGame.Calibration.MediaPipe;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using Zenject;
 
 namespace AvoidGame.Calibration
 {
     /// <summary>
     /// Debug class for controlling the whole process
     /// </summary>
-    public class Player : MonoBehaviour
+    [RequireComponent(typeof(PoseIKHolder))]
+    public class Calibrator : MonoBehaviour
     {
-        private Receiver _receiver;
-
+        [SerializeField] private bool debugLandmark = true;
+        [SerializeField] private GameObject landmark;
         [SerializeField] private PoseIKHolder poseIKHolder;
 
-        [SerializeField] private RetargetController retargetController;
+        private Receiver _receiver;
 
-        [SerializeField] private GameObject landmark;
+        [Inject] private GameStateManager _gameStateManager;
+
+        private RetargetController _retargetController;
 
         private readonly PoseAccumulator _poseAccumulator = new PoseAccumulator();
         private bool _retargetStarted = false;
@@ -25,13 +29,15 @@ namespace AvoidGame.Calibration
         private float _timeElapsed = 0f;
         private readonly List<GameObject> _debugLandmark = new List<GameObject>();
 
+        private void Awake()
+        {
+            _receiver = _gameStateManager.Receiver;
+            _retargetController = _gameStateManager.RetargetController;
+            _retargetController.IK = poseIKHolder;
+        }
 
         private void Start()
         {
-            _receiver = new Receiver();
-            var token = this.GetCancellationTokenOnDestroy();
-            _receiver.StartReceiver(token).Forget();
-
             if (landmark)
             {
                 for (int i = 0; i < 33; i++)
@@ -61,12 +67,12 @@ namespace AvoidGame.Calibration
             if (_timeElapsed > 5f && !_retargetFinished)
             {
                 _retargetFinished = true;
-                retargetController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
+                _retargetController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
                 return;
             }
 
             var landmarks = JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage);
-            retargetController.Retarget(landmarks);
+            _retargetController.Retarget(landmarks);
 
             if (landmark)
                 for (int i = 0; i < 33; i++)
