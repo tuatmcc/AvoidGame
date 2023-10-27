@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace AvoidGame.Play.Test
 {
     public class DebugPlayerPoseChanger : MonoBehaviour
     {
+        [SerializeField] RigBuilder builder;
         private Animator _animator;
+
+        private void Awake()
+        {
+            builder.enabled = false;
+        }
 
         void Start()
         {
