@@ -808,10 +808,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7640501081858227604}
-    - targetCorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7407605069020203952}
     - targetCorrespondingSourceObject: {fileID: 9213215628295441318, guid: 1b40d200e6a1d71ba8c84278db3f1242,
         type: 3}
@@ -1647,19 +1643,6 @@ MonoBehaviour:
   rightKnee: {fileID: 8606045075700280043}
   leftFoot: {fileID: 6674317867116245560}
   rightFoot: {fileID: 6370259037410962074}
---- !u!114 &7640501081858227604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932712762366909200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47d0b8b264d84c65a4c2697d20e9ac71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ik: {fileID: 654725323304214367}
 --- !u!114 &7407605069020203952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,10 +1655,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccc328f7cdc471c9ed918ec4cc47c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poseIKHolder: {fileID: 654725323304214367}
-  retargetController: {fileID: 7640501081858227604}
+  debugLandmark: 1
   landmark: {fileID: 4198472772038802745, guid: 2d7c9010dd98a2c4ea18ff18d4704668,
     type: 3}
+  poseIKHolder: {fileID: 654725323304214367}
 --- !u!4 &9078438975543412639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2788696245796029028, guid: 1b40d200e6a1d71ba8c84278db3f1242,
