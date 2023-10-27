@@ -7,7 +7,7 @@ using Zenject;
 namespace AvoidGame.Play
 {
     /// <summary>
-    /// ゲーム中のスピードを管理する
+    /// ゲーム中のスピード()倍率を管理する
     /// </summary>
     public class SpeedManager : MonoBehaviour
     {
@@ -37,6 +37,7 @@ namespace AvoidGame.Play
 
         /// <summary>
         /// スピードを変更する処理
+        /// 現状0.1を下回らないように
         /// </summary>
         /// <param name="add"></param>
         public void AddPlayerSpeed(float add)
@@ -48,6 +49,10 @@ namespace AvoidGame.Play
             }
         }
 
+        /// <summary>
+        /// 開始時に倍率を1.0に
+        /// </summary>
+        /// <param name="gameState"></param>
         private void PlayStart(GameState gameState)
         {
             if(gameState == GameState.Playing)

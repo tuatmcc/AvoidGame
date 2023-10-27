@@ -6,12 +6,17 @@ namespace AvoidGame.Calibration
     /// <summary>
     /// Calculates the retargeting of the pose and holds the multiplier.
     /// </summary>
-    public class RetargetController : MonoBehaviour
+    public class RetargetController
     {
         private Vector3 _bodyMultiplier = Vector3.one;
         private float _floorY = 0f;
+        private PoseIKHolder ik;
 
-        [SerializeField] private PoseIKHolder ik;
+        public PoseIKHolder IK
+        {
+            get => ik;
+            set => ik = value;
+        }
 
         public void CalcRetargetMultiplier(Landmark[] landmarks)
         {
