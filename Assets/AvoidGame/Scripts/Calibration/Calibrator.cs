@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using AvoidGame.Calibration.MediaPipe;
-using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 using Zenject;
@@ -14,7 +13,10 @@ namespace AvoidGame.Calibration
     public class Calibrator : MonoBehaviour
     {
         [SerializeField] private bool debugLandmark = true;
-        [SerializeField] private GameObject landmark;
+        [SerializeField] private float retargetingTime = 5f;
+
+        [SerializeField] private GameObject landmarkPrefab;
+
         [SerializeField] private PoseIKHolder poseIKHolder;
 
         private Receiver _receiver;
@@ -38,10 +40,10 @@ namespace AvoidGame.Calibration
 
         private void Start()
         {
-            if (landmark)
+            if (landmarkPrefab && debugLandmark)
             {
                 for (int i = 0; i < 33; i++)
-                    _debugLandmark.Add(Instantiate(landmark));
+                    _debugLandmark.Add(Instantiate(landmarkPrefab));
             }
         }
 
@@ -56,7 +58,7 @@ namespace AvoidGame.Calibration
 
             _timeElapsed += Time.deltaTime;
 
-            if (_timeElapsed <= 5f)
+            if (_timeElapsed <= retargetingTime)
             {
                 if (_receiver.ReceivedMessage != null)
                     _poseAccumulator.AccumulateLandmarks(
@@ -64,7 +66,7 @@ namespace AvoidGame.Calibration
                 return;
             }
 
-            if (_timeElapsed > 5f && !_retargetFinished)
+            if (_timeElapsed > retargetingTime && !_retargetFinished)
             {
                 _retargetFinished = true;
                 _retargetController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
@@ -74,11 +76,22 @@ namespace AvoidGame.Calibration
             var landmarks = JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage);
             _retargetController.Retarget(landmarks);
 
-            if (landmark)
-                for (int i = 0; i < 33; i++)
-                {
-                    _debugLandmark[i].transform.position = new Vector3(landmarks[i].X, landmarks[i].Y, landmarks[i].Z);
-                }
+            if (landmarkPrefab)
+                DrawDebugLandmark(landmarks);
+        }
+
+        private void DrawDebugLandmark(IReadOnlyList<Landmark> landmarks)
+        {
+            if (!landmarkPrefab)
+            {
+                Debug.Log("landmark prefab is not set");
+                return;
+            }
+
+            for (var i = 0; i < 33; i++)
+            {
+                _debugLandmark[i].transform.position = new Vector3(landmarks[i].X, landmarks[i].Y, landmarks[i].Z);
+            }
         }
     }
 }
