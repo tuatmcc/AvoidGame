@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7902800979134646443}
   - component: {fileID: -400499957007897624}
   m_Layer: 0
-  m_Name: TrackingMainCamera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
