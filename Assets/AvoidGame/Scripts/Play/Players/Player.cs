@@ -28,7 +28,7 @@ namespace AvoidGame.Play.Player
         }
 
         /// <summary>
-        /// 終点に達したらGameStateをfinishedに
+        /// 終点に達したらManagerに通知
         /// </summary>
         private void Update()
         {

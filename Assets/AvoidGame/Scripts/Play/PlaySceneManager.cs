@@ -4,10 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Playシーンを管理する
+/// </summary>
 namespace AvoidGame.Play
 {
     public class PlaySceneManager : MonoBehaviour
     {
+        /// <summary>
+        /// カウントダウン時のイベント
+        /// </summary>
         public event Action OnCountStart;
         public event Action<int> OnCountChanged;
 
@@ -22,6 +28,10 @@ namespace AvoidGame.Play
             StartCoroutine(Countdown());
         }
 
+        /// <summary>
+        /// 一定時間待ってカウントダウンを開始
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator Countdown()
         {
             yield return new WaitForSeconds(waitForCountdown);
@@ -37,12 +47,20 @@ namespace AvoidGame.Play
             _gameStateManager.GameState = GameState.Playing;
         }
 
+        /// <summary>
+        /// Playerから呼び出される
+        /// GameStateの変更は各Manageクラスが行うようにしている
+        /// </summary>
         public void Finished()
         {
             _gameStateManager.GameState = GameState.Finished;
             StartCoroutine(TransitToResult());
         }
 
+        /// <summary>
+        /// ゴール後一定時間待ってリザルトへ
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator TransitToResult()
         {
             yield return new WaitForSeconds(waitAfterFinished);
