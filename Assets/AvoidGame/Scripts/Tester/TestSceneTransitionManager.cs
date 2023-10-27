@@ -26,11 +26,11 @@ namespace AvoidGame.Tester
             {
                 if(s.sceneName == _from)
                 {
-                    _gameStateManager.GameState = s.targetState; 
+                    _gameStateManager.LockGameState(s.targetState);
                     break;
                 }
             }
-            _gameStateManager.LockGameState();
+            
         }
 
         override public void Start()
@@ -73,12 +73,11 @@ namespace AvoidGame.Tester
 
         protected override private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            _loadingCanvas.enabled = false;
+            base.SceneLoaded(scene, loadSceneMode);
             foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
                 obj.SetActive(false);
             }
-            _gameStateManager.UnlockGameState();
         }
     }
 }

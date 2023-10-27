@@ -86,11 +86,12 @@ namespace AvoidGame
         protected virtual private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             _loadingCanvas.enabled = false;
+            _gameStateManager.UnlockGameState();
         }
 
         protected private void toTitle()
         {
-            _gameStateManager.GameState = GameState.Title;
+            _gameStateManager.LockGameState(GameState.Title);
         } 
     }
 }
