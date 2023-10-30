@@ -7,6 +7,8 @@ namespace AvoidGame.Play.Items
 {
     public class SpeedUpItem : ItemBase
     {
+        [SerializeField] private float accelerate = 0.1f;
+
         void Start()
         {
             OnItemCollectorHit += OnOnItemCollectorHit;
@@ -18,7 +20,8 @@ namespace AvoidGame.Play.Items
         {
             if(itemCollector.TryGetComponent(out IItemCollectable itemCollectable))
             {
-                _speedManager.AddPlayerSpeed(0.1f);
+                Debug.Log($"Hit! : {accelerate:0.0}");
+                _speedManager.AddPlayerSpeed(accelerate);
             }
         }
     }
