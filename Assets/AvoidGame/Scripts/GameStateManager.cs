@@ -1,5 +1,3 @@
-using AvoidGame.Calibration;
-using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using Zenject;
@@ -16,8 +14,9 @@ namespace AvoidGame
         /// Stateごとに用意したほうが便利かも
         /// </summary>
         public event Action<GameState> OnGameStateChanged;
-    
+
         private bool gameStateLocked = false;
+
         public GameState GameState
         {
             get => _gameState;
@@ -31,10 +30,6 @@ namespace AvoidGame
             }
         }
 
-        public RetargetController RetargetController { get; set; }
-        public Receiver Receiver { get; private set; }
-
-
         private GameState _gameState;
 
         [Inject] private TimeManager _timeManager;
@@ -42,17 +37,11 @@ namespace AvoidGame
         private void Awake()
         {
             GameState = GameState.Title;
-            Receiver = new Receiver();
-            RetargetController = new RetargetController();
         }
 
         private void Start()
         {
             OnGameStateChanged += ChangeGameState;
-
-            // Start Receiver
-            var token = this.GetCancellationTokenOnDestroy();
-            Receiver.StartReceiver(token).Forget();
         }
 
         /// <summary>
@@ -80,7 +69,7 @@ namespace AvoidGame
 
         public bool UnlockGameState()
         {
-            if(!gameStateLocked) return false ;
+            if (!gameStateLocked) return false;
             gameStateLocked = false;
             return true;
         }

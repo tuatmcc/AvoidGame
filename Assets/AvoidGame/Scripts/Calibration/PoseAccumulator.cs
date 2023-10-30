@@ -1,4 +1,5 @@
-using AvoidGame.Calibration.MediaPipe;
+using System.Linq;
+using AvoidGame.MediaPipe;
 
 namespace AvoidGame.Calibration
 {
@@ -7,20 +8,11 @@ namespace AvoidGame.Calibration
     /// </summary>
     public class PoseAccumulator
     {
-        private readonly Landmark[] _accumulatedLandmarks = new Landmark[33];
+        private readonly Landmark[] _accumulatedLandmarks = Enumerable.Repeat(new Landmark(), 33).ToArray();
         private int _accumulatedCount = 0;
-
-        public PoseAccumulator()
-        {
-            for (var i = 0; i < _accumulatedLandmarks.Length; i++)
-            {
-                _accumulatedLandmarks[i] = new Landmark();
-            }
-        }
 
         public void AccumulateLandmarks(Landmark[] landmarks)
         {
-            if (landmarks.Length != 33) return;
             for (var i = 0; i < landmarks.Length; i++)
             {
                 _accumulatedLandmarks[i].X += landmarks[i].X;
@@ -34,7 +26,7 @@ namespace AvoidGame.Calibration
 
         public Landmark[] GetAverageLandmarks()
         {
-            var averageLandmarks = new Landmark[33];
+            var averageLandmarks = new Landmark[_accumulatedLandmarks.Length];
             for (var i = 0; i < _accumulatedLandmarks.Length; i++)
             {
                 averageLandmarks[i] = new Landmark

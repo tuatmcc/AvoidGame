@@ -4,9 +4,9 @@ using UnityEngine;
 namespace AvoidGame.Calibration
 {
     /// <summary>
-    /// Holds the IK points and visualizes them
+    /// Holds the IK points (and visualizes them)
     /// </summary>
-    public class PoseIKHolder : MonoBehaviour
+    public class PoseIK : MonoBehaviour
     {
         [SerializeField] private bool debugIK = true;
         [SerializeField] private GameObject ikDebugPointPrefab;
@@ -31,7 +31,7 @@ namespace AvoidGame.Calibration
         {
             if (debugIK)
             {
-                InstantiateAll();
+                InstantiateIKDebugPoints();
             }
         }
 
@@ -43,7 +43,7 @@ namespace AvoidGame.Calibration
             }
         }
 
-        private void InstantiateAll()
+        private void InstantiateIKDebugPoints()
         {
             _bones.Add(neck);
             _bones.Add(hip);

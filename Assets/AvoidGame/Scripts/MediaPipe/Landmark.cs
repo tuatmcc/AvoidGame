@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace AvoidGame.Calibration.MediaPipe
+namespace AvoidGame.MediaPipe
 {
     public class Landmark
     {

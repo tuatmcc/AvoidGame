@@ -1,15 +1,23 @@
+using System;
 using System.Net.Sockets;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
-namespace AvoidGame.Calibration
+namespace AvoidGame
 {
+    /// <summary>
+    /// UDP Receiver for MediaPipe
+    /// </summary>
     public class Receiver
     {
         private readonly UdpClient _udpClient;
+        public event Action<UdpReceiveResult> OnReceive;
 
-        public string ReceivedMessage { get; private set; } = null;
-
+        /// <summary>
+        /// Initialize Receiver
+        /// </summary>
+        /// <param name="port"> Port number to receive </param>
         public Receiver(int port = 8080)
         {
             _udpClient = new UdpClient(port);
@@ -17,11 +25,12 @@ namespace AvoidGame.Calibration
 
         public async UniTask StartReceiver(CancellationToken token)
         {
+            Debug.Log("UDP Receiver Started");
             while (!token.IsCancellationRequested)
             {
+                // wait for receive (blocking)
                 var result = await _udpClient.ReceiveAsync();
-                var data = result.Buffer;
-                ReceivedMessage = System.Text.Encoding.UTF8.GetString(data);
+                OnReceive?.Invoke(result);
             }
         }
     }

@@ -1,97 +1,104 @@
-using System.Collections.Generic;
-using AvoidGame.Calibration.MediaPipe;
-using Newtonsoft.Json;
+using System.Runtime.InteropServices;
+using AvoidGame.MediaPipe;
 using UnityEngine;
 using Zenject;
 
 namespace AvoidGame.Calibration
 {
     /// <summary>
-    /// Debug class for controlling the whole process
+    /// Calculates the retargeting of the pose and holds the multiplier.
     /// </summary>
-    [RequireComponent(typeof(PoseIKHolder))]
+    [RequireComponent(typeof(PoseIK))]
     public class Calibrator : MonoBehaviour
     {
-        [SerializeField] private bool debugLandmark = true;
-        [SerializeField] private float retargetingTime = 5f;
+        [Inject] private PlayerInfo _playerInfo;
 
-        [SerializeField] private GameObject landmarkPrefab;
+        [SerializeField] private PoseIK ik;
 
-        [SerializeField] private PoseIKHolder poseIKHolder;
-
-        private Receiver _receiver;
-
-        [Inject] private GameStateManager _gameStateManager;
-
-        private RetargetController _retargetController;
-
-        private readonly PoseAccumulator _poseAccumulator = new PoseAccumulator();
-        private bool _retargetStarted = false;
-        private bool _retargetFinished = false;
-        private float _timeElapsed = 0f;
-        private readonly List<GameObject> _debugLandmark = new List<GameObject>();
+        private Vector3 _bodyMultiplier = Vector3.one;
+        private float _floorY = 0f;
 
         private void Awake()
         {
-            _receiver = _gameStateManager.Receiver;
-            _retargetController = _gameStateManager.RetargetController;
-            _retargetController.IK = poseIKHolder;
+            _playerInfo.BodyMultiplier = _bodyMultiplier;
+            _playerInfo.FloorHeight = _floorY;
         }
 
-        private void Start()
+
+        public void CalcRetargetMultiplier(Landmark[] landmarks)
         {
-            if (landmarkPrefab && debugLandmark)
-            {
-                for (int i = 0; i < 33; i++)
-                    _debugLandmark.Add(Instantiate(landmarkPrefab));
-            }
+            if (landmarks.Length != 33) return;
+
+            var leftWrist = landmarks[(int)LandmarkIndex.LEFT_WRIST];
+            var rightWrist = landmarks[(int)LandmarkIndex.RIGHT_WRIST];
+            var leftHip = landmarks[(int)LandmarkIndex.LEFT_HIP];
+            var rightHip = landmarks[(int)LandmarkIndex.RIGHT_HIP];
+            var leftAnkle = landmarks[(int)LandmarkIndex.LEFT_ANKLE];
+            var rightAnkle = landmarks[(int)LandmarkIndex.RIGHT_ANKLE];
+            var leftHeel = landmarks[(int)LandmarkIndex.LEFT_HEEL];
+            var rightHeel = landmarks[(int)LandmarkIndex.RIGHT_HEEL];
+            var armLength = Mathf.Abs(leftWrist.X - rightWrist.X);
+            var bodyHeight = Mathf.Abs(leftWrist.Y + rightWrist.Y - leftAnkle.Y - rightAnkle.Y);
+
+
+            _floorY = 1 - (leftHeel.Y + rightHeel.Y) * 0.5f;
+            _bodyMultiplier.x = -Mathf.Abs(ik.leftWrist.position.x - ik.rightWrist.position.x) / armLength;
+            _bodyMultiplier.y = Mathf.Abs(ik.leftElbow.position.y + ik.rightElbow.position.y -
+                                    ik.rightFoot.position.y + ik.leftFoot.position.y) /
+                                bodyHeight;
+            _bodyMultiplier.z = 0.5f;
+
+            _playerInfo.BodyMultiplier = _bodyMultiplier;
+            _playerInfo.FloorHeight = _floorY;
+            Debug.Log($"BodyMultiplier: {_bodyMultiplier}");
         }
 
-        private void Update()
+
+        private Vector3 ScaleBody(float x, float y, float z)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !_retargetStarted)
-            {
-                _retargetStarted = true;
-            }
-
-            if (!_retargetStarted) return;
-
-            _timeElapsed += Time.deltaTime;
-
-            if (_timeElapsed <= retargetingTime)
-            {
-                if (_receiver.ReceivedMessage != null)
-                    _poseAccumulator.AccumulateLandmarks(
-                        JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage));
-                return;
-            }
-
-            if (_timeElapsed > retargetingTime && !_retargetFinished)
-            {
-                _retargetFinished = true;
-                _retargetController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
-                return;
-            }
-
-            var landmarks = JsonConvert.DeserializeObject<Landmark[]>(_receiver.ReceivedMessage);
-            _retargetController.Retarget(landmarks);
-
-            if (landmarkPrefab)
-                DrawDebugLandmark(landmarks);
+            y = 1 - y;
+            return Vector3.Scale(_bodyMultiplier, new Vector3(x - 0.5f, y - _floorY, z));
         }
 
-        private void DrawDebugLandmark(IReadOnlyList<Landmark> landmarks)
-        {
-            if (!landmarkPrefab)
-            {
-                Debug.Log("landmark prefab is not set");
-                return;
-            }
 
-            for (var i = 0; i < 33; i++)
-            {
-                _debugLandmark[i].transform.position = new Vector3(landmarks[i].X, landmarks[i].Y, landmarks[i].Z);
-            }
+        public void Retarget(Landmark[] landmarks)
+        {
+            if (landmarks.Length != 33) return;
+            // get media pipe landmarks
+            var nose = landmarks[(int)LandmarkIndex.NOSE];
+            var leftHip = landmarks[(int)LandmarkIndex.LEFT_HIP];
+            var rightHip = landmarks[(int)LandmarkIndex.RIGHT_HIP];
+            var leftFoot = landmarks[(int)LandmarkIndex.LEFT_HEEL];
+            var leftShin = landmarks[(int)LandmarkIndex.LEFT_KNEE];
+            var rightFoot = landmarks[(int)LandmarkIndex.RIGHT_HEEL];
+            var rightShin = landmarks[(int)LandmarkIndex.RIGHT_KNEE];
+            var leftShoulder = landmarks[(int)LandmarkIndex.LEFT_SHOULDER];
+            var rightShoulder = landmarks[(int)LandmarkIndex.RIGHT_SHOULDER];
+            var leftHand = landmarks[(int)LandmarkIndex.LEFT_WRIST];
+            var rightHand = landmarks[(int)LandmarkIndex.RIGHT_WRIST];
+            var leftForearm = landmarks[(int)LandmarkIndex.LEFT_ELBOW];
+            var rightForeArm = landmarks[(int)LandmarkIndex.RIGHT_ELBOW];
+
+            var hipY = (leftHip.Y + rightHip.Y) * 0.5f;
+
+            // set ik positions
+            ik.hip.position = ScaleBody(
+                (leftHip.X + rightHip.X) * 0.5f,
+                (leftHip.Y + rightHip.Y) * 0.5f,
+                (leftHip.Z + rightHip.Z) * 0.5f);
+            ik.leftFoot.position = ScaleBody(leftFoot.X, leftFoot.Y, leftFoot.Z);
+            ik.rightFoot.position = ScaleBody(rightFoot.X, rightFoot.Y, rightFoot.Z);
+            ik.leftKnee.position = ScaleBody(leftShin.X, leftShin.Y, leftShin.Z);
+            ik.rightKnee.position = ScaleBody(rightShin.X, rightShin.Y, rightShin.Z);
+
+            ik.neck.position = ScaleBody(
+                (leftShoulder.X + rightShoulder.X) * 0.5f,
+                (leftShoulder.Y + rightShoulder.Y) * 0.5f,
+                (leftShoulder.Z + rightShoulder.Z) * 0.5f);
+            ik.leftWrist.position = ScaleBody(leftHand.X, leftHand.Y, leftHand.Z);
+            ik.rightWrist.position = ScaleBody(rightHand.X, rightHand.Y, rightHand.Z);
+            ik.leftElbow.position = ScaleBody(leftForearm.X, leftForearm.Y, leftForearm.Z);
+            ik.rightElbow.position = ScaleBody(rightForeArm.X, rightForeArm.Y, rightForeArm.Z);
         }
     }
 }
