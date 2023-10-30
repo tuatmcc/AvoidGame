@@ -43,6 +43,9 @@ namespace AvoidGame
         {
             switch (gameState)
             {
+                case GameState.Title:
+                    ResetParams();
+                    break;
                 case GameState.Playing:
                     StartCount();
                     break;
@@ -73,6 +76,12 @@ namespace AvoidGame
         {
             counting = false;
             _timeRecordable.RecordTime(MainTimer);
+        }
+
+        private void ResetParams()
+        {
+            counting = false ;
+            MainTimer = 0;
         }
     }
 }

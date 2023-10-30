@@ -38,6 +38,14 @@ namespace AvoidGame
             SceneManager.sceneLoaded += SceneLoaded;
         }
 
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                toTitle();
+            }
+        }
+
         /// <summary>
         /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
         /// </summary>
@@ -78,6 +86,12 @@ namespace AvoidGame
         protected virtual private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             _loadingCanvas.enabled = false;
+            _gameStateManager.UnlockGameState();
         }
+
+        protected private void toTitle()
+        {
+            _gameStateManager.LockGameState(GameState.Title);
+        } 
     }
 }
