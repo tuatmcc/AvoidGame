@@ -809,6 +809,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7407605069020203952}
+    - targetCorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7382675125746525939}
     - targetCorrespondingSourceObject: {fileID: 9213215628295441318, guid: 1b40d200e6a1d71ba8c84278db3f1242,
         type: 3}
       insertIndex: -1
@@ -1656,9 +1660,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugLandmark: 1
-  landmark: {fileID: 4198472772038802745, guid: 2d7c9010dd98a2c4ea18ff18d4704668,
-    type: 3}
+  retargetingTime: 5
+  landmarkPrefab: {fileID: 0}
   poseIKHolder: {fileID: 654725323304214367}
+--- !u!114 &7382675125746525939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932712762366909200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d0b8b264d84c65a4c2697d20e9ac71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ik: {fileID: 654725323304214367}
 --- !u!4 &9078438975543412639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2788696245796029028, guid: 1b40d200e6a1d71ba8c84278db3f1242,
