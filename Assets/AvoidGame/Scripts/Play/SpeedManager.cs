@@ -60,5 +60,10 @@ namespace AvoidGame.Play
                 Speed = 1f;
             }
         }
+
+        private void OnDisable()
+        {
+            _gameStateManager.OnGameStateChanged -= PlayStart;
+        }
     }
 }
