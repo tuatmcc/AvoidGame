@@ -8,6 +8,7 @@ namespace AvoidGame.Play.Items
     public class SpeedDownItem : ItemBase
     {
         [SerializeField] private float decelerate = 0.1f;
+        private bool used = false;
 
         void Start()
         {
@@ -18,8 +19,9 @@ namespace AvoidGame.Play.Items
 
         private void OnOnItemCollectorHit(Collider itemCollector)
         {
-            if(itemCollector.TryGetComponent(out IItemCollectable itemCollectable))
+            if(!used)
             {
+                used = true;
                 Debug.Log($"Hit! : {-decelerate:0.0}");
                 _speedManager.AddPlayerSpeed(-decelerate);
             }
