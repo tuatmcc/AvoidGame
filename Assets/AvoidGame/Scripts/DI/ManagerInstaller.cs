@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Zenject;
 
 namespace AvoidGame.DI
@@ -21,7 +22,7 @@ namespace AvoidGame.DI
                 .FromInstance(_timeManager)
                 .AsSingle();
 
-            Container.Bind<MediaPipeManager>()
+            Container.Bind<IMediaPipeManager>().To<MediaPipeManager>()
                 .FromInstance(mediaPipeManager)
                 .AsSingle();
         }

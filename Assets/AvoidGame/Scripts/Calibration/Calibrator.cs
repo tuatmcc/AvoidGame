@@ -50,6 +50,7 @@ namespace AvoidGame.Calibration
 
             _playerInfo.BodyMultiplier = _bodyMultiplier;
             _playerInfo.FloorHeight = _floorY;
+            Debug.Log($"BodyMultiplier: {_bodyMultiplier}");
         }
 
 

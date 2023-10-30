@@ -480,6 +480,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2171124122296674012, guid: 9c92f6d84883cf69da4d696367b9d83c,
+        type: 3}
+      propertyPath: skipCalibration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4117747319580212600, guid: 9c92f6d84883cf69da4d696367b9d83c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -680,6 +685,11 @@ PrefabInstance:
       propertyPath: debugLandmark
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1462781161686963757, guid: c9dc84c70b54f478a9576205c8479507,
+        type: 3}
+      propertyPath: _calibrationSceneManager
+      value: 
+      objectReference: {fileID: 1726033854}
     - target: {fileID: 1478517652342685901, guid: c9dc84c70b54f478a9576205c8479507,
         type: 3}
       propertyPath: text

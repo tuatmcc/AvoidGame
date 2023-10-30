@@ -7,8 +7,12 @@ namespace AvoidGame.Calibration
 {
     public class CalibrationSceneManager : MonoBehaviour
     {
+        [Inject] private GameStateManager _gameStateManager;
+        [Inject] private IMediaPipeManager _mediaPipeManager;
+
+        [SerializeField] private bool skipCalibration = false;
+
         private const int CalibrationTime = 5;
-        [Inject] private MediaPipeManager _mediaPipeManager;
 
         public enum CalibrationState
         {
@@ -22,6 +26,12 @@ namespace AvoidGame.Calibration
 
         private async void Start()
         {
+            if (skipCalibration)
+            {
+                _gameStateManager.GameState = GameState.CountDown;
+                return;
+            }
+
             while (!_mediaPipeManager.IsReady)
             {
                 await UniTask.Delay(500);

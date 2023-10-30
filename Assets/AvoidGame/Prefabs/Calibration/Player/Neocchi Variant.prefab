@@ -1659,10 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccc328f7cdc471c9ed918ec4cc47c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLandmark: 1
-  retargetingTime: 5
-  landmarkPrefab: {fileID: 0}
-  poseIKHolder: {fileID: 654725323304214367}
+  calibrator: {fileID: 7382675125746525939}
 --- !u!114 &7382675125746525939
 MonoBehaviour:
   m_ObjectHideFlags: 0

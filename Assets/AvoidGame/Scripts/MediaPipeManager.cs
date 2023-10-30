@@ -12,22 +12,17 @@ namespace AvoidGame
     /// <summary>
     /// MediaPipeの管理
     /// </summary>
-    public class MediaPipeManager : MonoBehaviour
+    public class MediaPipeManager : MonoBehaviour, IMediaPipeManager
     {
-        private Receiver _receiver = new();
+        private readonly Receiver _receiver = new();
         public Landmark[] LandmarkData { get; private set; } = Enumerable.Repeat(new Landmark(), 33).ToArray();
 
         public bool IsReady { get; private set; } = false;
 
-        private void Awake()
-        {
-            _receiver = new Receiver();
-            _receiver.OnReceive += OnReceive;
-            Debug.Log("MediaPipeManager Initialized");
-        }
-
         private void Start()
         {
+            _receiver.OnReceive += OnReceive;
+            Debug.Log("MediaPipeManager Initialized");
             var token = this.GetCancellationTokenOnDestroy();
             _receiver.StartReceiver(token).Forget();
         }

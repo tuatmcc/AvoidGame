@@ -7,12 +7,14 @@ namespace AvoidGame.Calibration
     [RequireComponent(typeof(Calibrator))]
     public class Player : MonoBehaviour
     {
-        [Inject] private MediaPipeManager _mediaPipeManager;
+        [Inject] private IMediaPipeManager _mediaPipeManager;
         [Inject] private CalibrationSceneManager _calibrationSceneManager;
 
-        private Calibrator _calibrator;
+        [SerializeField] private Calibrator calibrator;
 
-        private readonly PoseAccumulator _poseAccumulator;
+        private readonly PoseAccumulator _poseAccumulator = new PoseAccumulator();
+
+        private bool _calculationFinished = false;
 
         private void Awake()
         {
@@ -21,11 +23,11 @@ namespace AvoidGame.Calibration
 
         private void OnCalibrationStateChanged(CalibrationSceneManager.CalibrationState state)
         {
-            Debug.Log($"Calibration State Changed to {state}");
             // Calculate Multiplier
             if (state != CalibrationSceneManager.CalibrationState.Finished) return;
             var averagedLandmarks = _poseAccumulator.GetAverageLandmarks();
-            _calibrator.CalcRetargetMultiplier(averagedLandmarks);
+            calibrator.CalcRetargetMultiplier(_mediaPipeManager.LandmarkData);
+            _calculationFinished = true;
         }
 
 
@@ -44,7 +46,8 @@ namespace AvoidGame.Calibration
                 }
                 case CalibrationSceneManager.CalibrationState.Finished:
                 {
-                    _calibrator.Retarget(_mediaPipeManager.LandmarkData);
+                    if (!_calculationFinished) return;
+                    calibrator.Retarget(_mediaPipeManager.LandmarkData);
                     break;
                 }
                 default:
