@@ -25,7 +25,7 @@ namespace AvoidGame.Calibration
             while (!_mediaPipeManager.IsReady)
             {
                 await UniTask.Delay(500);
-                Debug.Log("Waiting for MediaPipe");
+                Debug.Log($"Waiting for MediaPipe. IsReady: {_mediaPipeManager.IsReady}");
             }
 
             State = CalibrationState.Calibrating;

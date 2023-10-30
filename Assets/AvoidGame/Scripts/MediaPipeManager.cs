@@ -35,6 +35,7 @@ namespace AvoidGame
         private void OnReceive(UdpReceiveResult result)
         {
             IsReady = true;
+            Debug.Log($"Received. IsReady: {IsReady}");
             try
             {
                 var json = Encoding.UTF8.GetString(result.Buffer);

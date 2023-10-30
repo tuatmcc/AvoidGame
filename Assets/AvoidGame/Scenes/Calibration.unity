@@ -276,8 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a73d4092dc9a445f9c4cf1a0f67e9462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calibrationSceneManager: {fileID: 2171124122296674012, guid: 9c92f6d84883cf69da4d696367b9d83c,
-    type: 3}
+  calibrationSceneManager: {fileID: 1726033854}
 --- !u!1001 &856439222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -541,6 +540,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c92f6d84883cf69da4d696367b9d83c, type: 3}
+--- !u!114 &1726033854 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2171124122296674012, guid: 9c92f6d84883cf69da4d696367b9d83c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1726033853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99452bedcac044c69d5db97993fbc6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1775567133
 PrefabInstance:
   m_ObjectHideFlags: 0
