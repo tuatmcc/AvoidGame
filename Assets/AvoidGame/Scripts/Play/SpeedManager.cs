@@ -23,7 +23,7 @@ namespace AvoidGame.Play
             set 
             {
                 _speed = value;
-                OnSpeedChanged?.Invoke(Speed);
+                OnSpeedChanged?.Invoke(_speed);
             }
         }
 
@@ -59,6 +59,11 @@ namespace AvoidGame.Play
             {
                 Speed = 1f;
             }
+        }
+
+        private void OnDisable()
+        {
+            _gameStateManager.OnGameStateChanged -= PlayStart;
         }
     }
 }

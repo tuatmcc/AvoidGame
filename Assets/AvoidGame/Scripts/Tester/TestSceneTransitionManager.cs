@@ -12,6 +12,7 @@ namespace AvoidGame.Tester
     {
         [SerializeField] private SceneName _from;
         [SerializeField] private SceneName _to;
+        [SerializeField] private bool skipCalibration = false;
 
         override public void Awake()
         {
@@ -26,11 +27,11 @@ namespace AvoidGame.Tester
             {
                 if(s.sceneName == _from)
                 {
-                    _gameStateManager.GameState = s.targetState; 
+                    _gameStateManager.LockGameState(s.targetState);
                     break;
                 }
             }
-            _gameStateManager.LockGameState();
+            
         }
 
         override public void Start()
@@ -45,6 +46,11 @@ namespace AvoidGame.Tester
             {
                 if(s.targetState == gameState)
                 {
+                    if(s.sceneName == SceneName.Calibration && skipCalibration)
+                    {
+                        _gameStateManager.LockGameState(GameState.CountDown);
+                        return;
+                    }
                     if(!(_from <= s.sceneName && s.sceneName <= _to))
                     {
                         Debug.Log($"Test finished at : {_to}");
@@ -73,12 +79,11 @@ namespace AvoidGame.Tester
 
         protected override private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            _loadingCanvas.enabled = false;
+            base.SceneLoaded(scene, loadSceneMode);
             foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
                 obj.SetActive(false);
             }
-            _gameStateManager.UnlockGameState();
         }
     }
 }

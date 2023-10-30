@@ -52,15 +52,17 @@ namespace AvoidGame
         private void ChangeGameState(GameState gameState)
         {
             Debug.Log($"GameState Changhed to : {gameState}");
+            Debug.Log($"登録されたイベント数 : {OnGameStateChanged.GetInvocationList().Length}");
         }
 
         /// <summary>
         /// GameStateをロックする
         /// </summary>
         /// <returns></returns>
-        public bool LockGameState()
+        public bool LockGameState(GameState gameState)
         {
-            if (gameStateLocked) return false;
+            if(gameStateLocked) return false;
+            GameState = gameState;
             gameStateLocked = true;
             return true;
         }

@@ -54,5 +54,10 @@ namespace AvoidGame.Play.Player
         {
             cart.m_Speed = default_speed * speed;
         }
+
+        private void OnDisable()
+        {
+            _gameStateManager.OnGameStateChanged -= StartRace;
+        }
     }
 }
