@@ -23,7 +23,7 @@ namespace AvoidGame.Play
             set 
             {
                 _speed = value;
-                OnSpeedChanged?.Invoke(Speed);
+                OnSpeedChanged?.Invoke(_speed);
             }
         }
 

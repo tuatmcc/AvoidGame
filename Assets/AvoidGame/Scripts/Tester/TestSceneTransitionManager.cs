@@ -12,6 +12,7 @@ namespace AvoidGame.Tester
     {
         [SerializeField] private SceneName _from;
         [SerializeField] private SceneName _to;
+        [SerializeField] private bool skipCalibration = false;
 
         override public void Awake()
         {
@@ -45,6 +46,11 @@ namespace AvoidGame.Tester
             {
                 if(s.targetState == gameState)
                 {
+                    if(s.sceneName == SceneName.Calibration && skipCalibration)
+                    {
+                        _gameStateManager.LockGameState(GameState.CountDown);
+                        return;
+                    }
                     if(!(_from <= s.sceneName && s.sceneName <= _to))
                     {
                         Debug.Log($"Test finished at : {_to}");
