@@ -5,6 +5,9 @@ using UnityEngine.Animations.Rigging;
 
 namespace AvoidGame.Play.Test
 {
+    /// <summary>
+    /// キー入力でポーズを変える
+    /// </summary>
     public class DebugPlayerPoseChanger : MonoBehaviour
     {
         [SerializeField] RigBuilder builder;
