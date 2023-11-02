@@ -79,4 +79,13 @@ MonoBehaviour:
   path: {fileID: 0}
   objs:
   - {fileID: 3527872964885772357, guid: c8c9182fb09117744a19d5a47b1b76a8, type: 3}
-  itemPosition: []
+  itemPosition:
+  - 0.5
+  - 1
+  - 1.5
+  - 2
+  - 2.5
+  - 3
+  - 3.5
+  - 4
+  - 4.5
