@@ -15,16 +15,13 @@ namespace AvoidGame.DI
         public override void InstallBindings()
         {
             Container.Bind<GameStateManager>()
-                .FromInstance(_gameStateManager)
-                .AsSingle();
+                .FromInstance(_gameStateManager);
 
             Container.Bind<TimeManager>()
-                .FromInstance(_timeManager)
-                .AsSingle();
+                .FromInstance(_timeManager);
 
             Container.Bind<IMediaPipeManager>().To<MediaPipeManager>()
-                .FromInstance(mediaPipeManager)
-                .AsSingle();
+                .FromInstance(mediaPipeManager);
         }
     }
 }

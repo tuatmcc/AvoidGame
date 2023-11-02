@@ -9,6 +9,7 @@ namespace AvoidGame.Calibration
     {
         [Inject] private IMediaPipeManager _mediaPipeManager;
         [Inject] private CalibrationSceneManager _calibrationSceneManager;
+        [Inject] private GameStateManager _gameStateManager;
 
         [SerializeField] private Calibrator calibrator;
 
@@ -52,6 +53,10 @@ namespace AvoidGame.Calibration
                 }
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _gameStateManager.GameState = GameState.CountDown;
             }
         }
     }

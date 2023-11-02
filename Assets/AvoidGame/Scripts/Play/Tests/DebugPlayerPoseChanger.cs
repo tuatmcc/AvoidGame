@@ -15,7 +15,10 @@ namespace AvoidGame.Play.Test
 
         private void Awake()
         {
-            builder.enabled = false;
+            if (enabled)
+            {
+                builder.enabled = false;
+            }
         }
 
         void Start()

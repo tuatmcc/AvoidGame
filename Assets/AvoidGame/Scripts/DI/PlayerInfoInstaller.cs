@@ -10,8 +10,7 @@ namespace AvoidGame.DI
         public override void InstallBindings()
         {
             Container.Bind<PlayerInfo>()
-                .FromInstance(_playerInfo)
-                .AsSingle();
+                .FromInstance(_playerInfo);
         }
     }
 }
