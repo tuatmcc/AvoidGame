@@ -14,13 +14,14 @@ namespace AvoidGame
     /// </summary>
     public class MediaPipeManager : MonoBehaviour, IMediaPipeManager
     {
-        private readonly Receiver _receiver = new();
+        private Receiver _receiver;
         public Landmark[] LandmarkData { get; private set; } = Enumerable.Repeat(new Landmark(), 33).ToArray();
 
         public bool IsReady { get; private set; } = false;
 
         private void Start()
         {
+            _receiver = new Receiver();
             _receiver.OnReceive += OnReceive;
             Debug.Log("MediaPipeManager Initialized");
             var token = this.GetCancellationTokenOnDestroy();
@@ -40,6 +41,11 @@ namespace AvoidGame
             {
                 Debug.LogError(e);
             }
+        }
+
+        private void OnDestroy()
+        {
+            _receiver?.CloseCliant();
         }
     }
 }

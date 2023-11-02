@@ -20,6 +20,7 @@ namespace AvoidGame
         /// <param name="port"> Port number to receive </param>
         public Receiver(int port = 8080)
         {
+            Debug.Log("Called Reciever");
             _udpClient = new UdpClient(port);
         }
 
@@ -33,5 +34,17 @@ namespace AvoidGame
                 OnReceive?.Invoke(result);
             }
         }
+
+        public void CloseCliant()
+        {
+            try
+            {
+                _udpClient.Close();
+            }catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
+        }
     }
+
 }
