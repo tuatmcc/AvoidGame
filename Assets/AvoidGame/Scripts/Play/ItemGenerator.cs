@@ -11,17 +11,16 @@ namespace AvoidGame.Play
     {
         [SerializeField] Cinemachine.CinemachinePath path;
         [SerializeField] List<GameObject> objs;
-        [SerializeField] List<float> itemPosition;
+        [SerializeField, Range(0.0f, 5.0f)] List<float> itemPosition;
 
         void Start()
         {
-            for(float i = 0.5f; i < path.MaxPos; i += 0.5f)
+            foreach(var position in itemPosition)
             {
-                var pos = path.EvaluateLocalPosition(i);
-                pos.y += 0.2f;
-                var rotation = path.EvaluateOrientation(i);
+                var pos = path.EvaluateLocalPosition(position);
+                var rotation = path.EvaluateOrientation(position);
                 var rot = Quaternion.AngleAxis(90.0f, Vector3.up);
-                Instantiate(objs[0], pos, rot * rotation, this.transform);
+                Instantiate(objs[Random.Range(0, objs.Count)], pos, rot * rotation, this.transform);
             }
         }
     }
