@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/AvoidGame/Scenes/Title.unity
+    guid: abf59d734416c3240b12b9a2210eb7d8
+  - enabled: 1
+    path: Assets/AvoidGame/Scenes/Calibration.unity
+    guid: e70812b04876d384db7f88499bf3488a
+  - enabled: 1
+    path: Assets/AvoidGame/Scenes/Play.unity
+    guid: e8c75018fb01e9147abec761b1e5494e
+  - enabled: 1
+    path: Assets/AvoidGame/Scenes/Result.unity
+    guid: 4ab16737bad697341987fd4802b04a43
+  - enabled: 1
+    path: Assets/AvoidGame/Scenes/Tester.unity
+    guid: 2e1b7b51aea906d4bb8366ab1b59999e
   m_configObjects: {}

@@ -1,3 +1,4 @@
+using AvoidGame.TimeRecorder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +8,15 @@ using Zenject;
 /// <summary>
 /// Resultシーンを管理
 /// </summary>
-namespace Result
+namespace AvoidGame.Result
 {
     public class ResultSceneManager : MonoBehaviour
     {
         public event Action<ResultSceneSubState> OnSubStateChanged;
 
-        // [Inject] ITimeRecordable _timeRecordable;
+        [Inject] ITimeRecordable _timeRecordable;
+
+        [Inject] TimeManager _timeManager;
 
         private List<long> _records;
 
@@ -32,19 +35,7 @@ namespace Result
 
         private void Awake()
         {
-            // _records = _timeRecordable.GetTimeRanking();
-
-            //test
-            _records = new List<long>
-            {
-                100000000,
-                200000000,
-                300000000,
-                400000000,
-                500000000,
-                600000000
-            };
-
+            _records = _timeRecordable.GetTimeRanking();
             _records.Sort();
         }
 
@@ -60,7 +51,7 @@ namespace Result
 
         public (List<long> timeList, long playerTime) GetTimeData()
         {
-            return (_records, _records[1]);
+            return (_records, _timeManager.MainTimer);
         }
     }
 }

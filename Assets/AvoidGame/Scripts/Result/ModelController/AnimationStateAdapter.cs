@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Result.ModelController
+namespace AvoidGame.Result.ModelController
 {
     public class AnimationStateAdapter : MonoBehaviour
     {

@@ -8,7 +8,7 @@ using Zenject;
 /// <summary>
 /// 指定された順位のタイムを表示する
 /// </summary>
-namespace Result.UI
+namespace AvoidGame.Result.UI
 {
     public class ResultTimePresenter : MonoBehaviour
     {

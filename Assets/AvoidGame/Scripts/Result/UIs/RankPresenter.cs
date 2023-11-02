@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace Result.UI
+namespace AvoidGame.Result.UI
 {
     public class RankPresenter : MonoBehaviour
     {
@@ -20,7 +20,7 @@ namespace Result.UI
 
         private void SetRankText(List<long> timeList, long time)
         {
-            targetRank = targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank;
+            targetRank = (targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank);
             rankText.text = $"{targetRank}位";
         }
     }
