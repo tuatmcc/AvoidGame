@@ -40,6 +40,15 @@ namespace AvoidGame.Tester
             StartCoroutine(LoadScene(_from.ToString()));
         }
 
+        override public void Update()
+        {
+            base.Update();
+            if(_gameStateManager.GameState == GameState.Calibration && Input.GetKeyDown(KeyCode.Return))
+            {
+                _gameStateManager.GameState = GameState.CountDown;
+            }
+        }
+
         protected override private void SceneTransition(GameState gameState)
         {
             foreach(SceneTransitionStructure s in scenes)

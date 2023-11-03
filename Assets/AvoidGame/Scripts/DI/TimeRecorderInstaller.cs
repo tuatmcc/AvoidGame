@@ -14,8 +14,7 @@ namespace AvoidGame.DI
         {
             Container.Bind<ITimeRecordable>()
                 .To<CSVRecorder>()
-                .FromInstance(_recorder)
-                .AsSingle();
+                .FromInstance(_recorder);
         }
     }
 }
