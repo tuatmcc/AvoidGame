@@ -24,10 +24,9 @@ namespace AvoidGame.Play.Player
 
             _gameStateManager.OnGameStateChanged += StartRace;
             _speedManager.OnSpeedChanged += ChangeSpeed;
-            
         }
 
-        /// <summary>
+        /// <summary>\
         /// 終点に達したらManagerに通知
         /// </summary>
         private void Update()
@@ -52,7 +51,7 @@ namespace AvoidGame.Play.Player
         /// <param name="speed"></param>
         private void ChangeSpeed(float speed)
         {
-            cart.m_Speed = default_speed * speed;
+            cart.m_Speed = speed;
         }
 
         private void OnDisable()
