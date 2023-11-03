@@ -38,7 +38,7 @@ namespace AvoidGame
             SceneManager.sceneLoaded += SceneLoaded;
         }
 
-        public void Update()
+        virtual public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
