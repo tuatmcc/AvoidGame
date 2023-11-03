@@ -1,7 +1,7 @@
 using System.Linq;
 using AvoidGame.MediaPipe;
 
-namespace AvoidGame.Calibration
+namespace AvoidGame.Calibration.Player
 {
     /// <summary>
     /// Accumulates T Pose landmark data for calibration

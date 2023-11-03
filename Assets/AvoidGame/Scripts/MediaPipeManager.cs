@@ -21,14 +21,8 @@ namespace AvoidGame
 
         public bool IsReady { get; private set; } = false;
 
-        private MediaPipeManager()
-        {
-            Debug.Log("MediaPipeManager Initialized, id: " + GetHashCode());
-        }
-
         public void Awake()
         {
-            Debug.Log($"MediaPipeManager Started: id: {GetHashCode()}");
             receiver.LocalPort = 8080;
             receiver.Bind("/pose", OnReceive);
         }

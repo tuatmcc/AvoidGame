@@ -1,9 +1,8 @@
-using System.Runtime.InteropServices;
 using AvoidGame.MediaPipe;
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.Calibration
+namespace AvoidGame.Calibration.Player
 {
     /// <summary>
     /// Calculates the retargeting of the pose and holds the multiplier.
@@ -50,7 +49,6 @@ namespace AvoidGame.Calibration
 
             _playerInfo.BodyMultiplier = _bodyMultiplier;
             _playerInfo.FloorHeight = _floorY;
-            Debug.Log($"BodyMultiplier: {_bodyMultiplier}");
         }
 
 
@@ -82,23 +80,23 @@ namespace AvoidGame.Calibration
             var hipY = (leftHip.Y + rightHip.Y) * 0.5f;
 
             // set ik positions
-            ik.hip.position = ScaleBody(
+            ik.hip.localPosition = ScaleBody(
                 (leftHip.X + rightHip.X) * 0.5f,
                 (leftHip.Y + rightHip.Y) * 0.5f,
                 (leftHip.Z + rightHip.Z) * 0.5f);
-            ik.leftFoot.position = ScaleBody(leftFoot.X, leftFoot.Y, leftFoot.Z);
-            ik.rightFoot.position = ScaleBody(rightFoot.X, rightFoot.Y, rightFoot.Z);
-            ik.leftKnee.position = ScaleBody(leftShin.X, leftShin.Y, leftShin.Z);
-            ik.rightKnee.position = ScaleBody(rightShin.X, rightShin.Y, rightShin.Z);
+            ik.leftFoot.localPosition = ScaleBody(leftFoot.X, leftFoot.Y, leftFoot.Z);
+            ik.rightFoot.localPosition = ScaleBody(rightFoot.X, rightFoot.Y, rightFoot.Z);
+            ik.leftKnee.localPosition = ScaleBody(leftShin.X, leftShin.Y, leftShin.Z);
+            ik.rightKnee.localPosition = ScaleBody(rightShin.X, rightShin.Y, rightShin.Z);
 
-            ik.neck.position = ScaleBody(
+            ik.neck.localPosition = ScaleBody(
                 (leftShoulder.X + rightShoulder.X) * 0.5f,
                 (leftShoulder.Y + rightShoulder.Y) * 0.5f,
                 (leftShoulder.Z + rightShoulder.Z) * 0.5f);
-            ik.leftWrist.position = ScaleBody(leftHand.X, leftHand.Y, leftHand.Z);
-            ik.rightWrist.position = ScaleBody(rightHand.X, rightHand.Y, rightHand.Z);
-            ik.leftElbow.position = ScaleBody(leftForearm.X, leftForearm.Y, leftForearm.Z);
-            ik.rightElbow.position = ScaleBody(rightForeArm.X, rightForeArm.Y, rightForeArm.Z);
+            ik.leftWrist.localPosition = ScaleBody(leftHand.X, leftHand.Y, leftHand.Z);
+            ik.rightWrist.localPosition = ScaleBody(rightHand.X, rightHand.Y, rightHand.Z);
+            ik.leftElbow.localPosition = ScaleBody(leftForearm.X, leftForearm.Y, leftForearm.Z);
+            ik.rightElbow.localPosition = ScaleBody(rightForeArm.X, rightForeArm.Y, rightForeArm.Z);
         }
     }
 }

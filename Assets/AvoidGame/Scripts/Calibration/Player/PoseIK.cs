@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AvoidGame.Calibration
+namespace AvoidGame.Calibration.Player
 {
     /// <summary>
     /// Holds the IK points (and visualizes them)
