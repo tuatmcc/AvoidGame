@@ -16,6 +16,7 @@ namespace AvoidGame.DI
                 .AsSingle();
 
             Container.Bind(typeof(SpeedManager), typeof(IInitializable), typeof(IDisposable))
+                .To<SpeedManager>()
                 .FromNew()
                 .AsSingle();
         }

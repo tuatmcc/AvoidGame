@@ -13,6 +13,7 @@ namespace AvoidGame.DI
         public override void InstallBindings()
         {
             Container.Bind(typeof(GameStateManager), typeof(IInitializable))
+                .To<GameStateManager>()
                 .FromNew()
                 .AsSingle();
 
