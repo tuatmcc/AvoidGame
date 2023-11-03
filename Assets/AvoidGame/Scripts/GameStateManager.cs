@@ -17,11 +17,6 @@ namespace AvoidGame
 
         private bool gameStateLocked = false;
 
-        GameStateManager()
-        {
-            GameState = GameState.Title;
-        }
-
         public GameState GameState
         {
             get => _gameState;
@@ -39,6 +34,7 @@ namespace AvoidGame
 
         public void Initialize()
         {
+            GameState = GameState.Title;
             OnGameStateChanged += ChangeGameState;
         }
 

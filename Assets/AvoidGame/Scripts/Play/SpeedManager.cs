@@ -16,11 +16,6 @@ namespace AvoidGame.Play
         public event Action<float> OnSpeedChanged;
         [Inject] GameStateManager _gameStateManager;
 
-        SpeedManager()
-        {
-            Speed = 0f;
-        }
-
         /// <summary>
         /// スピード倍率
         /// </summary>
@@ -39,6 +34,7 @@ namespace AvoidGame.Play
 
         public void Initialize()
         {
+            Speed = 0f;
             _gameStateManager.OnGameStateChanged += PlayStart;
         }
 
