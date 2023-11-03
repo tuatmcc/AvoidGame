@@ -7,7 +7,9 @@ namespace AvoidGame.DI
     {
         public override void InstallBindings()
         {
-            Container.Bind<PlayerInfo>().AsSingle();
+            Container.Bind<PlayerInfo>()
+                .FromNew()
+                .AsSingle();
         }
     }
 }

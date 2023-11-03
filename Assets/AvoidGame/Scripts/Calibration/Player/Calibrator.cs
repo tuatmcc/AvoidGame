@@ -19,8 +19,8 @@ namespace AvoidGame.Calibration.Player
 
         private void Awake()
         {
-            _playerInfo.BodyMultiplier = _bodyMultiplier;
-            _playerInfo.FloorHeight = _floorY;
+            _bodyMultiplier = _playerInfo.BodyMultiplier;
+            _floorY = _playerInfo.FloorHeight;
         }
 
 
