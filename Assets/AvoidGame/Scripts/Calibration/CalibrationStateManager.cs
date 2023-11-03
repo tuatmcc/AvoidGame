@@ -3,6 +3,7 @@ using System.Threading;
 using AvoidGame.Calibration.Interface;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace AvoidGame.Calibration
@@ -12,7 +13,9 @@ namespace AvoidGame.Calibration
     /// </summary>
     public sealed class CalibrationStateManager : ICalibrationStateManager, IInitializable, IDisposable
     {
+        [Inject] private GameStateManager _gameStateManager;
         [Inject] private IMediaPipeManager _mediaPipeManager;
+        private DefaultInputActions _inputActions;
 
         private CalibrationState _state = CalibrationState.Waiting;
 
@@ -56,6 +59,8 @@ namespace AvoidGame.Calibration
 
             // Finish calibration.
             State = CalibrationState.Finished;
+
+            await UniTask.Delay(TimeSpan.FromSeconds(5), cancellationToken: _cts.Token);
         }
 
         public void Dispose()

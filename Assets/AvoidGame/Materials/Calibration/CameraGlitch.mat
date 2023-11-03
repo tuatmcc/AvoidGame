@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RedGlitch
+  m_Name: CameraGlitch
   m_Shader: {fileID: -6465566751694194690, guid: 31deb5c896b73245d9d29df39ccb6e84,
     type: 3}
   m_Parent: {fileID: 0}
@@ -46,12 +46,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaMultiplier: 1
+    - _BlinkRate: 10
+    - _EmissionMultiplier: 0.1
     - _FrameRate: 1000
     - _GlithScale: 0.05
     - _LineWidth: 0.05
+    - _NoiseScale: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _SineMultiplier: 1
+    m_Colors:
+    - _NoiseMinMax: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8816411446986653618
 MonoBehaviour:
