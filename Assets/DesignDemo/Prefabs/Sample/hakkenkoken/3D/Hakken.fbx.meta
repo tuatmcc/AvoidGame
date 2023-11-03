@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: faca175150c16a8449534ab1a9092c23
+guid: 11c4872f7b137064a86ff809bdb67887
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 1
-    materialName: 1
+    materialName: 2
     materialSearch: 1
     materialLocation: 0
   animations:
