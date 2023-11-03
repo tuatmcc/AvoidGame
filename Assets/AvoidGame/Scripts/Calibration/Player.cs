@@ -25,8 +25,6 @@ namespace AvoidGame.Calibration
             _poseAccumulator = new PoseAccumulator();
             var token = this.GetCancellationTokenOnDestroy();
             StartTimerAsync(token).Forget();
-            Debug.Log($"MediaPipeManager id: {_mediaPipeManager.GetHashCode()}");
-            Debug.Log($"CalibrationSceneManager id: {_calibrationStateHolder.GetHashCode()}");
         }
 
         public void Update()

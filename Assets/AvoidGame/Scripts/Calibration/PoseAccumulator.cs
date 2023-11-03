@@ -8,7 +8,9 @@ namespace AvoidGame.Calibration
     /// </summary>
     public class PoseAccumulator
     {
-        private readonly Landmark[] _accumulatedLandmarks = Enumerable.Repeat(new Landmark(), 33).ToArray();
+        private readonly Landmark[] _accumulatedLandmarks =
+            Enumerable.Range(0, 33).Select(_ => new Landmark()).ToArray();
+
         private int _accumulatedCount = 0;
 
         public void AccumulateLandmarks(Landmark[] landmarks)
