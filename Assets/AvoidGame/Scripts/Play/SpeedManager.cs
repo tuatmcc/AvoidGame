@@ -46,10 +46,7 @@ namespace AvoidGame.Play
         public void AddPlayerSpeed(float add)
         {
             Speed += add;
-            if(Speed < 0.1f)
-            {
-                Speed = 0.1f;
-            }
+            Speed = Math.Max(Speed, PlayerConstants.min_speed_multiplier);
         }
 
         /// <summary>
