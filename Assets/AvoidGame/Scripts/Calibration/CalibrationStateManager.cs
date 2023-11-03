@@ -15,7 +15,6 @@ namespace AvoidGame.Calibration
     {
         [Inject] private GameStateManager _gameStateManager;
         [Inject] private IMediaPipeManager _mediaPipeManager;
-        private DefaultInputActions _inputActions;
 
         private CalibrationState _state = CalibrationState.Waiting;
 
@@ -61,6 +60,7 @@ namespace AvoidGame.Calibration
             State = CalibrationState.Finished;
 
             await UniTask.Delay(TimeSpan.FromSeconds(5), cancellationToken: _cts.Token);
+            _gameStateManager.GameState = GameState.CountDown;
         }
 
         public void Dispose()
