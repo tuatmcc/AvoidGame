@@ -22,7 +22,6 @@ namespace AvoidGame.Play.Items
             if(!used)
             {
                 used = true;
-                Debug.Log($"Hit! : {accelerate:0.0}");
                 _speedManager.AddPlayerSpeed(accelerate);
             }
         }
