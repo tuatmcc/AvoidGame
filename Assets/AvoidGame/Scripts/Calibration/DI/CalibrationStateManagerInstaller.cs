@@ -1,5 +1,5 @@
 using AvoidGame.Calibration.Interface;
-using UnityEngine;
+using System;
 using Zenject;
 
 namespace AvoidGame.Calibration.DI
@@ -8,7 +8,7 @@ namespace AvoidGame.Calibration.DI
     {
         public override void InstallBindings()
         {
-            Container.Bind(typeof(ICalibrationStateManager), typeof(IInitializable))
+            Container.Bind(typeof(ICalibrationStateManager), typeof(IInitializable), typeof(IDisposable))
                 .To<CalibrationStateManager>()
                 .AsSingle();
         }
