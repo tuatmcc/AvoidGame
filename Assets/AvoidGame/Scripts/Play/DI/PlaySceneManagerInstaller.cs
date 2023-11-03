@@ -15,7 +15,7 @@ namespace AvoidGame.DI
                 .FromInstance(playSceneManager)
                 .AsSingle();
 
-            Container.Bind(typeof(SpeedManager), typeof(IInitializable))
+            Container.Bind(typeof(SpeedManager), typeof(IInitializable), typeof(IDisposable))
                 .To<SpeedManager>()
                 .FromNew()
                 .AsSingle();
