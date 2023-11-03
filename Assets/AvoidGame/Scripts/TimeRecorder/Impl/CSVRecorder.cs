@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace AvoidGame.TimeRecorder
 {
-    public class CSVRecorder : MonoBehaviour, ITimeRecordable
+    public class CSVRecorder : ITimeRecordable
     {
         private string _csvPath = Application.dataPath + "/../record.csv";
         public event Action OnTimeRecorded;

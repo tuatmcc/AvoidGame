@@ -31,7 +31,6 @@ namespace AvoidGame.Tester
                     break;
                 }
             }
-            
         }
 
         override public void Start()
