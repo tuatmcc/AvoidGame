@@ -1,51 +1,43 @@
 using System;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
 using AvoidGame.MediaPipe;
-using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
+using extOSC;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Zenject;
 
 namespace AvoidGame
 {
     /// <summary>
     /// MediaPipeの管理
     /// </summary>
+    [RequireComponent(typeof(OSCReceiver))]
     public class MediaPipeManager : MonoBehaviour, IMediaPipeManager
     {
-        private Receiver _receiver;
-        public Landmark[] LandmarkData { get; private set; } = Enumerable.Repeat(new Landmark(), 33).ToArray();
+        [SerializeField] OSCReceiver receiver;
+
+        public Landmark[] LandmarkData { get; private set; } =
+            Enumerable.Range(0, 33).Select(_ => new Landmark()).ToArray();
 
         public bool IsReady { get; private set; } = false;
 
-        private void Start()
+        public void Awake()
         {
-            _receiver = new Receiver();
-            _receiver.OnReceive += OnReceive;
-            Debug.Log("MediaPipeManager Initialized");
-            var token = this.GetCancellationTokenOnDestroy();
-            _receiver.StartReceiver(token).Forget();
+            receiver.LocalPort = 8080;
+            receiver.Bind("/pose", OnReceive);
         }
 
-        private void OnReceive(UdpReceiveResult result)
+        private void OnReceive(OSCMessage oscMessage)
         {
             IsReady = true;
-            Debug.Log($"Received. IsReady: {IsReady}");
-            try
+            var landmarks = oscMessage.Values[0].ArrayValue;
+            for (var i = 0; i < 33; i++)
             {
-                var json = Encoding.UTF8.GetString(result.Buffer);
-                LandmarkData = JsonConvert.DeserializeObject<Landmark[]>(json);
+                LandmarkData[i].X = landmarks[i].ArrayValue[0].FloatValue;
+                LandmarkData[i].Y = landmarks[i].ArrayValue[1].FloatValue;
+                LandmarkData[i].Z = landmarks[i].ArrayValue[2].FloatValue;
+                LandmarkData[i].Visibility = landmarks[i].ArrayValue[3].FloatValue;
             }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            _receiver?.CloseCliant();
         }
     }
 }
