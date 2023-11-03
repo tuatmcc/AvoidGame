@@ -7,7 +7,7 @@ namespace AvoidGame
     /// <summary>
     /// ゲームの進行管理
     /// </summary>
-    public class GameStateManager : MonoBehaviour
+    public class GameStateManager : IGameStateManager, IInitializable
     {
         /// <summary>
         /// Stateが変わるごとに呼ばれる
@@ -32,15 +32,9 @@ namespace AvoidGame
 
         private GameState _gameState;
 
-        [Inject] private TimeManager _timeManager;
-
-        private void Awake()
+        public void Initialize()
         {
             GameState = GameState.Title;
-        }
-
-        private void Start()
-        {
             OnGameStateChanged += ChangeGameState;
         }
 
