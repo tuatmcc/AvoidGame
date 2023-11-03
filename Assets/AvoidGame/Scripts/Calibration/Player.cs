@@ -1,5 +1,9 @@
 using System;
+using System.Threading;
+using AvoidGame.MediaPipe;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Zenject;
 
 namespace AvoidGame.Calibration
@@ -8,51 +12,61 @@ namespace AvoidGame.Calibration
     public class Player : MonoBehaviour
     {
         [Inject] private IMediaPipeManager _mediaPipeManager;
-        [Inject] private CalibrationSceneManager _calibrationSceneManager;
+        [Inject] private ICalibrationStateHolder _calibrationStateHolder;
 
         [SerializeField] private Calibrator calibrator;
 
-        private readonly PoseAccumulator _poseAccumulator = new PoseAccumulator();
+        private PoseAccumulator _poseAccumulator;
 
-        private bool _calculationFinished = false;
+        private const int CalibrationTime = 5;
 
-        private void Awake()
+        public void Start()
         {
-            _calibrationSceneManager.OnCalibrationStateChanged += OnCalibrationStateChanged;
+            _poseAccumulator = new PoseAccumulator();
+            var token = this.GetCancellationTokenOnDestroy();
+            StartTimerAsync(token).Forget();
+            Debug.Log($"MediaPipeManager id: {_mediaPipeManager.GetHashCode()}");
+            Debug.Log($"CalibrationSceneManager id: {_calibrationStateHolder.GetHashCode()}");
         }
 
-        private void OnCalibrationStateChanged(CalibrationSceneManager.CalibrationState state)
+        public void Update()
         {
-            // Calculate Multiplier
-            if (state != CalibrationSceneManager.CalibrationState.Finished) return;
-            var averagedLandmarks = _poseAccumulator.GetAverageLandmarks();
-            calibrator.CalcRetargetMultiplier(_mediaPipeManager.LandmarkData);
-            _calculationFinished = true;
-        }
-
-
-        private void Update()
-        {
-            switch (_calibrationSceneManager.State)
+            switch (_calibrationStateHolder.State)
             {
-                case CalibrationSceneManager.CalibrationState.Waiting:
+                case CalibrationState.Waiting:
                 {
                     break;
                 }
-                case CalibrationSceneManager.CalibrationState.Calibrating:
+                case CalibrationState.Calibrating:
                 {
                     _poseAccumulator.AccumulateLandmarks(_mediaPipeManager.LandmarkData);
                     break;
                 }
-                case CalibrationSceneManager.CalibrationState.Finished:
+                case CalibrationState.Finished:
                 {
-                    if (!_calculationFinished) return;
                     calibrator.Retarget(_mediaPipeManager.LandmarkData);
                     break;
                 }
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private async UniTask StartTimerAsync(CancellationToken token)
+        {
+            _calibrationStateHolder.State = CalibrationState.Waiting;
+            while (!_mediaPipeManager.IsReady)
+            {
+                await UniTask.Delay(1000, cancellationToken: token);
+                Debug.Log($"Waiting for MediaPipe. IsReady: {_mediaPipeManager.IsReady}");
+            }
+
+            _calibrationStateHolder.State = CalibrationState.Calibrating;
+
+            // Wait for calibration
+            await UniTask.Delay(TimeSpan.FromSeconds(CalibrationTime), cancellationToken: token);
+            calibrator.CalcRetargetMultiplier(_mediaPipeManager.LandmarkData);
+            _calibrationStateHolder.State = CalibrationState.Finished;
         }
     }
 }

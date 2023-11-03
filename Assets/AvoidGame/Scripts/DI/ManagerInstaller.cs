@@ -10,7 +10,6 @@ namespace AvoidGame.DI
     {
         [SerializeField] private GameStateManager _gameStateManager;
         [SerializeField] private TimeManager _timeManager;
-        [SerializeField] private MediaPipeManager mediaPipeManager;
 
         public override void InstallBindings()
         {
@@ -20,10 +19,6 @@ namespace AvoidGame.DI
 
             Container.Bind<TimeManager>()
                 .FromInstance(_timeManager)
-                .AsSingle();
-
-            Container.Bind<IMediaPipeManager>().To<MediaPipeManager>()
-                .FromInstance(mediaPipeManager)
                 .AsSingle();
         }
     }

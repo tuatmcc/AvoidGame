@@ -6,17 +6,17 @@ namespace AvoidGame.Calibration
 {
     public class CalibrationSceneUI : MonoBehaviour
     {
-        [Inject] private CalibrationSceneManager _calibrationSceneManager;
+        [Inject] private ICalibrationStateHolder _calibrationStateHolder;
         [SerializeField] private RawImage[] glitchImage;
 
         private void Awake()
         {
-            _calibrationSceneManager.OnCalibrationStateChanged += OnCalibrationStateChanged;
+            _calibrationStateHolder.OnCalibrationStateChanged += OnCalibrationStateChanged;
         }
 
-        private void OnCalibrationStateChanged(CalibrationSceneManager.CalibrationState state)
+        private void OnCalibrationStateChanged(CalibrationState state)
         {
-            if (state != CalibrationSceneManager.CalibrationState.Finished) return;
+            if (state != CalibrationState.Finished) return;
             foreach (var image in glitchImage)
             {
                 image.enabled = false;
