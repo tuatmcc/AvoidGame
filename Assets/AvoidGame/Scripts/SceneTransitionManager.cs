@@ -1,6 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using AvoidGame.Calibration;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -12,24 +14,23 @@ namespace AvoidGame
     /// </summary>
     public class SceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
+        [Inject] private GameStateManager _gameStateManager;
+        [Inject] private AvoidGameInputActions _inputActions;
+
         [SerializeField] private float loadAtLeast = 0f;
-
         [SerializeField] private Canvas canvas;
-
-        // private Canvas _loadingCanvas;
-
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
-        [Inject] private GameStateManager _gameStateManager;
 
-        /// <summary>
-        /// ロード画面用canvasを取得
-        /// </summary>
         private void Awake()
         {
-            // _loadingCanvas = canvas.GetComponent<Canvas>();
-            // _loadingCanvas.enabled = false;
             canvas.enabled = false;
+            _inputActions.Enable();
+            _inputActions.UI.ForceExit.started += (ctx) =>
+            {
+                Debug.Log("ForceExit");
+                ForceExit();
+            };
         }
 
         /// <summary>
@@ -37,21 +38,29 @@ namespace AvoidGame
         /// </summary>
         private void Start()
         {
-            RegisterEvents();
+            _gameStateManager.OnGameStateChanged += SceneTransition;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        public void RegisterEvents()
+        public void ForceExit()
         {
-            _gameStateManager.OnGameStateChanged += SceneTransition;
-            SceneManager.sceneLoaded += SceneLoaded;
+            // to title
+            _gameStateManager.GameState = GameState.Title;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ToTitle();
+                ForceExit();
             }
+        }
+
+        private void OnDestroy()
+        {
+            _gameStateManager.OnGameStateChanged -= SceneTransition;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            _inputActions.Disable();
         }
 
         /// <summary>
@@ -64,27 +73,33 @@ namespace AvoidGame
             {
                 if (s.targetState == gameState)
                 {
-                    StartCoroutine(LoadScene(s.sceneName.ToString()));
+                    // fire and forget
+                    LoadScene(s.sceneName.ToString(), default).Forget();
                 }
             }
         }
 
         /// <summary>
-        /// canvasを有効にした後loadAtLeast時間待ってからロードを開始
+        /// canvasを有効にした後ロードを開始, LoadSceneAsyncの終了を待つ
         /// </summary>
         /// <param name="sceneName"></param>
+        /// <param name="token"></param>
         /// <returns></returns>
-        public IEnumerator LoadScene(string sceneName)
+        private async UniTask LoadScene(string sceneName, CancellationToken token)
         {
-            float waited = 0f;
             canvas.enabled = true;
-            while (waited < loadAtLeast)
+            var asyncResult = SceneManager.LoadSceneAsync(sceneName);
+            asyncResult.allowSceneActivation = false;
+            await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
+            while (!asyncResult.isDone)
             {
-                yield return new WaitForSeconds(0.1f);
-                waited += 0.1f;
-            }
+                if (asyncResult.progress >= 0.9f)
+                {
+                    asyncResult.allowSceneActivation = true;
+                }
 
-            SceneManager.LoadSceneAsync(sceneName);
+                await UniTask.Yield(PlayerLoopTiming.Update, token);
+            }
         }
 
         /// <summary>
@@ -92,15 +107,10 @@ namespace AvoidGame
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="loadSceneMode"></param>
-        private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             canvas.enabled = false;
             _gameStateManager.UnlockGameState();
-        }
-
-        private void ToTitle()
-        {
-            _gameStateManager.LockGameState(GameState.Title);
         }
     }
 }

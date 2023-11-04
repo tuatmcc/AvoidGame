@@ -5,7 +5,6 @@ namespace AvoidGame.Calibration
 {
     public interface ISceneTransitionManager
     {
-        public IEnumerator LoadScene(string sceneName);
-        public void RegisterEvents();
+        public void ForceExit();
     }
 }

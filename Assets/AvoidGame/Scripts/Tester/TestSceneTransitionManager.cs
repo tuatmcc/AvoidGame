@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using AvoidGame.Calibration;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -13,8 +16,9 @@ namespace AvoidGame.Tester
     public class TestSceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
         [Inject] private GameStateManager _gameStateManager;
+        [Inject] private AvoidGameInputActions _inputActions;
 
-        [SerializeField] private float loadAtLeast = 0f;
+        [SerializeField] private float loadAtLeast = 0.5f;
         [SerializeField] private Canvas canvas;
         [SerializeField] private SceneName from;
         [SerializeField] private SceneName to;
@@ -43,12 +47,23 @@ namespace AvoidGame.Tester
                     break;
                 }
             }
+
+            // Escでタイトルに戻る
+            _inputActions.Enable();
+            _inputActions.UI.ForceExit.started += (ctx) => ForceExit();
         }
 
         public void Start()
         {
-            RegisterEvents();
-            StartCoroutine(LoadScene(from.ToString()));
+            _gameStateManager.OnGameStateChanged += SceneTransition;
+            SceneManager.sceneLoaded += SceneLoaded;
+            LoadScene(from.ToString(), default).Forget();
+        }
+
+        private void OnDestroy()
+        {
+            _gameStateManager.OnGameStateChanged -= SceneTransition;
+            SceneManager.sceneLoaded -= SceneLoaded;
         }
 
         private void SceneTransition(GameState gameState)
@@ -69,39 +84,37 @@ namespace AvoidGame.Tester
                         return;
                     }
 
-                    StartCoroutine(LoadScene(s.sceneName.ToString()));
+                    LoadScene(s.sceneName.ToString(), default).Forget();
                 }
             }
         }
 
-        public IEnumerator LoadScene(string sceneName)
+        private async UniTask LoadScene(string sceneName, CancellationToken token)
         {
-            float waited = 0f;
-            if (sceneName == from.ToString())
+            canvas.enabled = true;
+            var asyncResult = SceneManager.LoadSceneAsync(sceneName);
+            asyncResult.allowSceneActivation = false;
+            await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
+            while (!asyncResult.isDone)
             {
-                waited = loadAtLeast;
-            }
+                if (asyncResult.progress >= 0.9f)
+                {
+                    asyncResult.allowSceneActivation = true;
+                }
 
-            // _loadingCanvas.enabled = true;
-            while (waited < loadAtLeast)
-            {
-                yield return new WaitForSeconds(0.1f);
-                waited += 0.1f;
+                await UniTask.Yield(PlayerLoopTiming.Update, token);
             }
-
-            SceneManager.LoadSceneAsync(sceneName);
         }
 
-        public void RegisterEvents()
+        public void ForceExit()
         {
-            _gameStateManager.OnGameStateChanged += SceneTransition;
-            SceneManager.sceneLoaded += SceneLoaded;
+            // back to title
+            _gameStateManager.GameState = GameState.Title;
         }
 
         private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            // _loadingCanvas.enabled = false;
-            canvas.enabled = true;
+            canvas.enabled = false;
             _gameStateManager.UnlockGameState();
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
