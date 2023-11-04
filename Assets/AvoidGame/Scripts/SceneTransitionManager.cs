@@ -14,9 +14,9 @@ namespace AvoidGame
     {
         [SerializeField] private float loadAtLeast = 0f;
 
-        [SerializeField] private GameObject canvas;
+        [SerializeField] private Canvas canvas;
 
-        private Canvas _loadingCanvas;
+        // private Canvas _loadingCanvas;
 
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
@@ -27,8 +27,9 @@ namespace AvoidGame
         /// </summary>
         private void Awake()
         {
-            _loadingCanvas = canvas.GetComponent<Canvas>();
-            _loadingCanvas.enabled = false;
+            // _loadingCanvas = canvas.GetComponent<Canvas>();
+            // _loadingCanvas.enabled = false;
+            canvas.enabled = false;
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace AvoidGame
             SceneManager.sceneLoaded += SceneLoaded;
         }
 
-        virtual public void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -76,7 +77,7 @@ namespace AvoidGame
         public IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
-            _loadingCanvas.enabled = true;
+            canvas.enabled = true;
             while (waited < loadAtLeast)
             {
                 yield return new WaitForSeconds(0.1f);
@@ -93,11 +94,11 @@ namespace AvoidGame
         /// <param name="loadSceneMode"></param>
         private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            _loadingCanvas.enabled = false;
+            canvas.enabled = false;
             _gameStateManager.UnlockGameState();
         }
 
-        public void ToTitle()
+        private void ToTitle()
         {
             _gameStateManager.LockGameState(GameState.Title);
         }
