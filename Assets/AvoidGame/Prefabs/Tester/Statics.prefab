@@ -91,12 +91,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadAtLeast: 0
-  _canvas: {fileID: 6263517176833435781}
-  _from: 0
-  _to: 3
+  canvas: {fileID: 6263517176833435781}
+  from: 0
+  to: 3
+  skipCalibration: 0
   scenes:
   - sceneName: 0
-    targetState: 0
+    targetState: 1
   - sceneName: 1
     targetState: 1
   - sceneName: 2

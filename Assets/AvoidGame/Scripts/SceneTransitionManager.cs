@@ -1,38 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using AvoidGame.Calibration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
-/// <summary>
-/// シーン遷移を管理する
-/// </summary>
+
 namespace AvoidGame
 {
-    public class SceneTransitionManager : MonoBehaviour
+    /// <summary>
+    /// シーン遷移を管理する
+    /// </summary>
+    public class SceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
-        [SerializeField] protected private float loadAtLeast = 0f;
+        [SerializeField] private float loadAtLeast = 0f;
 
-        [SerializeField] protected private GameObject _canvas;
+        [SerializeField] private GameObject canvas;
 
-        protected private Canvas _loadingCanvas;
+        private Canvas _loadingCanvas;
 
-        [SerializeField] protected private List<SceneTransitionStructure> scenes;
+        [SerializeField] private List<SceneTransitionStructure> scenes;
 
-        [Inject] protected private GameStateManager _gameStateManager;
+        [Inject] private GameStateManager _gameStateManager;
 
         /// <summary>
         /// ロード画面用canvasを取得
         /// </summary>
-        virtual public void Awake()
+        private void Awake()
         {
-            _loadingCanvas = _canvas.GetComponent<Canvas>();
+            _loadingCanvas = canvas.GetComponent<Canvas>();
             _loadingCanvas.enabled = false;
         }
 
         /// <summary>
         /// イベント登録
         /// </summary>
-        virtual public void Start()
+        private void Start()
+        {
+            RegisterEvents();
+        }
+
+        public void RegisterEvents()
         {
             _gameStateManager.OnGameStateChanged += SceneTransition;
             SceneManager.sceneLoaded += SceneLoaded;
@@ -42,7 +49,7 @@ namespace AvoidGame
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                toTitle();
+                ToTitle();
             }
         }
 
@@ -50,11 +57,11 @@ namespace AvoidGame
         /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
         /// </summary>
         /// <param name="gameState"></param>
-        protected virtual private void SceneTransition(GameState gameState)
+        private void SceneTransition(GameState gameState)
         {
-            foreach(SceneTransitionStructure s in scenes)
+            foreach (SceneTransitionStructure s in scenes)
             {
-                if(s.targetState == gameState)
+                if (s.targetState == gameState)
                 {
                     StartCoroutine(LoadScene(s.sceneName.ToString()));
                 }
@@ -66,15 +73,16 @@ namespace AvoidGame
         /// </summary>
         /// <param name="sceneName"></param>
         /// <returns></returns>
-        protected virtual private IEnumerator LoadScene(string sceneName)
+        public IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
             _loadingCanvas.enabled = true;
-            while(waited < loadAtLeast)
+            while (waited < loadAtLeast)
             {
                 yield return new WaitForSeconds(0.1f);
                 waited += 0.1f;
             }
+
             SceneManager.LoadSceneAsync(sceneName);
         }
 
@@ -83,15 +91,15 @@ namespace AvoidGame
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="loadSceneMode"></param>
-        protected virtual private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             _loadingCanvas.enabled = false;
             _gameStateManager.UnlockGameState();
         }
 
-        protected private void toTitle()
+        public void ToTitle()
         {
             _gameStateManager.LockGameState(GameState.Title);
-        } 
+        }
     }
 }

@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadAtLeast: 3
-  _canvas: {fileID: 6263517176833435781}
+  canvas: {fileID: 6263517176833435781}
   scenes:
   - sceneName: 1
     targetState: 1

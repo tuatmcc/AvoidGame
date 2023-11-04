@@ -1,31 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using AvoidGame.Calibration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
-/// <summary>
-/// シーン遷移を管理する(テスト用)
-/// </summary>
+
 namespace AvoidGame.Tester
 {
-    public class TestSceneTransitionManager : SceneTransitionManager
+    /// <summary>
+    /// シーン遷移を管理する(テスト用)
+    /// </summary>
+    public class TestSceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
-        [SerializeField] private SceneName _from;
-        [SerializeField] private SceneName _to;
-        [SerializeField] private bool skipCalibration = false;
+        [Inject] private GameStateManager _gameStateManager;
 
-        override public void Awake()
+        [SerializeField] private float loadAtLeast = 0f;
+        [SerializeField] private GameObject canvas;
+        [SerializeField] private SceneName from;
+        [SerializeField] private SceneName to;
+        [SerializeField] private bool skipCalibration = false;
+        [SerializeField] private List<SceneTransitionStructure> scenes;
+
+        private Canvas _loadingCanvas;
+
+        private void Awake()
         {
-            base.Awake();
+            _loadingCanvas = canvas.GetComponent<Canvas>();
+            _loadingCanvas.enabled = false;
             // テスト時に無効化すべきGameObjectを無効に
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
                 obj.SetActive(false);
             }
+
             // GameStateを開始Stateに設定してロック
             foreach (SceneTransitionStructure s in scenes)
             {
-                if(s.sceneName == _from)
+                if (s.sceneName == from)
                 {
                     _gameStateManager.LockGameState(s.targetState);
                     break;
@@ -33,62 +44,64 @@ namespace AvoidGame.Tester
             }
         }
 
-        override public void Start()
+        public void Start()
         {
-            base.Start();
-            StartCoroutine(LoadScene(_from.ToString()));
+            RegisterEvents();
+            StartCoroutine(LoadScene(from.ToString()));
         }
 
-        override public void Update()
+        private void SceneTransition(GameState gameState)
         {
-            base.Update();
-            if(_gameStateManager.GameState == GameState.Calibration && Input.GetKeyDown(KeyCode.Return))
+            foreach (SceneTransitionStructure s in scenes)
             {
-                _gameStateManager.GameState = GameState.CountDown;
-            }
-        }
-
-        protected override private void SceneTransition(GameState gameState)
-        {
-            foreach(SceneTransitionStructure s in scenes)
-            {
-                if(s.targetState == gameState)
+                if (s.targetState == gameState)
                 {
-                    if(s.sceneName == SceneName.Calibration && skipCalibration)
+                    if (s.sceneName == SceneName.Calibration && skipCalibration)
                     {
                         _gameStateManager.LockGameState(GameState.CountDown);
                         return;
                     }
-                    if(!(_from <= s.sceneName && s.sceneName <= _to))
+
+                    if (!(from <= s.sceneName && s.sceneName <= to))
                     {
-                        Debug.Log($"Test finished at : {_to}");
+                        Debug.Log($"Test finished at : {to}");
                         return;
                     }
+
                     StartCoroutine(LoadScene(s.sceneName.ToString()));
                 }
             }
         }
 
-        protected override private IEnumerator LoadScene(string sceneName)
+        public IEnumerator LoadScene(string sceneName)
         {
             float waited = 0f;
-            if(sceneName == _from.ToString())
+            if (sceneName == from.ToString())
             {
                 waited = loadAtLeast;
             }
+
             _loadingCanvas.enabled = true;
-            while(waited < loadAtLeast)
+            while (waited < loadAtLeast)
             {
                 yield return new WaitForSeconds(0.1f);
                 waited += 0.1f;
             }
+
             SceneManager.LoadSceneAsync(sceneName);
         }
 
-        protected override private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        public void RegisterEvents()
         {
-            base.SceneLoaded(scene, loadSceneMode);
-            foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
+            _gameStateManager.OnGameStateChanged += SceneTransition;
+            SceneManager.sceneLoaded += SceneLoaded;
+        }
+
+        private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            _loadingCanvas.enabled = false;
+            _gameStateManager.UnlockGameState();
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
                 obj.SetActive(false);
             }
