@@ -14,7 +14,7 @@ namespace AvoidGame.Play.Test.UI
         private void Start()
         {
             text.SetText("Speed : 1.0");
-            _speedManager.OnSpeedChanged += ChangeText;
+            _speedManager.OnSpeedMultiplierChanged += ChangeText;
         }
 
         private void ChangeText(float speed)

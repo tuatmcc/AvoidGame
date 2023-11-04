@@ -11,8 +11,9 @@ namespace AvoidGame.Result.DI
 
         public override void InstallBindings()
         {
-            Container.Bind<ResultSceneManager>()
-                .FromInstance(_resultSceneManager)
+            Container.Bind(typeof(ResultSceneManager), typeof(IInitializable))
+                .To<ResultSceneManager>()
+                .FromNew()
                 .AsSingle();
         }
     }

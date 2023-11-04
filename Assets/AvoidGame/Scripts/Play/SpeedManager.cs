@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using AvoidGame.Play.Player;
 
 namespace AvoidGame.Play
 {
     /// <summary>
     /// ゲーム中のスピード()倍率を管理する
     /// </summary>
-    public class SpeedManager : MonoBehaviour
+    public class SpeedManager : ISpeedManager, IInitializable, IDisposable
     {
+        public event Action<float> OnSpeedMultiplierChanged;
         public event Action<float> OnSpeedChanged;
         [Inject] GameStateManager _gameStateManager;
 
@@ -23,13 +25,14 @@ namespace AvoidGame.Play
             set 
             {
                 _speed = value;
-                OnSpeedChanged?.Invoke(_speed);
+                OnSpeedMultiplierChanged?.Invoke(_speed);
+                OnSpeedChanged?.Invoke(_speed*PlayerConstants.default_player_speed);
             }
         }
 
         private float _speed;
 
-        private void Start()
+        public void Initialize()
         {
             Speed = 0f;
             _gameStateManager.OnGameStateChanged += PlayStart;
@@ -43,10 +46,7 @@ namespace AvoidGame.Play
         public void AddPlayerSpeed(float add)
         {
             Speed += add;
-            if(Speed < 0.1f)
-            {
-                Speed = 0.1f;
-            }
+            Speed = Math.Max(Speed, PlayerConstants.min_speed_multiplier);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace AvoidGame.Play
             }
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             _gameStateManager.OnGameStateChanged -= PlayStart;
         }

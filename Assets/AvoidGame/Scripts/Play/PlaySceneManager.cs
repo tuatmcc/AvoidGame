@@ -9,7 +9,7 @@ using Zenject;
 /// </summary>
 namespace AvoidGame.Play
 {
-    public class PlaySceneManager : MonoBehaviour
+    public class PlaySceneManager : MonoBehaviour, IPlaySceneManager
     {
         /// <summary>
         /// カウントダウン時のイベント
