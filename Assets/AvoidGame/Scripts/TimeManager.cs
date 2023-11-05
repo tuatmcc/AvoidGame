@@ -1,18 +1,18 @@
 using System;
-using System.Collections;
+using AvoidGame.Play;
 using UnityEngine;
-using UnityEngine.Jobs;
-using UnityEngine.SceneManagement;
 using Zenject;
 using AvoidGame.TimeRecorder;
 
-/// <summary>
-/// ゲームの時間を管理する
-/// </summary>
 namespace AvoidGame
 {
+    /// <summary>
+    /// ゲームの時間を管理する
+    /// </summary>
     public class TimeManager : MonoBehaviour
     {
+        [Inject] PlaySceneManager _playSceneManager;
+
         private bool counting = false;
 
         private long start_time;
@@ -31,29 +31,28 @@ namespace AvoidGame
 
         private long _mainTimer;
 
-        [Inject] private GameStateManager _gameStateManager;
         [Inject] private ITimeRecordable _timeRecordable;
 
-        public void Start()
+        public void Awake()
         {
-            _gameStateManager.OnGameStateChanged += ChangeTimerCondition;
+            _playSceneManager.OnPlayStateChanged += ChangeTimerCondition;
         }
 
-        private void ChangeTimerCondition(GameState gameState)
+        private void ChangeTimerCondition(PlaySceneState state)
         {
-            switch (gameState)
+            switch (state)
             {
-                case GameState.Title:
+                case PlaySceneState.Countdown:
                     ResetParams();
                     break;
-                case GameState.Playing:
+                case PlaySceneState.Playing:
                     StartCount();
                     break;
-                case GameState.Finished:
-                    StopCount(); 
+                case PlaySceneState.Finished:
+                    StopCount();
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
         }
 
@@ -67,11 +66,12 @@ namespace AvoidGame
 
         public void StartCount()
         {
-            if(counting) return; 
+            if (counting) return;
             MainTimer = 0;
             start_time = DateTime.Now.Ticks;
             counting = true;
         }
+
         public void StopCount()
         {
             counting = false;
@@ -80,7 +80,7 @@ namespace AvoidGame
 
         private void ResetParams()
         {
-            counting = false ;
+            counting = false;
             MainTimer = 0;
         }
     }

@@ -14,19 +14,21 @@ namespace AvoidGame.Play
     {
         public event Action<float> OnSpeedMultiplierChanged;
         public event Action<float> OnSpeedChanged;
+
         [Inject] GameStateManager _gameStateManager;
+        [Inject] PlaySceneManager _playSceneManager;
 
         /// <summary>
         /// スピード倍率
         /// </summary>
-        public float Speed 
+        private float Speed
         {
             get => _speed;
-            set 
+            set
             {
                 _speed = value;
                 OnSpeedMultiplierChanged?.Invoke(_speed);
-                OnSpeedChanged?.Invoke(_speed*PlayerConstants.default_player_speed);
+                OnSpeedChanged?.Invoke(_speed * PlayerConstants.default_player_speed);
             }
         }
 
@@ -35,7 +37,7 @@ namespace AvoidGame.Play
         public void Initialize()
         {
             Speed = 0f;
-            _gameStateManager.OnGameStateChanged += PlayStart;
+            _playSceneManager.OnPlayStateChanged += PlayStart;
         }
 
         /// <summary>
@@ -53,9 +55,10 @@ namespace AvoidGame.Play
         /// 開始時に倍率を1.0に
         /// </summary>
         /// <param name="gameState"></param>
-        private void PlayStart(GameState gameState)
+        /// <param name="sceneState"></param>
+        private void PlayStart(PlaySceneState sceneState)
         {
-            if(gameState == GameState.Playing)
+            if (sceneState == PlaySceneState.Playing)
             {
                 Speed = 1f;
             }
@@ -63,7 +66,7 @@ namespace AvoidGame.Play
 
         public void Dispose()
         {
-            _gameStateManager.OnGameStateChanged -= PlayStart;
+            _playSceneManager.OnPlayStateChanged -= PlayStart;
         }
     }
 }

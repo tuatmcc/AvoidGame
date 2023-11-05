@@ -60,7 +60,7 @@ namespace AvoidGame.Calibration
             State = CalibrationState.Finished;
 
             await UniTask.Delay(TimeSpan.FromSeconds(5), cancellationToken: _cts.Token);
-            _gameStateManager.GameState = GameState.CountDown;
+            _gameStateManager.GameState = GameState.Play;
         }
 
         public void Dispose()

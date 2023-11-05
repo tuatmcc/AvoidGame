@@ -9,17 +9,11 @@ namespace AvoidGame.DI
 {
     public class ManagerInstaller : MonoInstaller
     {
-        [SerializeField] private TimeManager _timeManager;
-
         public override void InstallBindings()
         {
             Container.Bind(typeof(GameStateManager), typeof(IInitializable), typeof(IDisposable))
                 .To<GameStateManager>()
                 .FromNew()
-                .AsSingle();
-
-            Container.Bind<TimeManager>()
-                .FromInstance(_timeManager)
                 .AsSingle();
         }
     }

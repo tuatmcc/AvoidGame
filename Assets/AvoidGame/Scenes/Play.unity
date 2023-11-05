@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 1712428937}
   - component: {fileID: 1712428936}
   - component: {fileID: 1712428938}
+  - component: {fileID: 1712428939}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1712428938}
+  - {fileID: 1712428939}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _autoRun: 1
@@ -208,7 +210,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playSceneManager: {fileID: 6499688800424306456}
-  speedManager: {fileID: 6499688800424306455}
+--- !u!114 &1712428939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712428935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6b31d61f7f4c7f8270a042b711a64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeManager: {fileID: 6499688800424306455}
 --- !u!114 &1766781319 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2831719794352795914, guid: 2e4ab6b90a180da4e835a211fb3ba349,
@@ -555,14 +569,14 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 57cfed05e0713fa4ca969dcc778eabcc, type: 3}
 --- !u!114 &6499688800424306455 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4584013991667155891, guid: 57cfed05e0713fa4ca969dcc778eabcc,
+  m_CorrespondingSourceObject: {fileID: 6879209010887958034, guid: 57cfed05e0713fa4ca969dcc778eabcc,
     type: 3}
   m_PrefabInstance: {fileID: 6499688800424306454}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bfb8071cf712924cb5082b404fafd8e, type: 3}
+  m_Script: {fileID: 11500000, guid: a0d00a0ee1c78bd4c84840a5dfa9794b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6499688800424306456 stripped

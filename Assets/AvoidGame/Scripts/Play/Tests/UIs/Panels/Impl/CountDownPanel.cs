@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace AvoidGame.Play.Test.UI
+namespace AvoidGame.Play.Tests.UIs.Panels.Impl
 {
     public class CountDownPanel : PanelBase
     {
-        public override GameState TargetState => GameState.CountDown;
+        public override PlaySceneState TargetState => PlaySceneState.Countdown;
     }
 }

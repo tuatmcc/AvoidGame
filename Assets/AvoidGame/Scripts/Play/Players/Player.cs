@@ -1,7 +1,8 @@
+using AvoidGame.Play.Player;
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.Play.Player
+namespace AvoidGame.Play.Players
 {
     /// <summary>
     /// プレイヤー
@@ -31,15 +32,15 @@ namespace AvoidGame.Play.Player
         /// </summary>
         private void Update()
         {
-            if(cart.m_Position == path.PathLength && _gameStateManager.GameState == GameState.Playing)
+            if (cart.m_Position == path.PathLength && _playSceneManager.State == PlaySceneState.Playing)
             {
-                _playSceneManager.Finished();   
+                _playSceneManager.Finished();
             }
         }
 
         private void StartRace(GameState gameState)
         {
-            if(gameState == GameState.Playing)
+            if (_playSceneManager.State == PlaySceneState.Playing)
             {
                 cart.m_Speed = default_speed;
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.Play.Test.UI
+namespace AvoidGame.Play.Tests.UIs.Panels
 {
     /// <summary>
     /// パネルの基底クラス
@@ -10,23 +10,23 @@ namespace AvoidGame.Play.Test.UI
     /// </summary>
     public abstract class PanelBase : MonoBehaviour
     {
-        public virtual GameState TargetState { get; }
-    
-        [Inject] private GameStateManager _gameStateManager;
-    
+        public virtual PlaySceneState TargetState { get; }
+
+        [Inject] private PlaySceneManager _playSceneManager;
+
         private void Awake()
         {
-            _gameStateManager.OnGameStateChanged += ChangePanelActivation;
+            _playSceneManager.OnPlayStateChanged += ChangePanelActivation;
         }
 
-        private void ChangePanelActivation(GameState gameState)
+        private void ChangePanelActivation(PlaySceneState state)
         {
-            gameObject.SetActive(gameState == TargetState);
+            gameObject.SetActive(state == TargetState);
         }
 
         private void OnDisable()
         {
-            _gameStateManager.OnGameStateChanged -= ChangePanelActivation;
+            _playSceneManager.OnPlayStateChanged -= ChangePanelActivation;
         }
     }
 }
