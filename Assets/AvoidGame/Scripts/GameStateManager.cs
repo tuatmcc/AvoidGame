@@ -7,7 +7,7 @@ namespace AvoidGame
     /// <summary>
     /// ゲームの進行管理
     /// </summary>
-    public class GameStateManager : IGameStateManager, IInitializable
+    public class GameStateManager : IGameStateManager, IInitializable, IDisposable
     {
         /// <summary>
         /// Stateが変わるごとに呼ばれる
@@ -40,6 +40,11 @@ namespace AvoidGame
         {
             GameState = GameState.Title;
             OnGameStateChanged += ChangeGameState;
+        }
+
+        public void Dispose()
+        {
+            OnGameStateChanged -= ChangeGameState;
         }
 
         /// <summary>
