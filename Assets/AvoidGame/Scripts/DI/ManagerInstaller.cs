@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace AvoidGame.DI
 
         public override void InstallBindings()
         {
-            Container.Bind(typeof(GameStateManager), typeof(IInitializable))
+            Container.Bind(typeof(GameStateManager), typeof(IInitializable), typeof(IDisposable))
                 .To<GameStateManager>()
                 .FromNew()
                 .AsSingle();

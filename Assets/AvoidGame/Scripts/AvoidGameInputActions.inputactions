@@ -1,0 +1,104 @@
+{
+    "name": "AvoidGameInputActions",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "4fb481cd-ffd8-4666-baae-f69e6aedc344",
+            "actions": [
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "1dcd4a00-dd8f-4e5f-b767-54cf079ac713",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ForceExit",
+                    "type": "Button",
+                    "id": "a7a00158-bc42-485e-bf67-27be131d85df",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ec6e8dec-96f5-41b6-8c4b-db51a715d773",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5693c848-5ef1-4058-8c74-a7ac54cfaa45",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceExit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53db6135-ae7f-4046-9d88-db8567278b62",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceExit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Global",
+            "id": "131f4737-4a60-42da-950f-8838384ca08d",
+            "actions": [
+                {
+                    "name": "ForceExit",
+                    "type": "Button",
+                    "id": "f7edc963-c3e2-49a7-8394-f85df3f05bc8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b41781cd-ed0a-40e2-868c-d0b816c75c52",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceExit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92f2b4ae-fb80-49f5-a377-48c1eb91c1b4",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceExit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
