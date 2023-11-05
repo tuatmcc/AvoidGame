@@ -15,11 +15,13 @@ namespace AvoidGame
     public class SceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
         [Inject] private GameStateManager _gameStateManager;
-        private AvoidGameInputActions _inputActions;
 
         [SerializeField] private float loadAtLeast = 0f;
         [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private List<SceneTransitionStructure> scenes;
+
+        private AvoidGameInputActions _inputActions;
+
 
         private void Awake()
         {
@@ -62,12 +64,15 @@ namespace AvoidGame
         /// <param name="gameState"></param>
         public void OnGameStateChanged(GameState gameState)
         {
+            Debug.Log($"OnGameStateChanged: {gameState}");
             foreach (SceneTransitionStructure s in scenes)
             {
                 if (s.targetState == gameState)
                 {
                     // fire and forget
-                    LoadSceneAsync(s.sceneName.ToString(), default).Forget();
+                    LoadSceneAsync(s.sceneName.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
+                    Debug.Log($"LoadSceneAsync: {s.sceneName}");
+                    break;
                 }
             }
         }

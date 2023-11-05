@@ -5,7 +5,6 @@ using AvoidGame.Calibration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Tester
@@ -16,7 +15,6 @@ namespace AvoidGame.Tester
     public class TestSceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
         [Inject] private GameStateManager _gameStateManager;
-        private AvoidGameInputActions _inputActions;
 
         [SerializeField] private float loadAtLeast = 0.5f;
         [SerializeField] private Canvas loadingCanvas;
@@ -24,6 +22,9 @@ namespace AvoidGame.Tester
         [SerializeField] private SceneName to;
         [SerializeField] private bool skipCalibration = false;
         [SerializeField] private List<SceneTransitionStructure> scenes;
+
+        private AvoidGameInputActions _inputActions;
+
 
         private void Awake()
         {
@@ -51,8 +52,8 @@ namespace AvoidGame.Tester
             _gameStateManager.OnGameStateChanged += OnGameStateChanged;
             SceneManager.sceneLoaded += SceneLoaded;
             // Escでタイトルに戻る
-            _inputActions.Global.ForceExit.started += (ctx) => ForceExit();
-            LoadSceneAsync(from.ToString(), default).Forget();
+            _inputActions.Global.ForceExit.started += (_) => ForceExit();
+            LoadSceneAsync(from.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void OnDisable()
@@ -85,7 +86,7 @@ namespace AvoidGame.Tester
                         return;
                     }
 
-                    LoadSceneAsync(s.sceneName.ToString(), default).Forget();
+                    LoadSceneAsync(s.sceneName.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
                 }
             }
         }
