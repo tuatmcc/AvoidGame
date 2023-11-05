@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace AvoidGame.Calibration.Input
@@ -17,7 +16,7 @@ namespace AvoidGame.Calibration.Input
 
         private void Start()
         {
-            _inputActions.UI.Submit.started += (ctx) => { _gameStateManager.GameState = GameState.CountDown; };
+            _inputActions.UI.Submit.started += (_) => { _gameStateManager.GameState = GameState.Play; };
         }
 
         private void OnDestroy()

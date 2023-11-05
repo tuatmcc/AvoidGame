@@ -10,18 +10,18 @@ namespace AvoidGame.Play.Items
     public abstract class ItemBase : MonoBehaviour
     {
         public virtual bool DestroyOnItemCollectorHit => true;
-    
+
         public event Action<Collider> OnItemCollectorHit;
-    
-        [Inject] private GameStateManager gameStateManager;
+
+        [Inject] private PlaySceneManager _playSceneManager;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (gameStateManager.GameState != GameState.Playing) return;
+            if (_playSceneManager.State != PlaySceneState.Playing) return;
             if (!other.TryGetComponent(out IItemCollectable _)) return;
-        
+
             OnItemCollectorHit?.Invoke(other);
-        
+
             if (DestroyOnItemCollectorHit)
             {
                 Destroy(gameObject);

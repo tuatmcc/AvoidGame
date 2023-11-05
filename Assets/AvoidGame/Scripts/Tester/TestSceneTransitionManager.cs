@@ -76,7 +76,7 @@ namespace AvoidGame.Tester
                 {
                     if (s.sceneName == SceneName.Calibration && skipCalibration)
                     {
-                        _gameStateManager.LockGameState(GameState.CountDown);
+                        _gameStateManager.LockGameState(GameState.Play);
                         return;
                     }
 

@@ -1,20 +1,21 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using AvoidGame.Play.Interface;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// Playシーンを管理する
-/// </summary>
 namespace AvoidGame.Play
 {
+    /// <summary>
+    /// Playシーンを管理する
+    /// </summary>
     public class PlaySceneManager : MonoBehaviour, IPlaySceneManager
     {
         /// <summary>
         /// カウントダウン時のイベント
         /// </summary>
         public event Action OnCountStart;
+
         public event Action<int> OnCountChanged;
 
         [SerializeField] private float waitForCountdown = 0f;
@@ -22,6 +23,20 @@ namespace AvoidGame.Play
         [SerializeField] private float waitAfterFinished = 0f;
 
         [Inject] private GameStateManager _gameStateManager;
+
+        private PlaySceneState _sceneState = PlaySceneState.Countdown;
+
+        public event Action<PlaySceneState> OnPlayStateChanged;
+
+        public PlaySceneState State
+        {
+            get => _sceneState;
+            private set
+            {
+                OnPlayStateChanged?.Invoke(value);
+                _sceneState = value;
+            }
+        }
 
         void Start()
         {
@@ -44,7 +59,8 @@ namespace AvoidGame.Play
                 yield return new WaitForSeconds(1);
                 count--;
             }
-            _gameStateManager.GameState = GameState.Playing;
+
+            State = PlaySceneState.Playing;
         }
 
         /// <summary>
@@ -53,7 +69,7 @@ namespace AvoidGame.Play
         /// </summary>
         public void Finished()
         {
-            _gameStateManager.GameState = GameState.Finished;
+            State = PlaySceneState.Finished;
             StartCoroutine(TransitToResult());
         }
 

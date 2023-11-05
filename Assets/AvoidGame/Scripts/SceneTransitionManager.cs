@@ -64,17 +64,7 @@ namespace AvoidGame
         /// <param name="gameState"></param>
         public void OnGameStateChanged(GameState gameState)
         {
-            Debug.Log($"OnGameStateChanged: {gameState}");
-            foreach (SceneTransitionStructure s in scenes)
-            {
-                if (s.targetState == gameState)
-                {
-                    // fire and forget
-                    LoadSceneAsync(s.sceneName.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
-                    Debug.Log($"LoadSceneAsync: {s.sceneName}");
-                    break;
-                }
-            }
+            LoadSceneAsync(gameState.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
         }
 
         /// <summary>

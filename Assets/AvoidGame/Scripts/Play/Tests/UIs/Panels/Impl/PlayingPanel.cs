@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using AvoidGame.Play.Test.UI;
 
-namespace AvoidGame.Play.Test.UI
+namespace AvoidGame.Play.Tests.UIs.Panels.Impl
 {
     public class PlayingPanel : PanelBase
     {
-        public override GameState TargetState => GameState.Playing;
+        public override PlaySceneState TargetState => PlaySceneState.Playing;
     }
 }

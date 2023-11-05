@@ -1,9 +1,8 @@
-using AvoidGame.Play;
 using System;
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.DI
+namespace AvoidGame.Play.DI
 {
     public class PlaySceneManagerInstaller : MonoInstaller
     {
