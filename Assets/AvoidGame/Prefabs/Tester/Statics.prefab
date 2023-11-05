@@ -97,7 +97,7 @@ MonoBehaviour:
   skipCalibration: 0
   scenes:
   - sceneName: 0
-    targetState: 1
+    targetState: 0
   - sceneName: 1
     targetState: 1
   - sceneName: 2

@@ -5,7 +5,6 @@ using AvoidGame.Calibration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame
@@ -16,23 +15,26 @@ namespace AvoidGame
     public class SceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
         [Inject] private GameStateManager _gameStateManager;
-        [Inject] private AvoidGameInputActions _inputActions;
+        private AvoidGameInputActions _inputActions;
 
         [SerializeField] private float loadAtLeast = 0f;
         [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
-        private CancellationTokenSource _cts;
-
         private void Awake()
         {
+            _inputActions = new AvoidGameInputActions();
             loadingCanvas.enabled = false;
+        }
+
+        private void OnEnable()
+        {
             _inputActions.Enable();
-            _inputActions.UI.ForceExit.started += (ctx) =>
-            {
-                Debug.Log("ForceExit");
-                ForceExit();
-            };
+        }
+
+        private void OnDisable()
+        {
+            _inputActions.Disable();
         }
 
         /// <summary>
@@ -40,24 +42,17 @@ namespace AvoidGame
         /// </summary>
         private void Start()
         {
-            _gameStateManager.OnGameStateChanged += StartSceneTransition;
+            _gameStateManager.OnGameStateChanged += OnGameStateChanged;
             SceneManager.sceneLoaded += OnSceneLoaded;
+            // Escでタイトルに戻る
+            _inputActions.Global.ForceExit.started += (_) => ForceExit();
         }
 
         private void OnDestroy()
         {
-            _gameStateManager.OnGameStateChanged -= StartSceneTransition;
+            _gameStateManager.OnGameStateChanged -= OnGameStateChanged;
             SceneManager.sceneLoaded -= OnSceneLoaded;
-            _inputActions.Disable();
-        }
-
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Q))
-            {
-                ForceExit();
-            }
+            _inputActions.Dispose();
         }
 
 
@@ -65,15 +60,14 @@ namespace AvoidGame
         /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
         /// </summary>
         /// <param name="gameState"></param>
-        private void StartSceneTransition(GameState gameState)
+        public void OnGameStateChanged(GameState gameState)
         {
             foreach (SceneTransitionStructure s in scenes)
             {
                 if (s.targetState == gameState)
                 {
-                    _cts = new CancellationTokenSource();
                     // fire and forget
-                    LoadScene(s.sceneName.ToString(), _cts.Token).Forget();
+                    LoadSceneAsync(s.sceneName.ToString(), default).Forget();
                 }
             }
         }
@@ -84,21 +78,18 @@ namespace AvoidGame
         /// <param name="sceneName"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        private async UniTask LoadScene(string sceneName, CancellationToken token)
+        private async UniTask LoadSceneAsync(string sceneName, CancellationToken token)
         {
             loadingCanvas.enabled = true;
-            var asyncResult = SceneManager.LoadSceneAsync(sceneName);
-            asyncResult.allowSceneActivation = false;
+            // Start unloading current scene and loading next scene
+            var loadAsyncResult = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            loadAsyncResult.allowSceneActivation = false;
+            // Wait for at least loadAtLeast seconds
             await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
-            while (!asyncResult.isDone)
-            {
-                if (asyncResult.progress >= 0.9f)
-                {
-                    asyncResult.allowSceneActivation = true;
-                }
-
-                await UniTask.Yield(PlayerLoopTiming.Update, token);
-            }
+            // Wait for scene loading end
+            loadAsyncResult.allowSceneActivation = true;
+            await loadAsyncResult;
+            loadingCanvas.enabled = false;
         }
 
         /// <summary>
@@ -108,9 +99,6 @@ namespace AvoidGame
         /// <param name="loadSceneMode"></param>
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            _cts.Cancel();
-            loadingCanvas.enabled = false;
-            _gameStateManager.UnlockGameState();
         }
 
         public void ForceExit()

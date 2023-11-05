@@ -22,7 +22,11 @@ namespace AvoidGame
             get => _gameState;
             set
             {
-                if (!gameStateLocked)
+                if (gameStateLocked)
+                {
+                    Debug.LogWarning($"GameState is locked to {_gameState}");
+                }
+                else
                 {
                     _gameState = value;
                     OnGameStateChanged?.Invoke(_gameState);
@@ -55,7 +59,7 @@ namespace AvoidGame
         /// <returns></returns>
         public bool LockGameState(GameState gameState)
         {
-            if(gameStateLocked) return false;
+            if (gameStateLocked) return false;
             GameState = gameState;
             gameStateLocked = true;
             return true;

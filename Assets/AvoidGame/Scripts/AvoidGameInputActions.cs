@@ -81,6 +81,45 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Global"",
+            ""id"": ""131f4737-4a60-42da-950f-8838384ca08d"",
+            ""actions"": [
+                {
+                    ""name"": ""ForceExit"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7edc963-c3e2-49a7-8394-f85df3f05bc8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b41781cd-ed0a-40e2-868c-d0b816c75c52"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForceExit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92f2b4ae-fb80-49f5-a377-48c1eb91c1b4"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForceExit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -89,6 +128,9 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
         m_UI_ForceExit = m_UI.FindAction("ForceExit", throwIfNotFound: true);
+        // Global
+        m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
+        m_Global_ForceExit = m_Global.FindAction("ForceExit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -200,9 +242,59 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Global
+    private readonly InputActionMap m_Global;
+    private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
+    private readonly InputAction m_Global_ForceExit;
+    public struct GlobalActions
+    {
+        private @AvoidGameInputActions m_Wrapper;
+        public GlobalActions(@AvoidGameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ForceExit => m_Wrapper.m_Global_ForceExit;
+        public InputActionMap Get() { return m_Wrapper.m_Global; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GlobalActions set) { return set.Get(); }
+        public void AddCallbacks(IGlobalActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GlobalActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GlobalActionsCallbackInterfaces.Add(instance);
+            @ForceExit.started += instance.OnForceExit;
+            @ForceExit.performed += instance.OnForceExit;
+            @ForceExit.canceled += instance.OnForceExit;
+        }
+
+        private void UnregisterCallbacks(IGlobalActions instance)
+        {
+            @ForceExit.started -= instance.OnForceExit;
+            @ForceExit.performed -= instance.OnForceExit;
+            @ForceExit.canceled -= instance.OnForceExit;
+        }
+
+        public void RemoveCallbacks(IGlobalActions instance)
+        {
+            if (m_Wrapper.m_GlobalActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGlobalActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GlobalActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GlobalActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GlobalActions @Global => new GlobalActions(this);
     public interface IUIActions
     {
         void OnSubmit(InputAction.CallbackContext context);
+        void OnForceExit(InputAction.CallbackContext context);
+    }
+    public interface IGlobalActions
+    {
         void OnForceExit(InputAction.CallbackContext context);
     }
 }
