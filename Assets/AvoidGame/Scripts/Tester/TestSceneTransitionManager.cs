@@ -118,6 +118,7 @@ namespace AvoidGame.Tester
             // テスト時に無効化すべきGameObjectを無効に
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
+                // to avoid object duplication, destroy, not disable
                 Destroy(obj);
             }
         }

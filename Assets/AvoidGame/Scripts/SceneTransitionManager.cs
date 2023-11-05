@@ -99,8 +99,15 @@ namespace AvoidGame
         public void ForceExit()
         {
             Debug.Log("ForceExit");
-            // to title
-            _gameStateManager.GameState = GameState.Title;
+            // to title and destroy this
+            UniTask.Create(async () =>
+            {
+                _gameStateManager.OnGameStateChanged -= OnGameStateChanged;
+                SceneManager.sceneLoaded -= OnSceneLoaded;
+                _gameStateManager.GameState = GameState.Title;
+                await LoadSceneAsync("Title", this.GetCancellationTokenOnDestroy());
+                Destroy(gameObject);
+            }).Forget();
         }
     }
 }

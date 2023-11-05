@@ -1,4 +1,5 @@
 using System;
+using AvoidGame.Interface;
 using UnityEngine;
 using Zenject;
 
@@ -56,6 +57,11 @@ namespace AvoidGame
         {
             Debug.Log($"GameState Changhed to : {gameState}");
             Debug.Log($"登録されたイベント数 : {OnGameStateChanged.GetInvocationList().Length}");
+        }
+
+        public void MoveToNextState()
+        {
+            ChangeGameState(GameState + 1);
         }
 
         /// <summary>
