@@ -1,3 +1,4 @@
+using AvoidGame.Play;
 using AvoidGame.TimeRecorder;
 using System;
 using System.Collections;
@@ -16,7 +17,7 @@ namespace AvoidGame.Result
 
         [Inject] ITimeRecordable _timeRecordable;
 
-        [Inject] TimeManager _timeManager;
+        [Inject] PlayerInfo _playerInfo;
 
         private List<long> _records;
 
@@ -41,7 +42,7 @@ namespace AvoidGame.Result
 
         public (List<long> timeList, long playerTime) GetTimeData()
         {
-            return (_records, _timeManager.MainTimer);
+            return (_records, _playerInfo.Time);
         }
     }
 }
