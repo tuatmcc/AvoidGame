@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadAtLeast: 0.5
-  canvas: {fileID: 6547867643833234077}
+  loadingCanvas: {fileID: 6547867643833234077}
   from: 0
   to: 3
   skipCalibration: 0

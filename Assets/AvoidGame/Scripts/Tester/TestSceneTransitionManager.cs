@@ -19,19 +19,18 @@ namespace AvoidGame.Tester
         [Inject] private AvoidGameInputActions _inputActions;
 
         [SerializeField] private float loadAtLeast = 0.5f;
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private SceneName from;
         [SerializeField] private SceneName to;
         [SerializeField] private bool skipCalibration = false;
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
-        // private Canvas _loadingCanvas;
 
         private void Awake()
         {
             // _loadingCanvas = canvas.GetComponent<Canvas>();
             // _loadingCanvas.enabled = false;
-            canvas.enabled = false;
+            loadingCanvas.enabled = false;
             // テスト時に無効化すべきGameObjectを無効に
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {
@@ -91,7 +90,7 @@ namespace AvoidGame.Tester
 
         private async UniTask LoadScene(string sceneName, CancellationToken token)
         {
-            canvas.enabled = true;
+            loadingCanvas.enabled = true;
             var asyncResult = SceneManager.LoadSceneAsync(sceneName);
             asyncResult.allowSceneActivation = false;
             await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
@@ -114,7 +113,7 @@ namespace AvoidGame.Tester
 
         private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            canvas.enabled = false;
+            loadingCanvas.enabled = false;
             _gameStateManager.UnlockGameState();
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
             {

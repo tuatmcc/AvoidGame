@@ -18,13 +18,13 @@ namespace AvoidGame
         [Inject] private AvoidGameInputActions _inputActions;
 
         [SerializeField] private float loadAtLeast = 0f;
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
 
         private void Awake()
         {
-            canvas.enabled = false;
+            loadingCanvas.enabled = false;
             _inputActions.Enable();
             _inputActions.UI.ForceExit.started += (ctx) =>
             {
@@ -87,7 +87,7 @@ namespace AvoidGame
         /// <returns></returns>
         private async UniTask LoadScene(string sceneName, CancellationToken token)
         {
-            canvas.enabled = true;
+            loadingCanvas.enabled = true;
             var asyncResult = SceneManager.LoadSceneAsync(sceneName);
             asyncResult.allowSceneActivation = false;
             await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
@@ -109,7 +109,6 @@ namespace AvoidGame
         /// <param name="loadSceneMode"></param>
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            canvas.enabled = false;
             _gameStateManager.UnlockGameState();
         }
     }
