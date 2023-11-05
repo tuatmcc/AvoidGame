@@ -1,10 +1,9 @@
 using System;
-using AvoidGame.Play;
 using UnityEngine;
 using Zenject;
 using AvoidGame.TimeRecorder;
 
-namespace AvoidGame
+namespace AvoidGame.Play
 {
     /// <summary>
     /// ゲームの時間を管理する
@@ -12,6 +11,8 @@ namespace AvoidGame
     public class TimeManager : MonoBehaviour
     {
         [Inject] PlaySceneManager _playSceneManager;
+
+        [Inject] PlayerInfo _playerInfo;
 
         private bool counting = false;
 
@@ -76,6 +77,7 @@ namespace AvoidGame
         {
             counting = false;
             _timeRecordable.RecordTime(MainTimer);
+            _playerInfo.Time = MainTimer;
         }
 
         private void ResetParams()
