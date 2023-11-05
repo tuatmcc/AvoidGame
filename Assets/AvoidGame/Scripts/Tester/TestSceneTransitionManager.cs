@@ -6,6 +6,7 @@ using AvoidGame.Calibration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Tester
@@ -25,6 +26,7 @@ namespace AvoidGame.Tester
         [SerializeField] private bool skipCalibration = false;
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
+        private CancellationTokenSource _cts;
 
         private void Awake()
         {
@@ -63,6 +65,7 @@ namespace AvoidGame.Tester
         {
             _gameStateManager.OnGameStateChanged -= SceneTransition;
             SceneManager.sceneLoaded -= SceneLoaded;
+            _inputActions.Disable();
         }
 
         private void SceneTransition(GameState gameState)
@@ -107,6 +110,7 @@ namespace AvoidGame.Tester
 
         public void ForceExit()
         {
+            Debug.Log("Force Exit");
             // back to title
             _gameStateManager.GameState = GameState.Title;
         }

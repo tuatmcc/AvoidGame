@@ -5,6 +5,7 @@ using AvoidGame.Calibration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame
@@ -21,6 +22,7 @@ namespace AvoidGame
         [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
+        private CancellationTokenSource _cts;
 
         private void Awake()
         {
@@ -38,43 +40,40 @@ namespace AvoidGame
         /// </summary>
         private void Start()
         {
-            _gameStateManager.OnGameStateChanged += SceneTransition;
+            _gameStateManager.OnGameStateChanged += StartSceneTransition;
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        public void ForceExit()
+        private void OnDestroy()
         {
-            // to title
-            _gameStateManager.GameState = GameState.Title;
+            _gameStateManager.OnGameStateChanged -= StartSceneTransition;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            _inputActions.Disable();
         }
+
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Q))
             {
                 ForceExit();
             }
         }
 
-        private void OnDestroy()
-        {
-            _gameStateManager.OnGameStateChanged -= SceneTransition;
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            _inputActions.Disable();
-        }
 
         /// <summary>
         /// あらかじめ決められたGameStateに遷移したらシーン遷移を開始
         /// </summary>
         /// <param name="gameState"></param>
-        private void SceneTransition(GameState gameState)
+        private void StartSceneTransition(GameState gameState)
         {
             foreach (SceneTransitionStructure s in scenes)
             {
                 if (s.targetState == gameState)
                 {
+                    _cts = new CancellationTokenSource();
                     // fire and forget
-                    LoadScene(s.sceneName.ToString(), default).Forget();
+                    LoadScene(s.sceneName.ToString(), _cts.Token).Forget();
                 }
             }
         }
@@ -109,7 +108,16 @@ namespace AvoidGame
         /// <param name="loadSceneMode"></param>
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+            _cts.Cancel();
+            loadingCanvas.enabled = false;
             _gameStateManager.UnlockGameState();
+        }
+
+        public void ForceExit()
+        {
+            Debug.Log("ForceExit");
+            // to title
+            _gameStateManager.GameState = GameState.Title;
         }
     }
 }
