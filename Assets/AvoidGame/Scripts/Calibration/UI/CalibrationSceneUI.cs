@@ -18,7 +18,7 @@ namespace AvoidGame.Calibration.UI
         private void OnCalibrationStateChanged(CalibrationState state)
         {
             Debug.Log($"CalibrationState: {state}");
-            if (state != CalibrationState.Finished) return;
+            if (state != CalibrationState.Finishing) return;
             foreach (var image in glitchImage)
             {
                 image.enabled = false;

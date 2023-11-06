@@ -39,14 +39,15 @@ namespace AvoidGame.Calibration.Player
                     _poseAccumulator.AccumulateLandmarks(_mediaPipeManager.LandmarkData);
                     break;
                 }
+                case CalibrationState.Finishing:
+                {
+                    if (_mulitplierCalculated) return;
+                    calibrator.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
+                    _mulitplierCalculated = true;
+                    break;
+                }
                 case CalibrationState.Finished:
                 {
-                    if (!_mulitplierCalculated)
-                    {
-                        calibrator.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
-                        _mulitplierCalculated = true;
-                    }
-
                     calibrator.Retarget(_mediaPipeManager.LandmarkData);
                     break;
                 }
@@ -54,22 +55,5 @@ namespace AvoidGame.Calibration.Player
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        // private async UniTask StartTimerAsync(CancellationToken token)
-        // {
-        //     _calibrationStateManager.State = CalibrationState.Waiting;
-        //     while (!_mediaPipeManager.IsReady)
-        //     {
-        //         await UniTask.Delay(1000, cancellationToken: token);
-        //         Debug.Log($"Waiting for MediaPipe. IsReady: {_mediaPipeManager.IsReady}");
-        //     }
-        //
-        //     _calibrationStateManager.State = CalibrationState.Calibrating;
-        //
-        //     // Wait for calibration
-        //     await UniTask.Delay(TimeSpan.FromSeconds(CalibrationTime), cancellationToken: token);
-        //     calibrator.CalcRetargetMultiplier(_mediaPipeManager.LandmarkData);
-        //     _calibrationStateManager.State = CalibrationState.Finished;
-        // }
     }
 }
