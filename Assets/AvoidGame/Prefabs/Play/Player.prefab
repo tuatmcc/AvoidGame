@@ -54,20 +54,38 @@ MonoBehaviour:
   - position: {x: 0, y: 0, z: -5}
     tangent: {x: 0, y: 0, z: 0}
     roll: 0
-  - position: {x: 5.508274, y: 0, z: 3.0565324}
-    tangent: {x: 1.2334876, y: 0, z: 2.8707666}
+  - position: {x: -0.042690516, y: 0, z: 3.0565324}
+    tangent: {x: 0.096666336, y: 0, z: 2.8707666}
     roll: 0
-  - position: {x: 7.4653234, y: 0, z: 14.8703}
-    tangent: {x: 1.4160604, y: 0, z: 2.0677538}
+  - position: {x: -0.08805466, y: 0, z: 14.8703}
+    tangent: {x: 0, y: 0, z: 8.661051}
     roll: 0
-  - position: {x: 14.852964, y: 0, z: 11.377603}
-    tangent: {x: 1.6955013, y: 0, z: -2.386901}
+  - position: {x: -1.6217072, y: 0, z: 26.911749}
+    tangent: {x: -2, y: 0, z: 2}
     roll: 0
-  - position: {x: 16.831717, y: 0, z: 1.8254302}
-    tangent: {x: 4.081213, y: 0, z: -4.153554}
+  - position: {x: -22.00016, y: 0, z: 28.59174}
+    tangent: {x: -17.203094, y: 0, z: 0}
     roll: 0
-  - position: {x: 17.1951, y: 0, z: -10.630113}
-    tangent: {x: -3.816311, y: 0, z: -4.9711037}
+  - position: {x: -42.473568, y: 0, z: 27.300987}
+    tangent: {x: -2, y: 0, z: -2}
+    roll: 0
+  - position: {x: -44.115185, y: 0, z: 19.109156}
+    tangent: {x: 0, y: 0, z: -5}
+    roll: 0
+  - position: {x: -42.756798, y: 0, z: 10.917321}
+    tangent: {x: 2, y: 0, z: -2}
+    roll: 0
+  - position: {x: -27.005318, y: 0, z: 9.416088}
+    tangent: {x: 11.998163, y: 0, z: 0}
+    roll: 0
+  - position: {x: -10.8674755, y: 0, z: 7.5867963}
+    tangent: {x: 2, y: 0, z: -2}
+    roll: 0
+  - position: {x: -9.360432, y: 0, z: 3.9514093}
+    tangent: {x: 0.010834476, y: 0, z: -0.9999413}
+    roll: 0
+  - position: {x: -9.241163, y: 0, z: -11.550585}
+    tangent: {x: 0, y: 0, z: -2}
     roll: 0
 --- !u!1 &6909733221186834072
 GameObject:
@@ -117,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseChanger: {fileID: 5810502131741604487}
   retargeter: {fileID: 5196639584610486321}
-  useDebuger: 1
+  useDebuger: 0
 --- !u!1001 &6617559351983295734
 PrefabInstance:
   m_ObjectHideFlags: 0
