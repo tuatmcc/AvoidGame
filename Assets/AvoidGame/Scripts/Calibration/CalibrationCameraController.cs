@@ -15,7 +15,7 @@ namespace AvoidGame.Calibration
 
         private void Update()
         {
-            _virtualCameraOrbitalTransposer.m_XAxis.Value = 1;
+            _virtualCameraOrbitalTransposer.m_XAxis.Value = 2;
         }
     }
 }
