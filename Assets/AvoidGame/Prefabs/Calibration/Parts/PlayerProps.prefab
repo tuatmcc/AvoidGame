@@ -402,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 8932712762366909200, guid: 395f6560a4ed9148e9b4a6b7c4184d8b,
         type: 3}
       propertyPath: m_Name
-      value: Neocchi Variant
+      value: Neocchi Variant Calibration
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

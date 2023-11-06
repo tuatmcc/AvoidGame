@@ -462,9 +462,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 5020578203677651773}
-    m_Mid: {fileID: 9084345624193316750}
-    m_Tip: {fileID: 1167907495779096270}
+    m_Root: {fileID: 7669488719755152681}
+    m_Mid: {fileID: 6840310302934313981}
+    m_Tip: {fileID: 5740768506540768683}
     m_Target: {fileID: 6370259037410962074}
     m_Hint: {fileID: 8606045075700280043}
     m_TargetPositionWeight: 1
@@ -741,7 +741,7 @@ PrefabInstance:
     - target: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
         type: 3}
       propertyPath: m_Name
-      value: Neocchi Variant
+      value: Neocchi Variant Calibration
       objectReference: {fileID: 0}
     - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
         type: 3}
