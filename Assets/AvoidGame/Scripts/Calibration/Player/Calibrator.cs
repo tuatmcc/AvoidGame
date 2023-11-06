@@ -39,13 +39,21 @@ namespace AvoidGame.Calibration.Player
             var armLength = Mathf.Abs(leftWrist.X - rightWrist.X);
             var bodyHeight = Mathf.Abs(leftWrist.Y + rightWrist.Y - leftAnkle.Y - rightAnkle.Y);
 
-
-            _floorY = 1 - (leftHeel.Y + rightHeel.Y) * 0.5f;
-            _bodyMultiplier.x = -Mathf.Abs(ik.leftWrist.position.x - ik.rightWrist.position.x) / armLength;
-            _bodyMultiplier.y = Mathf.Abs(ik.leftElbow.position.y + ik.rightElbow.position.y -
-                                    ik.rightFoot.position.y + ik.leftFoot.position.y) /
-                                bodyHeight;
-            _bodyMultiplier.z = 0.5f;
+            if (armLength < 0.001f || bodyHeight < 0.001f)
+            {
+                Debug.LogWarning("Pose estimation might be wrong. Using default values.");
+                _floorY = 0f;
+                _bodyMultiplier = Vector3.one;
+            }
+            else
+            {
+                _floorY = 1 - (leftHeel.Y + rightHeel.Y) * 0.5f;
+                _bodyMultiplier.x = -Mathf.Abs(ik.leftWrist.position.x - ik.rightWrist.position.x) / armLength;
+                _bodyMultiplier.y = Mathf.Abs(ik.leftElbow.position.y + ik.rightElbow.position.y -
+                                        ik.rightFoot.position.y + ik.leftFoot.position.y) /
+                                    bodyHeight;
+                _bodyMultiplier.z = 0.5f;
+            }
 
             _playerInfo.BodyMultiplier = _bodyMultiplier;
             _playerInfo.FloorHeight = _floorY;

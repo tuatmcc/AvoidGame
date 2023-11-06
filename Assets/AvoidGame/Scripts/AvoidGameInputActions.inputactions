@@ -2,7 +2,7 @@
     "name": "AvoidGameInputActions",
     "maps": [
         {
-            "name": "UI",
+            "name": "Calibration",
             "id": "4fb481cd-ffd8-4666-baae-f69e6aedc344",
             "actions": [
                 {
@@ -15,9 +15,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ForceExit",
+                    "name": "Next",
                     "type": "Button",
-                    "id": "a7a00158-bc42-485e-bf67-27be131d85df",
+                    "id": "f47da66e-e3d1-48fc-8910-6100bc370bcd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -38,23 +38,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5693c848-5ef1-4058-8c74-a7ac54cfaa45",
-                    "path": "<Keyboard>/escape",
+                    "id": "b617e928-70be-4e72-b5a7-504493cde547",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ForceExit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "53db6135-ae7f-4046-9d88-db8567278b62",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ForceExit",
+                    "action": "Next",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

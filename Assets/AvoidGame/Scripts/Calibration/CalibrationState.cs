@@ -4,6 +4,7 @@ namespace AvoidGame.Calibration
     {
         Waiting,
         Calibrating,
+        Finishing,
         Finished
     }
 }

@@ -24,7 +24,7 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
     ""name"": ""AvoidGameInputActions"",
     ""maps"": [
         {
-            ""name"": ""UI"",
+            ""name"": ""Calibration"",
             ""id"": ""4fb481cd-ffd8-4666-baae-f69e6aedc344"",
             ""actions"": [
                 {
@@ -37,9 +37,9 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ForceExit"",
+                    ""name"": ""Next"",
                     ""type"": ""Button"",
-                    ""id"": ""a7a00158-bc42-485e-bf67-27be131d85df"",
+                    ""id"": ""f47da66e-e3d1-48fc-8910-6100bc370bcd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -60,23 +60,12 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5693c848-5ef1-4058-8c74-a7ac54cfaa45"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""b617e928-70be-4e72-b5a7-504493cde547"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ForceExit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""53db6135-ae7f-4046-9d88-db8567278b62"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ForceExit"",
+                    ""action"": ""Next"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -124,10 +113,10 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
     ],
     ""controlSchemes"": []
 }");
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-        m_UI_ForceExit = m_UI.FindAction("ForceExit", throwIfNotFound: true);
+        // Calibration
+        m_Calibration = asset.FindActionMap("Calibration", throwIfNotFound: true);
+        m_Calibration_Submit = m_Calibration.FindAction("Submit", throwIfNotFound: true);
+        m_Calibration_Next = m_Calibration.FindAction("Next", throwIfNotFound: true);
         // Global
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_ForceExit = m_Global.FindAction("ForceExit", throwIfNotFound: true);
@@ -189,59 +178,59 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Submit;
-    private readonly InputAction m_UI_ForceExit;
-    public struct UIActions
+    // Calibration
+    private readonly InputActionMap m_Calibration;
+    private List<ICalibrationActions> m_CalibrationActionsCallbackInterfaces = new List<ICalibrationActions>();
+    private readonly InputAction m_Calibration_Submit;
+    private readonly InputAction m_Calibration_Next;
+    public struct CalibrationActions
     {
         private @AvoidGameInputActions m_Wrapper;
-        public UIActions(@AvoidGameInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Submit => m_Wrapper.m_UI_Submit;
-        public InputAction @ForceExit => m_Wrapper.m_UI_ForceExit;
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public CalibrationActions(@AvoidGameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Submit => m_Wrapper.m_Calibration_Submit;
+        public InputAction @Next => m_Wrapper.m_Calibration_Next;
+        public InputActionMap Get() { return m_Wrapper.m_Calibration; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-        public void AddCallbacks(IUIActions instance)
+        public static implicit operator InputActionMap(CalibrationActions set) { return set.Get(); }
+        public void AddCallbacks(ICalibrationActions instance)
         {
-            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_CalibrationActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CalibrationActionsCallbackInterfaces.Add(instance);
             @Submit.started += instance.OnSubmit;
             @Submit.performed += instance.OnSubmit;
             @Submit.canceled += instance.OnSubmit;
-            @ForceExit.started += instance.OnForceExit;
-            @ForceExit.performed += instance.OnForceExit;
-            @ForceExit.canceled += instance.OnForceExit;
+            @Next.started += instance.OnNext;
+            @Next.performed += instance.OnNext;
+            @Next.canceled += instance.OnNext;
         }
 
-        private void UnregisterCallbacks(IUIActions instance)
+        private void UnregisterCallbacks(ICalibrationActions instance)
         {
             @Submit.started -= instance.OnSubmit;
             @Submit.performed -= instance.OnSubmit;
             @Submit.canceled -= instance.OnSubmit;
-            @ForceExit.started -= instance.OnForceExit;
-            @ForceExit.performed -= instance.OnForceExit;
-            @ForceExit.canceled -= instance.OnForceExit;
+            @Next.started -= instance.OnNext;
+            @Next.performed -= instance.OnNext;
+            @Next.canceled -= instance.OnNext;
         }
 
-        public void RemoveCallbacks(IUIActions instance)
+        public void RemoveCallbacks(ICalibrationActions instance)
         {
-            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_CalibrationActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IUIActions instance)
+        public void SetCallbacks(ICalibrationActions instance)
         {
-            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_CalibrationActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_CalibrationActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public UIActions @UI => new UIActions(this);
+    public CalibrationActions @Calibration => new CalibrationActions(this);
 
     // Global
     private readonly InputActionMap m_Global;
@@ -288,10 +277,10 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
         }
     }
     public GlobalActions @Global => new GlobalActions(this);
-    public interface IUIActions
+    public interface ICalibrationActions
     {
         void OnSubmit(InputAction.CallbackContext context);
-        void OnForceExit(InputAction.CallbackContext context);
+        void OnNext(InputAction.CallbackContext context);
     }
     public interface IGlobalActions
     {
