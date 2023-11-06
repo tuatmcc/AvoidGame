@@ -21,7 +21,7 @@ namespace AvoidGame
         [SerializeField] private List<SceneTransitionStructure> scenes;
 
         private AvoidGameInputActions _inputActions;
-
+        private CancellationTokenSource _sceneLoadCts;
 
         private void Awake()
         {
@@ -64,7 +64,8 @@ namespace AvoidGame
         /// <param name="gameState"></param>
         public void OnGameStateChanged(GameState gameState)
         {
-            LoadSceneAsync(gameState.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
+            _sceneLoadCts = CancellationTokenSource.CreateLinkedTokenSource(this.GetCancellationTokenOnDestroy());
+            LoadSceneAsync(gameState.ToString(), _sceneLoadCts.Token).Forget();
         }
 
         /// <summary>
@@ -79,12 +80,23 @@ namespace AvoidGame
             // Start unloading current scene and loading next scene
             var loadAsyncResult = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
             loadAsyncResult.allowSceneActivation = false;
-            // Wait for at least loadAtLeast seconds
-            await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
-            // Wait for scene loading end
-            loadAsyncResult.allowSceneActivation = true;
-            await loadAsyncResult;
-            loadingCanvas.enabled = false;
+            try
+            {
+                // Wait for at least loadAtLeast seconds
+                await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
+                // Wait for scene loading end
+                loadAsyncResult.allowSceneActivation = true;
+                await loadAsyncResult;
+                loadingCanvas.enabled = false;
+            }
+            catch (Exception e)
+            {
+                // even if loading is cancelled, scene loading should be finished
+                // so that the scene loading will not remain in the background
+                loadAsyncResult.allowSceneActivation = true;
+                await loadAsyncResult;
+                loadingCanvas.enabled = false;
+            }
         }
 
         /// <summary>
@@ -96,16 +108,25 @@ namespace AvoidGame
         {
         }
 
+        /// <summary>
+        /// Back to Title and destroy this object
+        /// </summary>
         public void ForceExit()
         {
             Debug.Log("ForceExit");
-            // to title and destroy this
+            // immediately finish scene loading (if not finished)
+            _sceneLoadCts?.Cancel();
+            // UniTask is not connected to MonoBehaviour lifecycle
             UniTask.Create(async () =>
             {
+                // avoid double force exit
+                _inputActions.Disable();
+                // remove OnGameStateChanged event before changing GameState
                 _gameStateManager.OnGameStateChanged -= OnGameStateChanged;
-                SceneManager.sceneLoaded -= OnSceneLoaded;
                 _gameStateManager.GameState = GameState.Title;
-                await LoadSceneAsync("Title", this.GetCancellationTokenOnDestroy());
+                // remove OnSceneLoaded event before loading scene
+                SceneManager.sceneLoaded -= OnSceneLoaded;
+                await SceneManager.LoadSceneAsync(SceneName.Title.ToString());
                 Destroy(gameObject);
             }).Forget();
         }
