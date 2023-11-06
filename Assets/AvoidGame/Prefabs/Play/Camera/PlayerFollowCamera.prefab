@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7195153730567401850}
   - component: {fileID: 8726170630835567449}
+  - component: {fileID: 2882045334222541812}
   m_Layer: 0
   m_Name: PlayerFollowCamera
   m_TagString: Untagged
@@ -72,6 +73,21 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2601174924995994041}
+--- !u!114 &2882045334222541812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037797355157223621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Offset: {x: 0, y: 1, z: -1}
+  m_ApplyAfter: 1
+  m_PreserveComposition: 0
 --- !u!1 &3481990582708644642
 GameObject:
   m_ObjectHideFlags: 0
