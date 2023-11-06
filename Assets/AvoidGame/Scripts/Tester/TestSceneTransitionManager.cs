@@ -116,9 +116,10 @@ namespace AvoidGame.Tester
         {
             _gameStateManager.UnlockGameState();
             // テスト時に無効化すべきGameObjectを無効に
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
+            foreach (var obj in GameObject.FindObjectsOfType<SceneTransitionManager>())
             {
-                Destroy(obj);
+                // to avoid object duplication, destroy, not disable
+                Destroy(obj.gameObject);
             }
         }
     }
