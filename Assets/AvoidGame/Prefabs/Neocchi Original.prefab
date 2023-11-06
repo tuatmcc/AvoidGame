@@ -178,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0066ebaced105dafc97eb4145d1809eb,
         type: 3}
       propertyPath: m_Name
-      value: Neocchi
+      value: Neocchi Original
       objectReference: {fileID: 0}
     - target: {fileID: 6868716418057165105, guid: 0066ebaced105dafc97eb4145d1809eb,
         type: 3}

@@ -6,7 +6,7 @@ using Zenject;
 namespace AvoidGame.Calibration.Player
 {
     [RequireComponent(typeof(Calibrator))]
-    public class Player : MonoBehaviour
+    public class CalibrationPlayer : MonoBehaviour
     {
         [Inject] private IMediaPipeManager _mediaPipeManager;
         [Inject] private ICalibrationStateManager _calibrationStateManager;

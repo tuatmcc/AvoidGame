@@ -62,7 +62,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8297626063578150042}
+  - {fileID: 1790421906739677912}
   - {fileID: 2642020980880163104}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 0}
---- !u!1001 &6401287292054663371
+--- !u!1001 &8865898572451326040
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -104,91 +104,69 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5418159343375859727}
     m_Modifications:
-    - target: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
-        type: 3}
-      propertyPath: m_Name
-      value: Neocchi
-      objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+    - target: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7537605582440708154, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
+        type: 3}
+      propertyPath: m_Name
+      value: Neocchi Variant Play
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8042577753042114245}
-  m_SourcePrefab: {fileID: 100100000, guid: 1b40d200e6a1d71ba8c84278db3f1242, type: 3}
---- !u!4 &8297626063578150042 stripped
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 88b2a072e6fd640be9e269fb75e2e3b8, type: 3}
+--- !u!4 &1790421906739677912 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3166846449803248721, guid: 1b40d200e6a1d71ba8c84278db3f1242,
+  m_CorrespondingSourceObject: {fileID: 7192570743644840576, guid: 88b2a072e6fd640be9e269fb75e2e3b8,
     type: 3}
-  m_PrefabInstance: {fileID: 6401287292054663371}
+  m_PrefabInstance: {fileID: 8865898572451326040}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8677528687792975392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2357976068906458859, guid: 1b40d200e6a1d71ba8c84278db3f1242,
-    type: 3}
-  m_PrefabInstance: {fileID: 6401287292054663371}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8042577753042114245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8677528687792975392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cf7f56d95702f746869fc39277560ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
