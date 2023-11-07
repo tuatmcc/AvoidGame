@@ -7,16 +7,16 @@ namespace AvoidGame
     /// </summary>
     public class AudioManager : MonoBehaviour, IAudioManager
     {
-        [SerializeField] AudioSource audioSource;
+        public AudioSource audioSource;
         
         public void PlaySe(AudioClip audioClip)
         {
             audioSource.PlayOneShot(audioClip);
         }
 
-        public void PlayBGM(AudioClip audioClip)
+        public void PlayBGM(AudioClip audioClip, bool loop)
         {
-            audioSource.loop = true;
+            audioSource.loop = loop;
             audioSource.clip = audioClip;
             audioSource.Play();
         }
