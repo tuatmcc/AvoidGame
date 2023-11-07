@@ -1,3 +1,4 @@
+using AvoidGame.Play;
 using AvoidGame.TimeRecorder;
 using System;
 using System.Collections;
@@ -10,13 +11,13 @@ using Zenject;
 /// </summary>
 namespace AvoidGame.Result
 {
-    public class ResultSceneManager : MonoBehaviour
+    public class ResultSceneManager : IInitializable
     {
         public event Action<ResultSceneSubState> OnSubStateChanged;
 
         [Inject] ITimeRecordable _timeRecordable;
 
-        [Inject] TimeManager _timeManager;
+        [Inject] PlayerInfo _playerInfo;
 
         private List<long> _records;
 
@@ -33,25 +34,15 @@ namespace AvoidGame.Result
 
         private ResultSceneSubState _resultSceneSubState = ResultSceneSubState.LoadingRecord;
 
-        private void Awake()
+        public void Initialize()
         {
             _records = _timeRecordable.GetTimeRanking();
             _records.Sort();
         }
 
-        void Start()
-        {
-        
-        }
-
-        void Update()
-        {
-
-        }
-
         public (List<long> timeList, long playerTime) GetTimeData()
         {
-            return (_records, _timeManager.MainTimer);
+            return (_records, _playerInfo.Time);
         }
     }
 }

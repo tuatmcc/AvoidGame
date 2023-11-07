@@ -22,7 +22,6 @@ namespace AvoidGame.Play.Items
             if(!used)
             {
                 used = true;
-                Debug.Log($"Hit! : {-decelerate:0.0}");
                 _speedManager.AddPlayerSpeed(-decelerate);
             }
         }

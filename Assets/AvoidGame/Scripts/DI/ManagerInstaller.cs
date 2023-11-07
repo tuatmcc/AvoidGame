@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,17 +9,17 @@ namespace AvoidGame.DI
 {
     public class ManagerInstaller : MonoInstaller
     {
-        [SerializeField] private GameStateManager _gameStateManager;
-        [SerializeField] private TimeManager _timeManager;
-
+        [SerializeField] AudioManager audioManager;
         public override void InstallBindings()
         {
-            Container.Bind<GameStateManager>()
-                .FromInstance(_gameStateManager)
+            Container.Bind(typeof(GameStateManager), typeof(IInitializable), typeof(IDisposable))
+                .To<GameStateManager>()
+                .FromNew()
                 .AsSingle();
 
-            Container.Bind<TimeManager>()
-                .FromInstance(_timeManager)
+            Container.Bind<IAudioManager>()
+                .To<AudioManager>()
+                .FromInstance(audioManager)
                 .AsSingle();
         }
     }

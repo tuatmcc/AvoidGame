@@ -1,15 +1,12 @@
-using AvoidGame.Play;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.DI
+namespace AvoidGame.Play.DI
 {
     public class PlaySceneManagerInstaller : MonoInstaller
     {
         [SerializeField] PlaySceneManager playSceneManager;
-        [SerializeField] SpeedManager speedManager;
 
         public override void InstallBindings()
         {
@@ -17,8 +14,9 @@ namespace AvoidGame.DI
                 .FromInstance(playSceneManager)
                 .AsSingle();
 
-            Container.Bind<SpeedManager>()
-                .FromInstance(speedManager)
+            Container.Bind(typeof(SpeedManager), typeof(IInitializable), typeof(IDisposable))
+                .To<SpeedManager>()
+                .FromNew()
                 .AsSingle();
         }
     }

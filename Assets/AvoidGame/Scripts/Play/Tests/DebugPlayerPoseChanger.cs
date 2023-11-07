@@ -23,6 +23,7 @@ namespace AvoidGame.Play.Test
 
         void Start()
         {
+            transform.Rotate(0f, 180f, 0f);
             _animator = GetComponent<Animator>();
             _animator.SetInteger("Pose", 0);
         }

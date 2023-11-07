@@ -1,4 +1,5 @@
 using System;
+using AvoidGame.Interface;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +8,7 @@ namespace AvoidGame
     /// <summary>
     /// ゲームの進行管理
     /// </summary>
-    public class GameStateManager : MonoBehaviour
+    public class GameStateManager : IGameStateManager, IInitializable, IDisposable
     {
         /// <summary>
         /// Stateが変わるごとに呼ばれる
@@ -22,7 +23,11 @@ namespace AvoidGame
             get => _gameState;
             set
             {
-                if (!gameStateLocked)
+                if (gameStateLocked)
+                {
+                    Debug.LogWarning($"GameState is locked to {_gameState}");
+                }
+                else
                 {
                     _gameState = value;
                     OnGameStateChanged?.Invoke(_gameState);
@@ -32,16 +37,15 @@ namespace AvoidGame
 
         private GameState _gameState;
 
-        [Inject] private TimeManager _timeManager;
-
-        private void Awake()
+        public void Initialize()
         {
             GameState = GameState.Title;
+            OnGameStateChanged += ChangeGameState;
         }
 
-        private void Start()
+        public void Dispose()
         {
-            OnGameStateChanged += ChangeGameState;
+            OnGameStateChanged -= ChangeGameState;
         }
 
         /// <summary>
@@ -55,13 +59,18 @@ namespace AvoidGame
             Debug.Log($"登録されたイベント数 : {OnGameStateChanged.GetInvocationList().Length}");
         }
 
+        public void MoveToNextState()
+        {
+            ChangeGameState(GameState + 1);
+        }
+
         /// <summary>
         /// GameStateをロックする
         /// </summary>
         /// <returns></returns>
         public bool LockGameState(GameState gameState)
         {
-            if(gameStateLocked) return false;
+            if (gameStateLocked) return false;
             GameState = gameState;
             gameStateLocked = true;
             return true;

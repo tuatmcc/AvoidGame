@@ -11,12 +11,16 @@ namespace AvoidGame.Calibration
     /// <summary>
     /// Holds and Controls CalibrationState. Behaves like a MonoBehaviour.
     /// </summary>
-    public sealed class CalibrationStateManager : ICalibrationStateManager, IInitializable, IDisposable
+    public class CalibrationStateManager : ICalibrationStateManager, IInitializable, IDisposable
     {
         [Inject] private GameStateManager _gameStateManager;
         [Inject] private IMediaPipeManager _mediaPipeManager;
 
         private CalibrationState _state = CalibrationState.Waiting;
+
+        public float CalibratingDuration { get; } = 5f;
+        public float FinishingDuration { get; } = 2f;
+        public float FinishedDuration { get; } = 10f;
 
         public CalibrationState State
         {
@@ -32,7 +36,6 @@ namespace AvoidGame.Calibration
         public Action<CalibrationState> OnCalibrationStateChanged { get; set; }
 
         private CancellationTokenSource _cts;
-        private const int CalibrationTime = 5;
 
 
         public void Initialize()
@@ -53,14 +56,16 @@ namespace AvoidGame.Calibration
 
             // Start calibration.
             State = CalibrationState.Calibrating;
-            _cts = new CancellationTokenSource();
-            await UniTask.Delay(TimeSpan.FromSeconds(CalibrationTime), cancellationToken: _cts.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(CalibratingDuration), cancellationToken: _cts.Token);
+
+            // Wait for finishing.
+            State = CalibrationState.Finishing;
+            await UniTask.Delay(TimeSpan.FromSeconds(FinishingDuration), cancellationToken: _cts.Token);
 
             // Finish calibration.
             State = CalibrationState.Finished;
-
-            await UniTask.Delay(TimeSpan.FromSeconds(5), cancellationToken: _cts.Token);
-            _gameStateManager.GameState = GameState.CountDown;
+            await UniTask.Delay(TimeSpan.FromSeconds(FinishedDuration), cancellationToken: _cts.Token);
+            _gameStateManager.GameState = GameState.Play;
         }
 
         public void Dispose()

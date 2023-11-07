@@ -1,97 +1,125 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Threading;
+using AvoidGame.Calibration;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
-/// <summary>
-/// シーン遷移を管理する(テスト用)
-/// </summary>
+
 namespace AvoidGame.Tester
 {
-    public class TestSceneTransitionManager : SceneTransitionManager
+    /// <summary>
+    /// シーン遷移を管理する(テスト用)
+    /// </summary>
+    public class TestSceneTransitionManager : MonoBehaviour, ISceneTransitionManager
     {
-        [SerializeField] private SceneName _from;
-        [SerializeField] private SceneName _to;
-        [SerializeField] private bool skipCalibration = false;
+        [Inject] private GameStateManager _gameStateManager;
 
-        override public void Awake()
+        [SerializeField] private float loadAtLeast = 0.5f;
+        [SerializeField] private Canvas loadingCanvas;
+        [SerializeField] private SceneName from;
+        [SerializeField] private SceneName to;
+        [SerializeField] private bool skipCalibration = false;
+        [SerializeField] private List<SceneTransitionStructure> scenes;
+
+        private AvoidGameInputActions _inputActions;
+
+
+        private void Awake()
         {
-            base.Awake();
-            // テスト時に無効化すべきGameObjectを無効に
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
-            {
-                obj.SetActive(false);
-            }
+            _inputActions = new AvoidGameInputActions();
+            loadingCanvas.enabled = false;
+
             // GameStateを開始Stateに設定してロック
             foreach (SceneTransitionStructure s in scenes)
             {
-                if(s.sceneName == _from)
+                if (s.sceneName == from)
                 {
                     _gameStateManager.LockGameState(s.targetState);
                     break;
                 }
             }
-            
         }
 
-        override public void Start()
+        private void OnEnable()
         {
-            base.Start();
-            StartCoroutine(LoadScene(_from.ToString()));
+            _inputActions.Enable();
         }
 
-        override public void Update()
+        public void Start()
         {
-            base.Update();
-            if(_gameStateManager.GameState == GameState.Calibration && Input.GetKeyDown(KeyCode.Return))
+            _gameStateManager.OnGameStateChanged += OnGameStateChanged;
+            SceneManager.sceneLoaded += SceneLoaded;
+            // Escでタイトルに戻る
+            _inputActions.Global.ForceExit.started += (_) => ForceExit();
+            LoadSceneAsync(from.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private void OnDisable()
+        {
+            _inputActions.Disable();
+        }
+
+        private void OnDestroy()
+        {
+            _gameStateManager.OnGameStateChanged -= OnGameStateChanged;
+            SceneManager.sceneLoaded -= SceneLoaded;
+            _inputActions.Dispose();
+        }
+
+        public void OnGameStateChanged(GameState gameState)
+        {
+            foreach (SceneTransitionStructure s in scenes)
             {
-                _gameStateManager.GameState = GameState.CountDown;
-            }
-        }
-
-        protected override private void SceneTransition(GameState gameState)
-        {
-            foreach(SceneTransitionStructure s in scenes)
-            {
-                if(s.targetState == gameState)
+                if (s.targetState == gameState)
                 {
-                    if(s.sceneName == SceneName.Calibration && skipCalibration)
+                    if (s.sceneName == SceneName.Calibration && skipCalibration)
                     {
-                        _gameStateManager.LockGameState(GameState.CountDown);
+                        _gameStateManager.LockGameState(GameState.Play);
                         return;
                     }
-                    if(!(_from <= s.sceneName && s.sceneName <= _to))
+
+                    if (!(from <= s.sceneName && s.sceneName <= to))
                     {
-                        Debug.Log($"Test finished at : {_to}");
+                        Debug.Log($"Test finished at : {to}");
                         return;
                     }
-                    StartCoroutine(LoadScene(s.sceneName.ToString()));
+
+                    LoadSceneAsync(s.sceneName.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
                 }
             }
         }
 
-        protected override private IEnumerator LoadScene(string sceneName)
+        private async UniTask LoadSceneAsync(string sceneName, CancellationToken token)
         {
-            float waited = 0f;
-            if(sceneName == _from.ToString())
-            {
-                waited = loadAtLeast;
-            }
-            _loadingCanvas.enabled = true;
-            while(waited < loadAtLeast)
-            {
-                yield return new WaitForSeconds(0.1f);
-                waited += 0.1f;
-            }
-            SceneManager.LoadSceneAsync(sceneName);
+            loadingCanvas.enabled = true;
+            // Start unloading current scene and loading next scene
+            var loadAsyncResult = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            loadAsyncResult.allowSceneActivation = false;
+            // Wait for at least loadAtLeast seconds
+            await UniTask.Delay(TimeSpan.FromSeconds(loadAtLeast), cancellationToken: token);
+            // Wait for scene loading end
+            loadAsyncResult.allowSceneActivation = true;
+            await loadAsyncResult;
+            loadingCanvas.enabled = false;
         }
 
-        protected override private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        public void ForceExit()
         {
-            base.SceneLoaded(scene, loadSceneMode);
-            foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PassiveInTest"))
+            Debug.Log("Force Exit");
+            // back to title
+            _gameStateManager.LockGameState(GameState.Title);
+        }
+
+        private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            _gameStateManager.UnlockGameState();
+            // テスト時に無効化すべきGameObjectを無効に
+            foreach (var obj in GameObject.FindObjectsOfType<SceneTransitionManager>())
             {
-                obj.SetActive(false);
+                // to avoid object duplication, destroy, not disable
+                Destroy(obj.gameObject);
             }
         }
     }
