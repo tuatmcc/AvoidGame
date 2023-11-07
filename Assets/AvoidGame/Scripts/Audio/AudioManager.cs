@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace AvoidGame
+namespace AvoidGame.Audio
 {
     /// <summary>
     /// 音声の管理(AudioSource)
     /// </summary>
     public class AudioManager : MonoBehaviour, IAudioManager
     {
-        public AudioSource audioSource;
+        public AudioSource audioSource { get; set; }
         
         public void PlaySe(AudioClip audioClip)
         {
