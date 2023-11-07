@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AvoidGame
+namespace AvoidGame.Audio
 {
     /// <summary>
     /// 音声の管理(AudioSource)
