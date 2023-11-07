@@ -7,7 +7,7 @@ namespace AvoidGame.Audio
     /// </summary>
     public class AudioManager : MonoBehaviour, IAudioManager
     {
-        public AudioSource audioSource;
+        public AudioSource audioSource { get; set; }
         
         public void PlaySe(AudioClip audioClip)
         {
