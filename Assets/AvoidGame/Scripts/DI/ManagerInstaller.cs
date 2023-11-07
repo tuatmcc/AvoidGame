@@ -9,11 +9,17 @@ namespace AvoidGame.DI
 {
     public class ManagerInstaller : MonoInstaller
     {
+        [SerializeField] AudioManager audioManager;
         public override void InstallBindings()
         {
             Container.Bind(typeof(GameStateManager), typeof(IInitializable), typeof(IDisposable))
                 .To<GameStateManager>()
                 .FromNew()
+                .AsSingle();
+
+            Container.Bind<IAudioManager>()
+                .To<AudioManager>()
+                .FromInstance(audioManager)
                 .AsSingle();
         }
     }
