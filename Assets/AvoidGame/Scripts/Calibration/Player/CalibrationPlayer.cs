@@ -39,16 +39,23 @@ namespace AvoidGame.Calibration.Player
                     _poseAccumulator.AccumulateLandmarks(_mediaPipeManager.LandmarkData);
                     break;
                 }
-                case CalibrationState.Finishing:
+                case CalibrationState.Dissolving:
                 {
-                    if (_mulitplierCalculated) return;
-                    calibrator.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
-                    _mulitplierCalculated = true;
+                    if (!_mulitplierCalculated)
+                    {
+                        calibrator.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
+                        _mulitplierCalculated = true;
+                    }
+
                     break;
                 }
                 case CalibrationState.Finished:
                 {
                     calibrator.Retarget(_mediaPipeManager.LandmarkData);
+                    break;
+                }
+                case CalibrationState.Transitioning:
+                {
                     break;
                 }
                 default:

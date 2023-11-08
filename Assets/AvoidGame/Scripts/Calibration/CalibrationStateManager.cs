@@ -19,8 +19,9 @@ namespace AvoidGame.Calibration
         private CalibrationState _state = CalibrationState.Waiting;
 
         public float CalibratingDuration { get; } = 5f;
-        public float FinishingDuration { get; } = 2f;
-        public float FinishedDuration { get; } = 10f;
+        public float FinishedDuration { get; } = 60f;
+
+        public float TransitioningDuration { get; } = 3f;
 
         public CalibrationState State
         {
@@ -29,7 +30,7 @@ namespace AvoidGame.Calibration
             {
                 _state = value;
                 OnCalibrationStateChanged?.Invoke(_state);
-                Debug.Log($"CSManager: CalibrationState: {_state}");
+                Debug.Log($"CalibrationState Changed: {_state}");
             }
         }
 
@@ -58,13 +59,21 @@ namespace AvoidGame.Calibration
             State = CalibrationState.Calibrating;
             await UniTask.Delay(TimeSpan.FromSeconds(CalibratingDuration), cancellationToken: _cts.Token);
 
-            // Wait for finishing.
-            State = CalibrationState.Finishing;
-            await UniTask.Delay(TimeSpan.FromSeconds(FinishingDuration), cancellationToken: _cts.Token);
 
             // Finish calibration.
+            // if (State != CalibrationState.Finished)
+            // {
             State = CalibrationState.Finished;
+            // }
+
             await UniTask.Delay(TimeSpan.FromSeconds(FinishedDuration), cancellationToken: _cts.Token);
+
+            // if (State != CalibrationState.Transitioning)
+            // {
+            State = CalibrationState.Transitioning;
+            // }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(TransitioningDuration), cancellationToken: _cts.Token);
             _gameStateManager.GameState = GameState.Play;
         }
 

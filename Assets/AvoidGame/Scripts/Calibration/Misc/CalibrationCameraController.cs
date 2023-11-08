@@ -4,13 +4,15 @@ using Cinemachine;
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.Calibration
+namespace AvoidGame.Calibration.Misc
 {
     public class CalibrationCameraController : MonoBehaviour
     {
         [Inject] private ICalibrationStateManager _calibrationStateManager;
         [SerializeField] private CinemachineVirtualCamera virtualOrbitalCamera;
         [SerializeField] private CinemachineVirtualCamera virtualFocusCamera;
+        [SerializeField] private CinemachineVirtualCamera virtualFinalCamera;
+
         private CinemachineOrbitalTransposer _virtualCameraOrbitalTransposer;
 
         private void Awake()
@@ -22,7 +24,7 @@ namespace AvoidGame.Calibration
 
         private void Update()
         {
-            if (_calibrationStateManager.State == CalibrationState.Finishing) return;
+            if (_calibrationStateManager.State == CalibrationState.Dissolving) return;
             _virtualCameraOrbitalTransposer.m_XAxis.Value += Time.deltaTime * 50;
         }
 
@@ -34,15 +36,17 @@ namespace AvoidGame.Calibration
                     break;
                 case CalibrationState.Calibrating:
                     break;
-                case CalibrationState.Finishing:
+                case CalibrationState.Dissolving:
                     virtualFocusCamera.Priority = 10;
                     virtualOrbitalCamera.Priority = 0;
                     break;
                 case CalibrationState.Finished:
                     virtualFocusCamera.Priority = 0;
                     virtualOrbitalCamera.Priority = 10;
-                    _virtualCameraOrbitalTransposer.m_XAxis.Value = 0;
-                    // centerize camera
+                    break;
+                case CalibrationState.Transitioning:
+                    virtualOrbitalCamera.Priority = 0;
+                    virtualFinalCamera.Priority = 10;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
