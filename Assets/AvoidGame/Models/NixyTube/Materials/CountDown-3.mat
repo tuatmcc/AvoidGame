@@ -95,11 +95,14 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _Emmision: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 50
+    - _GlowDown: 0
+    - _GlowUp: 1
+    - _Intensity: 0
     - _MaxIntensity: 50
     - _Metallic: 0
     - _Mode: 0

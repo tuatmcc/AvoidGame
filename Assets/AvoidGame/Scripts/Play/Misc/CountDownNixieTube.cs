@@ -20,7 +20,8 @@ namespace AvoidGame.Play.Misc
 
         private void UpdateCount(int count)
         {
-            if (count == 3)
+            // NixieTube Needs pre-transition before 3, 2, 1, 0, so animation was created with 4 seconds.
+            if (count == 4)
                 animation.Play();
         }
     }
