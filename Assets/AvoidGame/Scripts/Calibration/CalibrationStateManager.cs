@@ -111,7 +111,7 @@ namespace AvoidGame.Calibration
         private async UniTask StartTransitionAsync(CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(TransitioningDuration), cancellationToken: token);
-            _gameStateManager.GameState = GameState.Title;
+            _gameStateManager.GameState++;
         }
 
         private async UniTask StartCalibratingAsync(CancellationToken token)
