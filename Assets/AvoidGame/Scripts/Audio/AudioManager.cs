@@ -14,11 +14,12 @@ namespace AvoidGame.Audio
             audioSource.PlayOneShot(audioClip);
         }
 
-        public void PlayBGM(AudioClip audioClip, bool loop)
+        public void PlaySeNotOverlap(AudioClip audioClip)
         {
-            audioSource.loop = loop;
-            audioSource.clip = audioClip;
-            audioSource.Play();
+            if (audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(audioClip);
+            }
         }
     }
 }
