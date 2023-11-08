@@ -60,6 +60,7 @@ namespace AvoidGame.Play
                 count--;
             }
 
+            OnCountChanged?.Invoke(count);
             State = PlaySceneState.Playing;
         }
 
