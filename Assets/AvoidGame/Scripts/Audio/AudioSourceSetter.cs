@@ -10,12 +10,12 @@ namespace AvoidGame.Audio
     /// </summary>
     public class AudioSourceSetter : MonoBehaviour
     {
-        [SerializeField] AudioSource source;
+        [SerializeField] AudioSource seSource;
         [Inject] IAudioManager audioManager;
 
         private void Awake()
         {
-            audioManager.audioSource = source;
+            audioManager.audioSource = seSource;
         }
     }
 }
