@@ -11,7 +11,7 @@ namespace AvoidGame.Play.Misc
     {
         [Inject] private PlaySceneManager _playSceneManager;
 
-        [SerializeField] private Animation animation;
+        [SerializeField] private Animation countdownAnimation;
 
         private void Start()
         {
@@ -22,7 +22,7 @@ namespace AvoidGame.Play.Misc
         {
             // NixieTube Needs pre-transition before 3, 2, 1, 0, so animation was created with 4 seconds.
             if (count == 4)
-                animation.Play();
+                countdownAnimation.Play();
         }
     }
 }
