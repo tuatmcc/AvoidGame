@@ -22,7 +22,7 @@ namespace AvoidGame.Play
             var space = path.PathLength / (itemCount + 1);
             for (var i = 0; i < itemCount; i++)
             {
-                var item = Instantiate(itemPatterns[Random.Range(0, itemPatterns.Count - 1)].gameObject);
+                var item = Instantiate(itemPatterns[Random.Range(0, itemPatterns.Count)].gameObject);
                 var cart = item.GetComponent<CinemachineDollyCart>();
                 cart.m_Position = space * (i + 1);
                 cart.m_Path = path;

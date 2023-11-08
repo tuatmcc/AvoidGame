@@ -185,6 +185,7 @@ MonoBehaviour:
   path: {fileID: 0}
   itemPatterns:
   - {fileID: 8731537071489245469, guid: c8c9182fb09117744a19d5a47b1b76a8, type: 3}
+  - {fileID: 5522722194394504988, guid: 9f880d843ed531446b365c32b91453f0, type: 3}
   itemCount: 15
 --- !u!1001 &5921565737298884236
 PrefabInstance:
