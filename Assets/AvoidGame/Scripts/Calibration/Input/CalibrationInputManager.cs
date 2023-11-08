@@ -1,4 +1,3 @@
-using System;
 using AvoidGame.Calibration.Interface;
 using UnityEngine;
 using Zenject;
@@ -19,24 +18,33 @@ namespace AvoidGame.Calibration.Input
 
         private void Start()
         {
-            _inputActions.Calibration.Submit.started += (_) => { _gameStateManager.GameState += 1; };
-            _inputActions.Calibration.Next.started += (_) =>
-            {
-                if (_calibrationStateManager.State ==
-                    (CalibrationState)(Enum.GetValues(typeof(CalibrationState)).Length - 1))
-                {
-                    _gameStateManager.GameState += 1;
-                    return;
-                }
-
-                _calibrationStateManager.State += 1;
-            };
+            // Next Game State
+            _inputActions.Calibration.Submit.started += HandleSubmit;
+            // Next Calibration State
+            _inputActions.Calibration.Next.started += HandleNext;
         }
 
         private void OnDestroy()
         {
             _inputActions.Disable();
             _inputActions.Dispose();
+        }
+
+        private void HandleNext(UnityEngine.InputSystem.InputAction.CallbackContext _)
+        {
+            if (_calibrationStateManager.State == CalibrationState.Transitioning)
+            {
+                _gameStateManager.GameState += 1;
+            }
+            else
+            {
+                _calibrationStateManager.State += 1;
+            }
+        }
+
+        private void HandleSubmit(UnityEngine.InputSystem.InputAction.CallbackContext _)
+        {
+            _gameStateManager.GameState += 1;
         }
     }
 }

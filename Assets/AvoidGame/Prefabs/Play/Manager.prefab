@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitForCountdown: 0
-  countdown: 3
+  countdown: 5
   waitAfterFinished: 1
 --- !u!114 &6879209010887958034
 MonoBehaviour:
