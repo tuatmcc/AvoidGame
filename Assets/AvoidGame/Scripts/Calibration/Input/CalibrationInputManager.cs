@@ -32,11 +32,7 @@ namespace AvoidGame.Calibration.Input
 
         private void HandleNext(UnityEngine.InputSystem.InputAction.CallbackContext _)
         {
-            if (_calibrationStateManager.State == CalibrationState.Transitioning)
-            {
-                _gameStateManager.GameState += 1;
-            }
-            else
+            if (_calibrationStateManager.State != CalibrationState.Transitioning)
             {
                 _calibrationStateManager.State += 1;
             }
