@@ -95,6 +95,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8298667762238585483, guid: 4ce29cd0124255c458cd9362d3084185,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298667762238585483, guid: 4ce29cd0124255c458cd9362d3084185,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298667762238585483, guid: 4ce29cd0124255c458cd9362d3084185,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[10]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298667762238585483, guid: 4ce29cd0124255c458cd9362d3084185,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[17]
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -107,7 +127,51 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8349465640320757878}
+    - targetCorrespondingSourceObject: {fileID: 2357976068906458859, guid: 4ce29cd0124255c458cd9362d3084185,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7402892460808307505}
+    - targetCorrespondingSourceObject: {fileID: 777013786032048986, guid: 4ce29cd0124255c458cd9362d3084185,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3139592384935620403}
   m_SourcePrefab: {fileID: 100100000, guid: 4ce29cd0124255c458cd9362d3084185, type: 3}
+--- !u!95 &3488616331511884786 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9012488755130867243, guid: 4ce29cd0124255c458cd9362d3084185,
+    type: 3}
+  m_PrefabInstance: {fileID: 5582428153653196249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4490667758531645266 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8298667762238585483, guid: 4ce29cd0124255c458cd9362d3084185,
+    type: 3}
+  m_PrefabInstance: {fileID: 5582428153653196249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5165704912778493571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 777013786032048986, guid: 4ce29cd0124255c458cd9362d3084185,
+    type: 3}
+  m_PrefabInstance: {fileID: 5582428153653196249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &3139592384935620403
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5165704912778493571}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d80bd6e925d38d003a7d1678ad20c139, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: d80bd6e925d38d003a7d1678ad20c139, type: 2}
+  - {fileID: 7400000, guid: 2d7922517bf8deb638e9ad363c716a3d, type: 2}
+  - {fileID: 7400000, guid: d80bd6e925d38d003a7d1678ad20c139, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &7388756369905136008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3166846449803248721, guid: 4ce29cd0124255c458cd9362d3084185,
@@ -132,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75c20c9f1fb9674dbc6090f9f7a73f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 0}
 --- !u!114 &8349465640320757878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +209,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad579c32090b4aa458e761e9c5778018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 3488616331511884786}
+--- !u!114 &7402892460808307505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7908868957496011570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834cf772f8f847dcb68d76a3857d2c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  face: {fileID: 4490667758531645266}
+  openEyes: {fileID: 7400000, guid: a8a28da3e37f1d7abaaee56b4c3d8614, type: 2}
+  closeEyes: {fileID: 7400000, guid: d80bd6e925d38d003a7d1678ad20c139, type: 2}
+  disappointed: {fileID: 7400000, guid: 2d7922517bf8deb638e9ad363c716a3d, type: 2}
+  pleased: {fileID: 0}
+  faceAnimation: {fileID: 3139592384935620403}

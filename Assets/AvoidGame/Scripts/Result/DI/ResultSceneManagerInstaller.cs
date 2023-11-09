@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using AvoidGame.Result.Interface;
 using Zenject;
 
 namespace AvoidGame.Result.DI
 {
     public class ResultSceneManagerInstaller : MonoInstaller
     {
-        [SerializeField] private ResultSceneManager _resultSceneManager;
-
         public override void InstallBindings()
         {
-            Container.Bind(typeof(ResultSceneManager), typeof(IInitializable))
+            Container.Bind(typeof(IResultSceneManager), typeof(IInitializable))
                 .To<ResultSceneManager>()
-                .FromNew()
                 .AsSingle();
         }
     }

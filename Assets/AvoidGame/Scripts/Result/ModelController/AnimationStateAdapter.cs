@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using AvoidGame.Result.Interface;
 using UnityEngine;
 using Zenject;
 
 namespace AvoidGame.Result.ModelController
 {
+    [RequireComponent(typeof(Animator))]
     public class AnimationStateAdapter : MonoBehaviour
     {
-        private Animator animator;
-        [Inject] ResultSceneManager _sceneManager;
+        [Inject] IResultSceneManager _sceneManager;
 
-        void Start()
+        [SerializeField] private Animator animator;
+        private static readonly int Ranking = Animator.StringToHash("Ranking");
+
+        private void Start()
         {
-            animator = GetComponent<Animator>();
-            var _data = _sceneManager.GetTimeData();
-            ChangeAnimation(_data.timeList, _data.playerTime);
+            ChangeAnimation();
         }
 
-        private void ChangeAnimation(List<long> timeList, long time)
+        private void ChangeAnimation()
         {
-            animator?.SetInteger("Ranking", timeList.IndexOf(time) + 1);
+            animator.SetInteger(Ranking, _sceneManager.PlayerRank);
         }
-
     }
 }
