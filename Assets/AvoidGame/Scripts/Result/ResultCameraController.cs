@@ -23,18 +23,12 @@ namespace AvoidGame.Result
 
         private void Start()
         {
-            if (_sceneManager.PlayerRank == 1)
+            _trackedDolly.m_Path = _sceneManager.PlayerRank switch
             {
-                _trackedDolly.m_Path = path1;
-            }
-            else if (_sceneManager.PlayerRank == 2)
-            {
-                _trackedDolly.m_Path = path2;
-            }
-            else
-            {
-                _trackedDolly.m_Path = path1;
-            }
+                1 => path1,
+                2 => path2,
+                _ => path1
+            };
 
             _trackedDolly.m_PathPosition = 0;
         }
