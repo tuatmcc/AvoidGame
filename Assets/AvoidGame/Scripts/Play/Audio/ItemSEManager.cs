@@ -6,7 +6,7 @@ using System.Threading;
 using UnityEngine;
 using Zenject;
 
-namespace AvoidGame.Play.Items
+namespace AvoidGame.Play.Audio
 {
     public class ItemSEManager : MonoBehaviour
     {
