@@ -20,8 +20,7 @@ namespace AvoidGame.DI
 
             Container.Bind<IAudioManager>()
                 .To<AudioManager>()
-                .FromInstance(audioManager)
-                .AsSingle();
+                .FromInstance(audioManager);
         }
     }
 }

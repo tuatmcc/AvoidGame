@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using AvoidGame.Result.Interface;
 using UnityEngine;
 using Zenject;
