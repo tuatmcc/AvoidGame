@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838832b471952c54db595072e49d0185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 9dc04ea8ac3035540827247d77364c3c, type: 3}
   decelerate: 0.1
 --- !u!114 &7432916151299801280
 MonoBehaviour:
