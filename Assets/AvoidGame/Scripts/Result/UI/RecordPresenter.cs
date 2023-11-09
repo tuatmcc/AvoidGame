@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using AvoidGame.Result.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace AvoidGame.Result.UI
 {
-   public class RecordPresenter : MonoBehaviour
+    public class RecordPresenter : MonoBehaviour
     {
         private Image image;
         [SerializeField] private int targetRank;
-        [Inject] ResultSceneManager _sceneManager;
+        [Inject] IResultSceneManager _sceneManager;
 
         private void Awake()
         {
@@ -20,14 +19,13 @@ namespace AvoidGame.Result.UI
 
         void Start()
         {
-            var _data = _sceneManager.GetTimeData();
-            SetNewRecordImage(_data.timeList, _data.playerTime);
+            SetNewRecordImage();
         }
 
-        private void SetNewRecordImage(List<long> timeList, long time)
+        private void SetNewRecordImage()
         {
             if (targetRank == 0) return;
-            if(timeList.IndexOf(time) + 1 == targetRank)
+            if (_sceneManager.PlayerRank == targetRank)
             {
                 image.enabled = true;
             }

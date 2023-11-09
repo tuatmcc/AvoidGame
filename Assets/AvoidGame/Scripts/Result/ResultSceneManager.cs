@@ -3,15 +3,16 @@ using AvoidGame.TimeRecorder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AvoidGame.Result.Interface;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// Resultシーンを管理
-/// </summary>
 namespace AvoidGame.Result
 {
-    public class ResultSceneManager : IInitializable
+    /// <summary>
+    /// Resultシーンを管理
+    /// </summary>
+    public class ResultSceneManager : IResultSceneManager, IInitializable
     {
         public event Action<ResultSceneSubState> OnSubStateChanged;
 
@@ -23,13 +24,20 @@ namespace AvoidGame.Result
 
         public ResultSceneSubState ResultSceneSubState
         {
-            get { return _resultSceneSubState; }
-            set 
-            { 
+            get => _resultSceneSubState;
+            set
+            {
                 _resultSceneSubState = value;
                 OnSubStateChanged?.Invoke(value);
             }
+        }
 
+        private int _playerRank;
+
+        public int PlayerRank
+        {
+            get => _playerRank;
+            set => _playerRank = value;
         }
 
         private ResultSceneSubState _resultSceneSubState = ResultSceneSubState.LoadingRecord;
@@ -38,6 +46,8 @@ namespace AvoidGame.Result
         {
             _records = _timeRecordable.GetTimeRanking();
             _records.Sort();
+            _playerRank = _records.IndexOf(_playerInfo.Time) + 1;
+            Debug.Log($"Rank: {_playerRank}");
         }
 
         public (List<long> timeList, long playerTime) GetTimeData()
