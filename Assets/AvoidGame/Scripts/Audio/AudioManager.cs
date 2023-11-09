@@ -16,7 +16,7 @@ namespace AvoidGame.Audio
 
         public void PlaySeNotOverlap(AudioClip audioClip)
         {
-            if (audioSource.isPlaying)
+            if (!audioSource.isPlaying)
             {
                 audioSource.PlayOneShot(audioClip);
             }
