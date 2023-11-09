@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67d0f65a2b25ae47ba7dc0c276e9b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 542a21a94a538bc40a747144a85857cf, type: 3}
   accelerate: 0.1
 --- !u!136 &3429707773725843750
 CapsuleCollider:
