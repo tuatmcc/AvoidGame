@@ -11,6 +11,7 @@ namespace AvoidGame.Result
         [SerializeField] private AnimationClip[] faceAnimationClips;
         [SerializeField] private AnimationClip[] bodyAnimationClips;
         [SerializeField] private CinemachinePath[] cameraPaths;
+        [SerializeField] private GameObject[] activationObjects;
 
         private int _index;
 
@@ -20,6 +21,7 @@ namespace AvoidGame.Result
             public AnimationClip faceAnimationClip;
             public AnimationClip bodyAnimationClip;
             public CinemachinePath cameraPath;
+            public GameObject activationObject;
         }
 
         private void Awake()
@@ -31,7 +33,8 @@ namespace AvoidGame.Result
             }
 
             _index = Random.Range(0,
-                Mathf.Min(faceAnimationClips.Length, faceAnimationClips.Length, faceAnimationClips.Length));
+                Mathf.Min(faceAnimationClips.Length, faceAnimationClips.Length, faceAnimationClips.Length,
+                    activationObjects.Length));
         }
 
         public Pattern GetCurrentPattern()
@@ -40,7 +43,8 @@ namespace AvoidGame.Result
             {
                 cameraPath = cameraPaths[_index],
                 faceAnimationClip = faceAnimationClips[_index],
-                bodyAnimationClip = bodyAnimationClips[_index]
+                bodyAnimationClip = bodyAnimationClips[_index],
+                activationObject = activationObjects[_index]
             };
         }
     }
