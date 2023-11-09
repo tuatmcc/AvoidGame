@@ -18,12 +18,11 @@ namespace AvoidGame.Calibration
 
         private CalibrationState _state = CalibrationState.Waiting;
 
-        public float CalibratingDuration { get; } = 5f;
-        public float DissolvingDuration { get; } = 5f;
+        public float WaitingDuration { get; } = 8f;
+        public float CalibratingDuration { get; } = 6f;
+        public float DissolvingDuration { get; } = 4f;
         public float FinishedDuration { get; } = 30f;
-
-
-        public float TransitioningDuration { get; } = 3f;
+        public float TransitioningDuration { get; } = 4f;
 
         public CalibrationState State
         {
@@ -45,21 +44,6 @@ namespace AvoidGame.Calibration
             _cts = new CancellationTokenSource();
             StartWaitingAsync(_cts.Token).Forget();
             OnCalibrationStateChanged += HandleCalibrationStateChange;
-        }
-
-        private async UniTask StartTimerAsync(CancellationToken token)
-        {
-            // Wait for MediaPipeManager to be ready.(MediaPipeManager is ready when it receives the first landmark data.)
-            State = CalibrationState.Waiting;
-            while ((!_mediaPipeManager.IsReady || State == CalibrationState.Waiting) && !token.IsCancellationRequested)
-            {
-                await UniTask.Delay(500, cancellationToken: token);
-                Debug.Log($"Waiting for MediaPipe. IsReady: {_mediaPipeManager.IsReady}");
-            }
-
-            // Start Calibration
-            if (State != CalibrationState.Calibrating)
-                State = CalibrationState.Calibrating;
         }
 
         public void Dispose()
