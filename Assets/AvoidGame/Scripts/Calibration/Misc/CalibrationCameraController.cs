@@ -22,6 +22,13 @@ namespace AvoidGame.Calibration.Misc
             _calibrationStateManager.OnCalibrationStateChanged += OnCalibrationStateChanged;
         }
 
+        private void Start()
+        {
+            virtualFocusCamera.Priority = 10;
+            virtualFocusCamera.Priority = 0;
+            virtualFinalCamera.Priority = 0;
+        }
+
         private void Update()
         {
             if (_calibrationStateManager.State == CalibrationState.Dissolving) return;
@@ -41,12 +48,12 @@ namespace AvoidGame.Calibration.Misc
                     virtualOrbitalCamera.Priority = 0;
                     break;
                 case CalibrationState.Finished:
-                    virtualFocusCamera.Priority = 0;
                     virtualOrbitalCamera.Priority = 10;
+                    virtualFocusCamera.Priority = 0;
                     break;
                 case CalibrationState.Transitioning:
-                    virtualOrbitalCamera.Priority = 0;
                     virtualFinalCamera.Priority = 10;
+                    virtualOrbitalCamera.Priority = 0;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);

@@ -36,9 +36,10 @@ namespace AvoidGame.Calibration.Effects
         private async UniTask ChangeDissolvePosition(CancellationToken token)
         {
             var currentDissolvePosition = -2f;
+            await UniTask.Delay(500, cancellationToken: token);
             while (currentDissolvePosition < 1f && !token.IsCancellationRequested)
             {
-                currentDissolvePosition = Mathf.Lerp(currentDissolvePosition, 1f, 0.05f);
+                currentDissolvePosition = Mathf.Lerp(currentDissolvePosition, 1f, 0.035f);
                 _dissolveMaterial.SetFloat(Dissolve, currentDissolvePosition);
                 await UniTask.Delay(10, cancellationToken: token);
             }
