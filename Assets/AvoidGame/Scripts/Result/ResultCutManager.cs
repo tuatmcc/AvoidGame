@@ -1,11 +1,14 @@
 using System.Collections.Generic;
+using AvoidGame.Result.Interface;
 using Cinemachine;
 using UnityEngine;
+using Zenject;
 
 namespace AvoidGame.Result
 {
     public class ResultCutManager : MonoBehaviour
     {
+        [Inject] private IResultSceneManager _sceneManager;
         [SerializeField] private bool debug = false;
         [SerializeField] private int debugIndex = 0;
         [SerializeField] private AnimationClip[] faceAnimationClips;
@@ -14,6 +17,7 @@ namespace AvoidGame.Result
         [SerializeField] private GameObject[] activationObjects;
 
         private int _index;
+        private int _inappropriateCountFromBack = 1;
 
 
         public struct Pattern
@@ -24,17 +28,33 @@ namespace AvoidGame.Result
             public GameObject activationObject;
         }
 
+        private void Validate()
+        {
+            var len = faceAnimationClips.Length;
+            if (len != bodyAnimationClips.Length || len != cameraPaths.Length || len != activationObjects.Length)
+            {
+                Debug.LogError("Result Cut Patterns' Length Miss Match!");
+            }
+        }
+
         private void Awake()
         {
+            Validate();
             if (debug)
             {
                 _index = debugIndex;
                 return;
             }
 
-            _index = Random.Range(0,
-                Mathf.Min(faceAnimationClips.Length, faceAnimationClips.Length, faceAnimationClips.Length,
-                    activationObjects.Length));
+            var len = faceAnimationClips.Length;
+            if (_sceneManager.PlayerRank <= 5)
+            {
+                _index = Random.Range(0, len);
+            }
+            else
+            {
+                _index = Random.Range(0, len - _inappropriateCountFromBack);
+            }
         }
 
         public Pattern GetCurrentPattern()

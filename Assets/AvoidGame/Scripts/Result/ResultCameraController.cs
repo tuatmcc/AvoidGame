@@ -25,8 +25,14 @@ namespace AvoidGame.Result
             _trackedDolly.m_PathPosition = 0;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
+            if (virtualCamera.transform.position == _trackedDolly.m_Path.EvaluatePosition(3))
+            {
+                virtualCamera.m_Follow = null;
+                virtualCamera.m_LookAt = null;
+            }
+
             _trackedDolly.m_PathPosition += 2;
         }
     }
