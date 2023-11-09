@@ -18,7 +18,7 @@ namespace AvoidGame.Play.Audio
 
         private void PlayCountSE(int count)
         {
-            if(count != 0)
+            if(0 < count && count <= 3)
             {
                 audioManager.PlaySe(countClip);
             }
