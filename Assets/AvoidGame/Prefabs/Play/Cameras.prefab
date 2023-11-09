@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7079197579571789594}
   - component: {fileID: 8527935924610337648}
   - component: {fileID: 5169265924482693377}
+  - component: {fileID: 2653885626995500019}
   m_Layer: 0
   m_Name: SeAudio
   m_TagString: Untagged
@@ -191,6 +192,20 @@ MonoBehaviour:
   SESpan: 0.05
   speedUp: {fileID: 8300000, guid: 542a21a94a538bc40a747144a85857cf, type: 3}
   speedDown: {fileID: 8300000, guid: 9dc04ea8ac3035540827247d77364c3c, type: 3}
+--- !u!114 &2653885626995500019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815667852579468023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cea781ffdf6ed54b80b5b49b040fe5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countClip: {fileID: 8300000, guid: 7af02b2548704064f99939c80d250da3, type: 3}
+  startClip: {fileID: 8300000, guid: cb2db75bc39c36d4a953c3374038afff, type: 3}
 --- !u!1 &7505337508621217427
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 7803222294235302585}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -1}
+  m_LocalPosition: {x: 0, y: 1, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
