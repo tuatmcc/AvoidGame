@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace AvoidGame.Result.ModelController
 {
     public class DirectionController : MonoBehaviour
     {
-        void Start()
+        [SerializeField] private Transform head;
+
+        private async void Start()
         {
-            Vector3 p = Camera.main.transform.position;
-            p.y = transform.position.y;
-            transform.LookAt(p);
+            await UniTask.WaitForSeconds(1);
+            if (Camera.main != null) head.transform.LookAt(Camera.main.transform.position);
         }
     }
 }

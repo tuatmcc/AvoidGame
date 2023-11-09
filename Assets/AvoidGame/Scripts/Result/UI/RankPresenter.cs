@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using AvoidGame.Result.Interface;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -10,17 +9,17 @@ namespace AvoidGame.Result.UI
     {
         [SerializeField] private TMP_Text rankText;
         [SerializeField] private int targetRank;
-        [Inject] private ResultSceneManager _sceneManager;
+        [Inject] private IResultSceneManager _sceneManager;
+
         void Start()
         {
             rankText = GetComponent<TMP_Text>();
-            var _data = _sceneManager.GetTimeData();
-            SetRankText(_data.timeList, _data.playerTime);
+            SetRankText();
         }
 
-        private void SetRankText(List<long> timeList, long time)
+        private void SetRankText()
         {
-            targetRank = (targetRank == 0 ? timeList.IndexOf(time) + 1 : targetRank);
+            targetRank = (targetRank == 0 ? _sceneManager.PlayerRank : targetRank);
             rankText.text = $"{targetRank}位";
         }
     }
