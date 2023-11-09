@@ -53,11 +53,11 @@ namespace AvoidGame.Play.Items
                 await UniTask.Delay(TimeSpan.FromSeconds(SESpan), cancellationToken: token);
                 if(pre_speed < now_speed)
                 {
-                    audioManager.PlaySe(speedDown);
+                    audioManager.PlaySe(speedUp);
                 }
                 else if(pre_speed > now_speed)
                 {
-                    audioManager.PlaySe(speedUp);
+                    audioManager.PlaySe(speedDown);
                 }
             }
         }

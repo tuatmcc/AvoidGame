@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5561526289435779581}
   - component: {fileID: 7079197579571789594}
   - component: {fileID: 8527935924610337648}
+  - component: {fileID: 5169265924482693377}
   m_Layer: 0
   m_Name: SeAudio
   m_TagString: Untagged
@@ -76,14 +77,14 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 50
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -174,6 +175,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seSource: {fileID: 7079197579571789594}
+--- !u!114 &5169265924482693377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815667852579468023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc97d72572263143bc076601316624c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SESpan: 0.05
+  speedUp: {fileID: 8300000, guid: 542a21a94a538bc40a747144a85857cf, type: 3}
+  speedDown: {fileID: 8300000, guid: 9dc04ea8ac3035540827247d77364c3c, type: 3}
 --- !u!1 &7505337508621217427
 GameObject:
   m_ObjectHideFlags: 0
