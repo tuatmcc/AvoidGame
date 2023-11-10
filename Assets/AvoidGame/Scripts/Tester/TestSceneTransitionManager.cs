@@ -18,10 +18,10 @@ namespace AvoidGame.Tester
 
         [SerializeField] private float loadAtLeast = 0.5f;
         [SerializeField] private Canvas loadingCanvas;
-        [SerializeField] private SceneName from;
-        [SerializeField] private SceneName to;
+        [SerializeField] private GameState from;
+        [SerializeField] private GameState to;
         [SerializeField] private bool skipCalibration = false;
-        [SerializeField] private List<SceneTransitionStructure> scenes;
+        [SerializeField] private List<GameState> scenes;
 
         private AvoidGameInputActions _inputActions;
 
@@ -32,11 +32,11 @@ namespace AvoidGame.Tester
             loadingCanvas.enabled = false;
 
             // GameStateを開始Stateに設定してロック
-            foreach (SceneTransitionStructure s in scenes)
+            foreach (var s in scenes)
             {
-                if (s.sceneName == from)
+                if (s == from)
                 {
-                    _gameStateManager.LockGameState(s.targetState);
+                    _gameStateManager.LockGameState(s);
                     break;
                 }
             }
@@ -70,23 +70,23 @@ namespace AvoidGame.Tester
 
         public void OnGameStateChanged(GameState gameState)
         {
-            foreach (SceneTransitionStructure s in scenes)
+            foreach (var s in scenes)
             {
-                if (s.targetState == gameState)
+                if (s == gameState)
                 {
-                    if (s.sceneName == SceneName.Calibration && skipCalibration)
+                    if (s == GameState.Calibration && skipCalibration)
                     {
                         _gameStateManager.LockGameState(GameState.Play);
                         return;
                     }
 
-                    if (!(from <= s.sceneName && s.sceneName <= to))
+                    if (!(from <= s && s <= to))
                     {
                         Debug.Log($"Test finished at : {to}");
                         return;
                     }
 
-                    LoadSceneAsync(s.sceneName.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
+                    LoadSceneAsync(s.ToString(), this.GetCancellationTokenOnDestroy()).Forget();
                 }
             }
         }

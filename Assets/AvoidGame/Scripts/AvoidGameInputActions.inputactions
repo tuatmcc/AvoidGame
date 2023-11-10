@@ -87,6 +87,65 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Description",
+            "id": "48ead572-09cf-468f-866e-29b2226372ab",
+            "actions": [
+                {
+                    "name": "Next",
+                    "type": "Button",
+                    "id": "e1b7108b-3727-498b-aa89-a24a6a6030b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SkipAll",
+                    "type": "Button",
+                    "id": "82b79008-161d-415d-bdaf-e2c8d51d332e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e6d1357e-9f13-47f4-ab40-45c94c05985c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cd519cd-6af2-4bf2-80a1-c45414bdae91",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipAll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "077b8018-3b38-4a9a-b821-f65c24ff6464",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipAll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -63,15 +63,7 @@ MonoBehaviour:
   from: 0
   to: 3
   skipCalibration: 0
-  scenes:
-  - sceneName: 0
-    targetState: 0
-  - sceneName: 1
-    targetState: 1
-  - sceneName: 2
-    targetState: 2
-  - sceneName: 3
-    targetState: 3
+  scenes: 0000000001000000020000000300000004000000
 --- !u!1001 &8432188648209006994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +76,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126725260934521016, guid: b9880459a452a9e459c44e397ebcbf3b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7653822958749718857, guid: b9880459a452a9e459c44e397ebcbf3b,
         type: 3}
@@ -133,6 +130,11 @@ PrefabInstance:
     - target: {fileID: 7653822958749718857, guid: b9880459a452a9e459c44e397ebcbf3b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095069007387257965, guid: b9880459a452a9e459c44e397ebcbf3b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
