@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838832b471952c54db595072e49d0185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decelerate: 0.05
+  decelerate: 0.1
 --- !u!114 &7432916151299801280
 MonoBehaviour:
   m_ObjectHideFlags: 0
