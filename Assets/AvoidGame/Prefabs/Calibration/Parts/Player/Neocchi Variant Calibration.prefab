@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &338495244934135447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7487717497572192166}
+  - component: {fileID: 954389945731441810}
+  m_Layer: 0
+  m_Name: ConstraintHead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7487717497572192166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338495244934135447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1157389191422233641}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &954389945731441810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338495244934135447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10bdb03db33fb148b858a4a3b646cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_ConstrainedObject: {fileID: 2295432874655947631}
+    m_SourceObjects:
+      m_Length: 1
+      m_Item0:
+        transform: {fileID: 6358144560491098660}
+        weight: 1
+      m_Item1:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item2:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item3:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item4:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item5:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item6:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item7:
+        transform: {fileID: 0}
+        weight: 0
+    m_Offset: {x: 0, y: 0, z: 0}
+    m_ConstrainedAxes:
+      x: 1
+      y: 1
+      z: 1
+    m_MaintainOffset: 0
 --- !u!1 &678434598181180141
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,12 +172,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2180984109181307573}
+  - {fileID: 7487717497572192166}
   - {fileID: 2143893212064681587}
   - {fileID: 6751709230484818560}
   - {fileID: 3445926095722551183}
   - {fileID: 154298336964574961}
   - {fileID: 3845157247026716783}
   - {fileID: 2016177979392717459}
+  - {fileID: 6358144560491098660}
   - {fileID: 5024745346504794176}
   - {fileID: 2897516223054706038}
   - {fileID: 7848562068073070270}
@@ -329,6 +410,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1157389191422233641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4930406747183126415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6358144560491098660}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6358144560491098660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4930406747183126415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604616, y: -0.00000011920932, z: 7.105424e-15, w: 1}
+  m_LocalPosition: {x: -0.0000000011110353, y: 1.2365893, z: 0.0445828}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1157389191422233641}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5597910756682438655
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,9 +662,9 @@ MonoBehaviour:
   m_Weight: 1
   m_Data:
     m_Root: {fileID: 2036625800755658747}
-    m_Tip: {fileID: 2295432874655947631}
+    m_Tip: {fileID: 7306312433024188074}
     m_Target: {fileID: 2016177979392717459}
-    m_ChainRotationWeight: 1
+    m_ChainRotationWeight: 0.8
     m_TipRotationWeight: 0.9
     m_MaxIterations: 15
     m_Tolerance: 0.0001
@@ -1735,6 +1847,7 @@ MonoBehaviour:
   ikDebugPointPrefab: {fileID: 4198472772038802745, guid: 8a6047506027f38ce827e5be2747d91f,
     type: 3}
   neck: {fileID: 2016177979392717459}
+  head: {fileID: 6358144560491098660}
   hip: {fileID: 5024745346504794176}
   leftShoulder: {fileID: 0}
   rightShoulder: {fileID: 0}
