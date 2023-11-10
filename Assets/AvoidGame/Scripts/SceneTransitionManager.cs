@@ -5,6 +5,7 @@ using AvoidGame.Calibration;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Zenject;
 
 namespace AvoidGame
@@ -19,6 +20,7 @@ namespace AvoidGame
         [SerializeField] private float loadAtLeast = 0f;
         [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private List<SceneTransitionStructure> scenes;
+        [SerializeField] private Slider loadingBar;
 
         private AvoidGameInputActions _inputActions;
         private CancellationTokenSource _sceneLoadCts;
@@ -66,6 +68,7 @@ namespace AvoidGame
         {
             _sceneLoadCts = CancellationTokenSource.CreateLinkedTokenSource(this.GetCancellationTokenOnDestroy());
             LoadSceneAsync(gameState.ToString(), _sceneLoadCts.Token).Forget();
+            StartLoadingBar(_sceneLoadCts.Token).Forget();
         }
 
         /// <summary>
@@ -77,6 +80,7 @@ namespace AvoidGame
         private async UniTask LoadSceneAsync(string sceneName, CancellationToken token)
         {
             loadingCanvas.enabled = true;
+            loadingBar.value = 0f;
             // Start unloading current scene and loading next scene
             var loadAsyncResult = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
             loadAsyncResult.allowSceneActivation = false;
@@ -87,6 +91,7 @@ namespace AvoidGame
                 // Wait for scene loading end
                 loadAsyncResult.allowSceneActivation = true;
                 await loadAsyncResult;
+                loadingBar.value = 1f;
                 loadingCanvas.enabled = false;
             }
             catch (Exception e)
@@ -129,6 +134,17 @@ namespace AvoidGame
                 await SceneManager.LoadSceneAsync(SceneName.Title.ToString());
                 Destroy(gameObject);
             }).Forget();
+        }
+
+        private async UniTask StartLoadingBar(CancellationToken token)
+        {
+            var dt = 10f;
+            var dx = 1 / (dt * loadAtLeast);
+            while (loadingBar.value < 1f && !token.IsCancellationRequested)
+            {
+                await UniTask.Delay((int)dt, cancellationToken: token);
+                loadingBar.value += dx;
+            }
         }
     }
 }
