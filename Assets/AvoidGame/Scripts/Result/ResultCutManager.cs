@@ -49,11 +49,11 @@ namespace AvoidGame.Result
             var len = faceAnimationClips.Length;
             if (_sceneManager.PlayerRank <= 5)
             {
-                _index = Random.Range(0, len);
+                _index = Random.Range(0, len - _inappropriateCountFromBack);
             }
             else
             {
-                _index = Random.Range(0, len - _inappropriateCountFromBack);
+                _index = Random.Range(0, len);
             }
         }
 
