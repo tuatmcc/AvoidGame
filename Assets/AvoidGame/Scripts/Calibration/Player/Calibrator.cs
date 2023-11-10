@@ -85,6 +85,11 @@ namespace AvoidGame.Calibration.Player
             var leftForearm = landmarks[(int)LandmarkIndex.LEFT_ELBOW];
             var rightForeArm = landmarks[(int)LandmarkIndex.RIGHT_ELBOW];
 
+            var neckX = (leftShoulder.X + rightShoulder.X) * 0.5f;
+            var neckY = (leftShoulder.Y + rightShoulder.Y) * 0.5f;
+            var neckZ = (leftShoulder.Z + rightShoulder.Z) * 0.5f;
+            var headY = neckY + (nose.Y - neckY) * 0.2f;
+
             var hipY = (leftHip.Y + rightHip.Y) * 0.5f;
             var xBase = (leftHip.X + rightHip.X) * 0.5f - 0.5f;
             var zBase = (leftHip.Z + rightHip.Z) * 0.5f;
@@ -99,10 +104,8 @@ namespace AvoidGame.Calibration.Player
             ik.leftKnee.localPosition = ScaleBody(leftShin.X - xBase, leftShin.Y, leftShin.Z - zBase);
             ik.rightKnee.localPosition = ScaleBody(rightShin.X - xBase, rightShin.Y, rightShin.Z - zBase);
 
-            ik.neck.localPosition = ScaleBody(
-                (leftShoulder.X + rightShoulder.X) * 0.5f - xBase,
-                (leftShoulder.Y + rightShoulder.Y) * 0.5f,
-                (leftShoulder.Z + rightShoulder.Z) * 0.5f - zBase);
+            ik.neck.localPosition = ScaleBody(neckX - xBase, neckY, neckZ - zBase);
+            ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
             ik.leftWrist.localPosition = ScaleBody(leftHand.X - xBase, leftHand.Y, leftHand.Z - zBase);
             ik.rightWrist.localPosition = ScaleBody(rightHand.X - xBase, rightHand.Y, rightHand.Z - zBase);
             ik.leftElbow.localPosition = ScaleBody(leftForearm.X - xBase, leftForearm.Y, leftForearm.Z - zBase);
