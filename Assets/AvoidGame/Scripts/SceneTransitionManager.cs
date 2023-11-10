@@ -19,7 +19,6 @@ namespace AvoidGame
 
         [SerializeField] private float loadAtLeast = 0f;
         [SerializeField] private Canvas loadingCanvas;
-        [SerializeField] private List<SceneTransitionStructure> scenes;
         [SerializeField] private Slider loadingBar;
 
         private AvoidGameInputActions _inputActions;

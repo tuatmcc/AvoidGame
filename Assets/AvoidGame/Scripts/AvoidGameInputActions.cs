@@ -109,6 +109,65 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Description"",
+            ""id"": ""48ead572-09cf-468f-866e-29b2226372ab"",
+            ""actions"": [
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1b7108b-3727-498b-aa89-a24a6a6030b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipAll"",
+                    ""type"": ""Button"",
+                    ""id"": ""82b79008-161d-415d-bdaf-e2c8d51d332e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e6d1357e-9f13-47f4-ab40-45c94c05985c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cd519cd-6af2-4bf2-80a1-c45414bdae91"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipAll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""077b8018-3b38-4a9a-b821-f65c24ff6464"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipAll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -120,6 +179,10 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
         // Global
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_ForceExit = m_Global.FindAction("ForceExit", throwIfNotFound: true);
+        // Description
+        m_Description = asset.FindActionMap("Description", throwIfNotFound: true);
+        m_Description_Next = m_Description.FindAction("Next", throwIfNotFound: true);
+        m_Description_SkipAll = m_Description.FindAction("SkipAll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -277,6 +340,60 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
         }
     }
     public GlobalActions @Global => new GlobalActions(this);
+
+    // Description
+    private readonly InputActionMap m_Description;
+    private List<IDescriptionActions> m_DescriptionActionsCallbackInterfaces = new List<IDescriptionActions>();
+    private readonly InputAction m_Description_Next;
+    private readonly InputAction m_Description_SkipAll;
+    public struct DescriptionActions
+    {
+        private @AvoidGameInputActions m_Wrapper;
+        public DescriptionActions(@AvoidGameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Next => m_Wrapper.m_Description_Next;
+        public InputAction @SkipAll => m_Wrapper.m_Description_SkipAll;
+        public InputActionMap Get() { return m_Wrapper.m_Description; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DescriptionActions set) { return set.Get(); }
+        public void AddCallbacks(IDescriptionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DescriptionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DescriptionActionsCallbackInterfaces.Add(instance);
+            @Next.started += instance.OnNext;
+            @Next.performed += instance.OnNext;
+            @Next.canceled += instance.OnNext;
+            @SkipAll.started += instance.OnSkipAll;
+            @SkipAll.performed += instance.OnSkipAll;
+            @SkipAll.canceled += instance.OnSkipAll;
+        }
+
+        private void UnregisterCallbacks(IDescriptionActions instance)
+        {
+            @Next.started -= instance.OnNext;
+            @Next.performed -= instance.OnNext;
+            @Next.canceled -= instance.OnNext;
+            @SkipAll.started -= instance.OnSkipAll;
+            @SkipAll.performed -= instance.OnSkipAll;
+            @SkipAll.canceled -= instance.OnSkipAll;
+        }
+
+        public void RemoveCallbacks(IDescriptionActions instance)
+        {
+            if (m_Wrapper.m_DescriptionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDescriptionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DescriptionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DescriptionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DescriptionActions @Description => new DescriptionActions(this);
     public interface ICalibrationActions
     {
         void OnSubmit(InputAction.CallbackContext context);
@@ -285,5 +402,10 @@ public partial class @AvoidGameInputActions: IInputActionCollection2, IDisposabl
     public interface IGlobalActions
     {
         void OnForceExit(InputAction.CallbackContext context);
+    }
+    public interface IDescriptionActions
+    {
+        void OnNext(InputAction.CallbackContext context);
+        void OnSkipAll(InputAction.CallbackContext context);
     }
 }

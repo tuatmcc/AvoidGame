@@ -61,7 +61,8 @@ namespace AvoidGame
 
         public void MoveToNextState()
         {
-            ChangeGameState(GameState + 1);
+            if (gameStateLocked) return;
+            GameState++;
         }
 
         /// <summary>
