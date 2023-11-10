@@ -81,6 +81,7 @@ namespace AvoidGame.Calibration
         private async UniTask StartWaitingAsync(CancellationToken token)
         {
             await UniTask.WaitUntil(() => _mediaPipeManager.IsReady, cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(WaitingDuration), cancellationToken: token);
             if (State == CalibrationState.Waiting)
                 State++;
         }
