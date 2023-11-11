@@ -12,6 +12,7 @@ namespace AvoidGame.Calibration.UI
         [SerializeField] private TMP_Text scanDescription;
         [SerializeField] private TMP_Text playDescription;
         [SerializeField] private RawImage glitchImage;
+        [SerializeField] private TMP_Text calibratingDescription;
 
         private void Awake()
         {
@@ -19,6 +20,7 @@ namespace AvoidGame.Calibration.UI
             glitchImage.enabled = false;
             scanDescription.enabled = true;
             playDescription.enabled = false;
+            calibratingDescription.enabled = false;
         }
 
         private void OnCalibrationStateChanged(CalibrationState state)
@@ -30,6 +32,7 @@ namespace AvoidGame.Calibration.UI
                     scanDescription.enabled = true;
                     playDescription.enabled = false;
                     glitchImage.enabled = false;
+                    calibratingDescription.enabled = false;
                     break;
                 }
                 case CalibrationState.Calibrating:
@@ -37,6 +40,7 @@ namespace AvoidGame.Calibration.UI
                     glitchImage.enabled = true;
                     scanDescription.enabled = false;
                     playDescription.enabled = false;
+                    calibratingDescription.enabled = true;
                     break;
                 }
                 case CalibrationState.Finished:
@@ -44,12 +48,14 @@ namespace AvoidGame.Calibration.UI
                     playDescription.enabled = true;
                     glitchImage.enabled = false;
                     scanDescription.enabled = false;
+                    calibratingDescription.enabled = false;
                     break;
                 }
                 default:
                     scanDescription.enabled = false;
                     glitchImage.enabled = false;
                     playDescription.enabled = false;
+                    calibratingDescription.enabled = false;
                     break;
             }
         }
