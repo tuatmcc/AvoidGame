@@ -105,7 +105,7 @@ namespace AvoidGame.Calibration.Player
             ik.rightKnee.localPosition = ScaleBody(rightShin.X - xBase, rightShin.Y, rightShin.Z - zBase);
 
             ik.neck.localPosition = ScaleBody(neckX - xBase, neckY, neckZ - zBase);
-            ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
+            // ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
             ik.leftWrist.localPosition = ScaleBody(leftHand.X - xBase, leftHand.Y, leftHand.Z - zBase);
             ik.rightWrist.localPosition = ScaleBody(rightHand.X - xBase, rightHand.Y, rightHand.Z - zBase);
             ik.leftElbow.localPosition = ScaleBody(leftForearm.X - xBase, leftForearm.Y, leftForearm.Z - zBase);

@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/AvoidGame/Scenes/Title.unity
     guid: abf59d734416c3240b12b9a2210eb7d8
   - enabled: 1
+    path: Assets/AvoidGame/Scenes/Description.unity
+    guid: 0f09e04db2c7382e6afbb0f82e24426d
+  - enabled: 1
     path: Assets/AvoidGame/Scenes/Calibration.unity
-    guid: e70812b04876d384db7f88499bf3488a
+    guid: 754136f47fc52f9849d5663945eac03e
   - enabled: 1
     path: Assets/AvoidGame/Scenes/Play.unity
     guid: e8c75018fb01e9147abec761b1e5494e

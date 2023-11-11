@@ -12,7 +12,8 @@ namespace AvoidGame.Calibration.Player
         [SerializeField] private GameObject ikDebugPointPrefab;
 
         public Transform neck;
-        public Transform head;
+
+        // public Transform head;
         public Transform hip;
         public Transform leftShoulder;
         public Transform rightShoulder;
@@ -47,7 +48,7 @@ namespace AvoidGame.Calibration.Player
         private void InstantiateIKDebugPoints()
         {
             _bones.Add(neck);
-            _bones.Add(head);
+            // _bones.Add(head);
             _bones.Add(hip);
             _bones.Add(leftElbow);
             _bones.Add(leftWrist);
