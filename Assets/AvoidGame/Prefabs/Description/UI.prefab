@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1000, y: 0}
+  m_AnchoredPosition: {x: 1000, y: 300}
   m_SizeDelta: {x: 1800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &796765861781561111
@@ -65,11 +65,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: In Game, as you move forward, you need to touch speed up items and avoid
-    speed down items.
+  m_text: "\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u304C\u52D5\u304D\u59CB\u3081\u305F\u3089\u3001\u3057\u3083\u304C\u3093\u3060\u308A\u3001\u30B8\u30E3\u30F3\u30D7\u3057\u305F\u308A\u3001\u624B\u3092\u4F38\u3070\u3057\u305F\u308A\u3057\u3066\u30A2\u30A4\u30C6\u30E0\u306B\u89E6\u308C\u305F\u308A\u907F\u3051\u305F\u308A\u3057\u307E\u3057\u3087\u3046\u3002"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -200,10 +200,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rules
+  m_text: "\u30B2\u30FC\u30E0\u8AAC\u660E"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -511,10 +512,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rules
+  m_text: "\u30B2\u30FC\u30E0\u8AAC\u660E"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -717,10 +719,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rules
+  m_text: "\u30B2\u30FC\u30E0\u8AAC\u660E"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -783,7 +786,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3313907937049573826
@@ -851,11 +854,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: After that, Move your arms and feets to check if you can controll game
-    character with your motion.
+  m_text: "\u30B9\u30AD\u30E3\u30F3\u304C\u7D42\u308F\u3063\u305F\u3089\u3001\u624B\u8DB3\u3092\u52D5\u304B\u3057\u3066\u30B2\u30FC\u30E0\u5185\u30AD\u30E3\u30E9\u306E\u52D5\u4F5C\u304C\u8FFD\u5F93\u3059\u308B\u304B\u78BA\u8A8D\u3057\u307E\u3059\u3002"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -986,10 +989,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First, Keep T-Posed while Scanning Your Body.
+  m_text: "\u307E\u305A\u3001T\u5B57\u30DD\u30FC\u30BA\u3092\u3068\u308A\u3001\u4F53\u3092\u30B9\u30AD\u30E3\u30F3\u3057\u307E\u3059\u3002"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1072,7 +1076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7191798208789601781
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1150,7 +1154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4261556918407486415
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1300,7 +1304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8408325837989162497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1627,7 +1631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1000, y: 0}
+  m_AnchoredPosition: {x: 1000, y: 200}
   m_SizeDelta: {x: 1800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &790711813178896491
@@ -1658,10 +1662,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score is calculated based on time.
+  m_text: "\u9752\u3068\u7DD1\u306E\u5149\u308B\u30A2\u30A4\u30C6\u30E0: \u52A0\u901F\n\u8D64\u306E\u30C8\u30B2\u30C8\u30B2:
+    \u6E1B\u901F\n\n\u30B4\u30FC\u30EB\u30BF\u30A4\u30E0\u304C\u30B9\u30B3\u30A2\u3068\u306A\u308A\u307E\u3059"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1842,10 +1848,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rules
+  m_text: "\u30B2\u30FC\u30E0\u8AAC\u660E"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64afd9fb0a5b1a66b9e41ba610948cb0, type: 2}
+  m_sharedMaterial: {fileID: -8227993561525207158, guid: 64afd9fb0a5b1a66b9e41ba610948cb0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1908,6 +1915,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
