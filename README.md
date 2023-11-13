@@ -50,3 +50,13 @@ Python, C#間で LAN ケーブルつないでソケット通信をするやつ
 - `Animation Rigging`
 - `InputSystems`
 
+### 外部アセット
+
+- フォント
+    - [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP)
+    - 
+- コース・周辺のビル
+    - [⑨な3Dショップ サイバーシティ2050 - BOOTH](https://booth.pm/ja/items/4916802)
+- 人型アニメーション
+    - [Mixamo](https://mixamo.com)
+    - [ねここや EmoteBox - BOOTH](https://booth.pm/ja/items/2291899)
