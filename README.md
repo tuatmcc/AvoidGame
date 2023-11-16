@@ -30,7 +30,11 @@ Python, C#間で LAN ケーブルつないでソケット通信をするやつ
 
 ## 概要
 
-ゲーム本体部分は大体`Assets/AvoidGame`にある(一部プレハブやモデル、マテリアルは`Assets/DesignDemo`にある)
+Webカメラによるモーションキャプチャでゲーム内キャラクターを動かしてアイテムを取ったり避けたりするゲーム。
+
+あらかじめ[tuatmcc/MediaPipeSocket](https://github.com/tuatmcc/MediaPipeSicket)が起動している必要がある。
+
+本体部分は大体`Assets/AvoidGame`にある(一部プレハブやモデル、マテリアルは`Assets/DesignDemo`にある)
 
 ### シーン構成
 
