@@ -93,7 +93,7 @@
     "LIL_FEATURE_AudioLinkLocalMap": false,
     "LIL_FEATURE_DissolveMask": false,
     "LIL_FEATURE_DissolveNoiseMask": false,
-    "LIL_FEATURE_OutlineTex": false,
+    "LIL_FEATURE_OutlineTex": true,
     "LIL_FEATURE_OutlineWidthMask": false,
     "LIL_FEATURE_OutlineVectorTex": false,
     "LIL_FEATURE_FurNoiseMask": false,
