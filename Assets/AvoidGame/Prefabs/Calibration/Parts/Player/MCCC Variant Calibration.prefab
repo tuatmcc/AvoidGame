@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f14702a3c649e2b219d34cd03b34c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugIK: 1
+  debugIK: 0
   ikDebugPointPrefab: {fileID: 4198472772038802745, guid: 8a6047506027f38ce827e5be2747d91f,
     type: 3}
   neck: {fileID: 1269751348852698440}

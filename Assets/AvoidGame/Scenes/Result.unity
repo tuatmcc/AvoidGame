@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.037845913, g: 0.054754294, b: 0.07596058, a: 1}
+  m_IndirectSpecularColor: {r: 0.037812423, g: 0.054739274, b: 0.075913906, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1003,17 +1003,17 @@ PrefabInstance:
     - target: {fileID: 7104381577045614637, guid: 7257e857e53a28a4d8af451e69f99728,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.11231449
+      value: 0.11231447
       objectReference: {fileID: 0}
     - target: {fileID: 7104381577045614637, guid: 7257e857e53a28a4d8af451e69f99728,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7903984
+      value: 0.7903985
       objectReference: {fileID: 0}
     - target: {fileID: 7104381577045614637, guid: 7257e857e53a28a4d8af451e69f99728,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.58261406
+      value: -0.582614
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1135,17 +1135,17 @@ PrefabInstance:
     - target: {fileID: 4275042415931871847, guid: 77d38806a27db3a89a249d2748b094e2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.11231449
+      value: 0.11231447
       objectReference: {fileID: 0}
     - target: {fileID: 4275042415931871847, guid: 77d38806a27db3a89a249d2748b094e2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7903984
+      value: 0.7903985
       objectReference: {fileID: 0}
     - target: {fileID: 4275042415931871847, guid: 77d38806a27db3a89a249d2748b094e2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.58261406
+      value: -0.582614
       objectReference: {fileID: 0}
     - target: {fileID: 8621250073387827967, guid: 77d38806a27db3a89a249d2748b094e2,
         type: 3}
@@ -1248,7 +1248,7 @@ PrefabInstance:
     - target: {fileID: 7810220441055049913, guid: e72b136e091b4fe80b50641d97434243,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
