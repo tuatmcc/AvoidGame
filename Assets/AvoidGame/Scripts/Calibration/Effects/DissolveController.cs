@@ -39,7 +39,7 @@ namespace AvoidGame.Calibration.Effects
             await UniTask.Delay(500, cancellationToken: token);
             while (currentDissolvePosition < 1f && !token.IsCancellationRequested)
             {
-                currentDissolvePosition = Mathf.Lerp(currentDissolvePosition, 1f, 0.015f);
+                currentDissolvePosition = Mathf.Lerp(currentDissolvePosition, 1f, 0.01f);
                 _dissolveMaterial.SetFloat(Dissolve, currentDissolvePosition);
                 await UniTask.Delay(10, cancellationToken: token);
             }
