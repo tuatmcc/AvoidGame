@@ -63,7 +63,7 @@ namespace AvoidGame.Calibration.Player
         private Vector3 ScaleBody(float x, float y, float z)
         {
             y = 1 - y;
-            return Vector3.Scale(_bodyMultiplier, new Vector3(x - 0.5f, y - _floorY, z));
+            return Vector3.Scale(_bodyMultiplier, new Vector3(-x + 0.5f, y - _floorY, -z));
         }
 
 
