@@ -3,6 +3,7 @@ using AvoidGame.Calibration.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Play.Player
@@ -14,11 +15,11 @@ namespace AvoidGame.Play.Player
     {
         [Inject] IMediaPipeManager _mediaPipeManager;
         
-        [SerializeField] Calibrator calibrator;
+        [FormerlySerializedAs("calibrator")] [SerializeField] IKController ikController;
 
         void Update()
         {
-            calibrator.Retarget(_mediaPipeManager.LandmarkData);
+            ikController.Retarget(_mediaPipeManager.LandmarkData);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace AvoidGame.Calibration.Player
     /// <summary>
     /// Holds the IK points (and visualizes them)
     /// </summary>
-    public class PoseIK : MonoBehaviour
+    public class IKVisualizer : MonoBehaviour
     {
         [SerializeField] private bool debugIK = true;
         [SerializeField] private GameObject ikDebugPointPrefab;
@@ -25,6 +25,8 @@ namespace AvoidGame.Calibration.Player
         public Transform rightKnee;
         public Transform leftFoot;
         public Transform rightFoot;
+        public Transform leftHand;
+        public Transform rightHand;
 
         private readonly List<Transform> _bones = new List<Transform>();
         private readonly List<Transform> _debugPoints = new List<Transform>();
@@ -58,6 +60,8 @@ namespace AvoidGame.Calibration.Player
             _bones.Add(leftFoot);
             _bones.Add(rightKnee);
             _bones.Add(rightFoot);
+            _bones.Add(leftHand);
+            _bones.Add(rightHand);
 
             foreach (var _ in _bones)
             {
