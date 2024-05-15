@@ -1,5 +1,6 @@
 using AvoidGame.MediaPipe;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Calibration.Player
@@ -7,12 +8,12 @@ namespace AvoidGame.Calibration.Player
     /// <summary>
     /// Calculates the retargeting of the pose and holds the multiplier.
     /// </summary>
-    [RequireComponent(typeof(PoseIK))]
-    public class Calibrator : MonoBehaviour
+    [RequireComponent(typeof(IKVisualizer))]
+    public class IKController : MonoBehaviour
     {
         [Inject] private PlayerInfo _playerInfo;
 
-        [SerializeField] private PoseIK ik;
+        [SerializeField] private IKVisualizer ikVisualizer;
 
         private Vector3 _bodyMultiplier = Vector3.one;
         private float _floorY = 0f;
@@ -48,9 +49,10 @@ namespace AvoidGame.Calibration.Player
             else
             {
                 _floorY = 1 - (leftHeel.Y + rightHeel.Y) * 0.5f;
-                _bodyMultiplier.x = -Mathf.Abs(ik.leftWrist.position.x - ik.rightWrist.position.x) / armLength;
-                _bodyMultiplier.y = Mathf.Abs(ik.leftElbow.position.y + ik.rightElbow.position.y -
-                                        ik.rightFoot.position.y + ik.leftFoot.position.y) /
+                _bodyMultiplier.x = -Mathf.Abs(ikVisualizer.leftWrist.position.x - ikVisualizer.rightWrist.position.x) /
+                                    armLength;
+                _bodyMultiplier.y = Mathf.Abs(ikVisualizer.leftElbow.position.y + ikVisualizer.rightElbow.position.y -
+                                        ikVisualizer.rightFoot.position.y + ikVisualizer.leftFoot.position.y) /
                                     bodyHeight;
                 _bodyMultiplier.z = 0.5f;
             }
@@ -95,22 +97,58 @@ namespace AvoidGame.Calibration.Player
             var zBase = (leftHip.Z + rightHip.Z) * 0.5f;
 
             // set ik positions
-            ik.hip.localPosition = ScaleBody(
+            ikVisualizer.hip.localPosition = ScaleBody(
                 (leftHip.X + rightHip.X) * 0.5f - xBase,
                 (leftHip.Y + rightHip.Y) * 0.5f,
                 (leftHip.Z + rightHip.Z) * 0.5f - zBase);
-            ik.leftFoot.localPosition = ScaleBody(leftFoot.X - xBase, leftFoot.Y, leftFoot.Z - zBase);
-            ik.rightFoot.localPosition = ScaleBody(rightFoot.X - xBase, rightFoot.Y, rightFoot.Z - zBase);
-            ik.leftKnee.localPosition = ScaleBody(leftShin.X - xBase, leftShin.Y, leftShin.Z - zBase);
-            ik.rightKnee.localPosition = ScaleBody(rightShin.X - xBase, rightShin.Y, rightShin.Z - zBase);
+            ikVisualizer.leftFoot.localPosition = ScaleBody(leftFoot.X - xBase, leftFoot.Y, leftFoot.Z - zBase);
+            ikVisualizer.rightFoot.localPosition = ScaleBody(rightFoot.X - xBase, rightFoot.Y, rightFoot.Z - zBase);
+            ikVisualizer.leftKnee.localPosition = ScaleBody(leftShin.X - xBase, leftShin.Y, leftShin.Z - zBase);
+            ikVisualizer.rightKnee.localPosition = ScaleBody(rightShin.X - xBase, rightShin.Y, rightShin.Z - zBase);
 
-            ik.neck.localPosition = ScaleBody(neckX - xBase, neckY, neckZ - zBase);
+            ikVisualizer.neck.localPosition = ScaleBody(neckX - xBase, neckY, neckZ - zBase);
             // ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
-            ik.leftWrist.localPosition = ScaleBody(leftHand.X - xBase, leftHand.Y, leftHand.Z - zBase);
-            ik.rightWrist.localPosition = ScaleBody(rightHand.X - xBase, rightHand.Y, rightHand.Z - zBase);
-            ik.leftElbow.localPosition = ScaleBody(leftForearm.X - xBase, leftForearm.Y, leftForearm.Z - zBase);
-            ik.rightElbow.localPosition =
+            ikVisualizer.leftWrist.localPosition = ScaleBody(leftHand.X - xBase, leftHand.Y, leftHand.Z - zBase);
+            ikVisualizer.rightWrist.localPosition = ScaleBody(rightHand.X - xBase, rightHand.Y, rightHand.Z - zBase);
+            ikVisualizer.leftElbow.localPosition =
+                ScaleBody(leftForearm.X - xBase, leftForearm.Y, leftForearm.Z - zBase);
+            ikVisualizer.rightElbow.localPosition =
                 ScaleBody(rightForeArm.X - xBase, rightForeArm.Y, rightForeArm.Z - zBase);
+
+            SetWristRotations(landmarks);
+        }
+
+        private void SetWristRotations(Landmark[] landmarks)
+        {
+            // Left wrist rotation
+            var leftWrist = landmarks[(int)LandmarkIndex.LEFT_WRIST];
+            var leftIndex = landmarks[(int)LandmarkIndex.LEFT_INDEX];
+            var leftThumb = landmarks[(int)LandmarkIndex.LEFT_THUMB];
+
+            var leftWristRotation = CalculateRotation(leftWrist, leftIndex, leftThumb);
+            ikVisualizer.leftHand.localRotation = leftWristRotation;
+
+            // Right wrist rotation
+            var rightWrist = landmarks[(int)LandmarkIndex.RIGHT_WRIST];
+            var rightIndex = landmarks[(int)LandmarkIndex.RIGHT_INDEX];
+            var rightThumb = landmarks[(int)LandmarkIndex.RIGHT_THUMB];
+
+            var rightWristRotation = CalculateRotation(rightWrist, rightIndex, rightThumb);
+            ikVisualizer.rightHand.localRotation = rightWristRotation;
+        }
+
+        // Helper method to calculate quaternion rotation from three points
+        private Quaternion CalculateRotation(Landmark wrist, Landmark index, Landmark thumb)
+        {
+            var wristPos = new Vector3(wrist.X, -wrist.Y, wrist.Z);
+            var indexPos = new Vector3(index.X, -index.Y, index.Z);
+            var thumbPos = new Vector3(thumb.X, -thumb.Y, thumb.Z);
+
+            var forward = (indexPos - wristPos).normalized;
+            var up = (thumbPos - wristPos).normalized;
+            var rotation = Quaternion.LookRotation(forward, up);
+
+            return rotation;
         }
     }
 }

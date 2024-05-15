@@ -1,17 +1,18 @@
 using System;
 using AvoidGame.Calibration.Interface;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Calibration.Player
 {
-    [RequireComponent(typeof(Calibrator))]
+    [RequireComponent(typeof(IKController))]
     public class CalibrationPlayer : MonoBehaviour
     {
         [Inject] private IMediaPipeManager _mediaPipeManager;
         [Inject] private ICalibrationStateManager _calibrationStateManager;
 
-        [SerializeField] private Calibrator calibrator;
+        [FormerlySerializedAs("calibrator")] [SerializeField] private IKController ikController;
 
         private PoseAccumulator _poseAccumulator;
 
@@ -43,7 +44,7 @@ namespace AvoidGame.Calibration.Player
                 {
                     if (!_mulitplierCalculated)
                     {
-                        calibrator.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
+                        ikController.CalcRetargetMultiplier(_poseAccumulator.GetAverageLandmarks());
                         _mulitplierCalculated = true;
                     }
 
@@ -51,7 +52,7 @@ namespace AvoidGame.Calibration.Player
                 }
                 case CalibrationState.Finished:
                 {
-                    calibrator.Retarget(_mediaPipeManager.LandmarkData);
+                    ikController.Retarget(_mediaPipeManager.LandmarkData);
                     break;
                 }
                 case CalibrationState.Transitioning:
