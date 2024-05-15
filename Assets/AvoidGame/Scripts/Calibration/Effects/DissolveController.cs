@@ -16,7 +16,7 @@ namespace AvoidGame.Calibration.Effects
         private static readonly int Dissolve = Shader.PropertyToID("_Position");
 
         private readonly float _startDissolvePosition = -2f;
-
+    
         private void Awake()
         {
             _dissolveMaterial = skinnedMeshRenderer.material;
@@ -39,7 +39,7 @@ namespace AvoidGame.Calibration.Effects
             await UniTask.Delay(500, cancellationToken: token);
             while (currentDissolvePosition < 1f && !token.IsCancellationRequested)
             {
-                currentDissolvePosition = Mathf.Lerp(currentDissolvePosition, 1f, 0.01f);
+                currentDissolvePosition = Mathf.Lerp(currentDissolvePosition, 1f, 0.015f);
                 _dissolveMaterial.SetFloat(Dissolve, currentDissolvePosition);
                 await UniTask.Delay(10, cancellationToken: token);
             }
