@@ -93,7 +93,8 @@ namespace AvoidGame.Calibration.Player
             var headY = neckY + (nose.Y - neckY) * 0.2f;
 
             var hipY = (leftHip.Y + rightHip.Y) * 0.5f;
-            var xBase = (leftHip.X + rightHip.X) * 0.5f - 0.5f;
+            // var xBase = (leftHip.X + rightHip.X) * 0.5f - 0.5f;
+            var xBase = 0.5f;
             var zBase = (leftHip.Z + rightHip.Z) * 0.5f;
 
             // set ik positions
@@ -114,6 +115,10 @@ namespace AvoidGame.Calibration.Player
                 ScaleBody(leftForearm.X - xBase, leftForearm.Y, leftForearm.Z - zBase);
             ikVisualizer.rightElbow.localPosition =
                 ScaleBody(rightForeArm.X - xBase, rightForeArm.Y, rightForeArm.Z - zBase);
+
+            ikVisualizer.hip.localRotation = Quaternion.Euler(new Vector3(neckX, neckY, neckZ) - new Vector3(
+                leftHip.X + rightHip.X,
+                (leftHip.Y + rightHip.Y) / 2, (leftHip.Z + rightHip.Z) / 2));
 
             SetWristRotations(landmarks);
         }
