@@ -11,22 +11,18 @@ namespace AvoidGame.Play
     /// </summary>
     public class PlaySceneManager : MonoBehaviour, IPlaySceneManager
     {
-        /// <summary>
-        /// カウントダウン時のイベント
-        /// </summary>
-        public event Action OnCountStart;
-
-        public event Action<int> OnCountChanged;
-
-        [SerializeField] private float waitForCountdown = 0f;
-        [SerializeField] private int countdown = 0;
-        [SerializeField] private float waitAfterFinished = 0f;
+        [SerializeField] private float waitForCountdown;
+        [SerializeField] private int countdown = 5;
+        [SerializeField] private float waitAfterFinished;
 
         [Inject] private GameStateManager _gameStateManager;
 
         private PlaySceneState _sceneState = PlaySceneState.Countdown;
 
-        public event Action<PlaySceneState> OnPlayStateChanged;
+        private void Start()
+        {
+            StartCoroutine(Countdown());
+        }
 
         public PlaySceneState State
         {
@@ -38,10 +34,14 @@ namespace AvoidGame.Play
             }
         }
 
-        void Start()
-        {
-            StartCoroutine(Countdown());
-        }
+        /// <summary>
+        /// カウントダウン時のイベント
+        /// </summary>
+        public event Action OnCountStart;
+
+        public event Action<int> OnCountChanged;
+
+        public event Action<PlaySceneState> OnPlayStateChanged;
 
         /// <summary>
         /// 一定時間待ってカウントダウンを開始
