@@ -1,6 +1,5 @@
 using AvoidGame.MediaPipe;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Calibration.Player
@@ -11,17 +10,16 @@ namespace AvoidGame.Calibration.Player
     [RequireComponent(typeof(IKVisualizer))]
     public class IKController : MonoBehaviour
     {
-        [Inject] private PlayerInfo _playerInfo;
-
         [SerializeField] private IKVisualizer ikVisualizer;
 
         private Vector3 _bodyMultiplier = Vector3.one;
-        private float _floorY = 0f;
+        [Inject] private PlayerInfo _playerInfo;
+        private float yBase;
 
         private void Awake()
         {
             _bodyMultiplier = _playerInfo.BodyMultiplier;
-            _floorY = _playerInfo.FloorHeight;
+            yBase = _playerInfo.FloorHeight;
         }
 
 
@@ -43,29 +41,35 @@ namespace AvoidGame.Calibration.Player
             if (armLength < 0.001f || bodyHeight < 0.001f)
             {
                 Debug.LogWarning("Pose estimation might be wrong. Using default values.");
-                _floorY = 0f;
+                yBase = 0f;
                 _bodyMultiplier = Vector3.one;
             }
             else
             {
-                _floorY = 1 - (leftHeel.Y + rightHeel.Y) * 0.5f;
+                yBase = (leftHeel.Y + rightHeel.Y) * 0.5f;
                 _bodyMultiplier.x = -Mathf.Abs(ikVisualizer.leftWrist.position.x - ikVisualizer.rightWrist.position.x) /
                                     armLength;
                 _bodyMultiplier.y = Mathf.Abs(ikVisualizer.leftElbow.position.y + ikVisualizer.rightElbow.position.y -
                                         ikVisualizer.rightFoot.position.y + ikVisualizer.leftFoot.position.y) /
                                     bodyHeight;
-                _bodyMultiplier.z = 0.5f;
+                _bodyMultiplier.z = 0.5f; // 適当
             }
 
             _playerInfo.BodyMultiplier = _bodyMultiplier;
-            _playerInfo.FloorHeight = _floorY;
+            _playerInfo.FloorHeight = yBase;
         }
 
 
-        private Vector3 ScaleBody(float x, float y, float z)
+        /// <summary>
+        /// x,y,z coords relative to hip
+        /// </summary>
+        /// <param name="relativeX"></param>
+        /// <param name="relativeY"></param>
+        /// <param name="relativeZ"></param>
+        /// <returns></returns>
+        private Vector3 ScaleBody(float relativeX, float relativeY, float relativeZ)
         {
-            y = 1 - y;
-            return Vector3.Scale(_bodyMultiplier, new Vector3(-x + 0.5f, y - _floorY, -z));
+            return Vector3.Scale(_bodyMultiplier, new Vector3(relativeX, relativeY - yBase, relativeZ));
         }
 
 
@@ -93,27 +97,34 @@ namespace AvoidGame.Calibration.Player
             var headY = neckY + (nose.Y - neckY) * 0.2f;
 
             var hipY = (leftHip.Y + rightHip.Y) * 0.5f;
-            var xBase = (leftHip.X + rightHip.X) * 0.5f - 0.5f;
-            var zBase = (leftHip.Z + rightHip.Z) * 0.5f;
+            var hipX = (leftHip.X + rightHip.X) * 0.5f;
+            var hipZ = (leftHip.Z + rightHip.Z) * 0.5f;
+
+            var baseVec = new Vector3(hipX, 0, 0);
 
             // set ik positions
-            ikVisualizer.hip.localPosition = ScaleBody(
-                (leftHip.X + rightHip.X) * 0.5f - xBase,
-                (leftHip.Y + rightHip.Y) * 0.5f,
-                (leftHip.Z + rightHip.Z) * 0.5f - zBase);
-            ikVisualizer.leftFoot.localPosition = ScaleBody(leftFoot.X - xBase, leftFoot.Y, leftFoot.Z - zBase);
-            ikVisualizer.rightFoot.localPosition = ScaleBody(rightFoot.X - xBase, rightFoot.Y, rightFoot.Z - zBase);
-            ikVisualizer.leftKnee.localPosition = ScaleBody(leftShin.X - xBase, leftShin.Y, leftShin.Z - zBase);
-            ikVisualizer.rightKnee.localPosition = ScaleBody(rightShin.X - xBase, rightShin.Y, rightShin.Z - zBase);
+            ikVisualizer.hip.localPosition = ScaleBody(hipX, hipY, 0);
+            ikVisualizer.leftFoot.localPosition = baseVec + ScaleBody(leftFoot.X - hipX, leftFoot.Y, leftFoot.Z - hipZ);
+            ikVisualizer.rightFoot.localPosition =
+                baseVec + ScaleBody(rightFoot.X - hipX, rightFoot.Y, rightFoot.Z - hipZ);
+            ikVisualizer.leftKnee.localPosition = baseVec + ScaleBody(leftShin.X - hipX, leftShin.Y, leftShin.Z - hipZ);
+            ikVisualizer.rightKnee.localPosition =
+                baseVec + ScaleBody(rightShin.X - hipX, rightShin.Y, rightShin.Z - hipZ);
 
-            ikVisualizer.neck.localPosition = ScaleBody(neckX - xBase, neckY, neckZ - zBase);
+            ikVisualizer.neck.localPosition = baseVec + ScaleBody(neckX - hipX, neckY, neckZ - hipZ);
             // ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
-            ikVisualizer.leftWrist.localPosition = ScaleBody(leftHand.X - xBase, leftHand.Y, leftHand.Z - zBase);
-            ikVisualizer.rightWrist.localPosition = ScaleBody(rightHand.X - xBase, rightHand.Y, rightHand.Z - zBase);
+            ikVisualizer.leftWrist.localPosition =
+                baseVec + ScaleBody(leftHand.X - hipX, leftHand.Y, leftHand.Z - hipZ);
+            ikVisualizer.rightWrist.localPosition =
+                baseVec + ScaleBody(rightHand.X - hipX, rightHand.Y, rightHand.Z - hipZ);
             ikVisualizer.leftElbow.localPosition =
-                ScaleBody(leftForearm.X - xBase, leftForearm.Y, leftForearm.Z - zBase);
+                baseVec + ScaleBody(leftForearm.X - hipX, leftForearm.Y, leftForearm.Z - hipZ);
             ikVisualizer.rightElbow.localPosition =
-                ScaleBody(rightForeArm.X - xBase, rightForeArm.Y, rightForeArm.Z - zBase);
+                baseVec + ScaleBody(rightForeArm.X - hipX, rightForeArm.Y, rightForeArm.Z - hipZ);
+
+            ikVisualizer.hip.localRotation = Quaternion.Euler(new Vector3(neckX, neckY, neckZ) - new Vector3(
+                leftHip.X + rightHip.X,
+                (leftHip.Y + rightHip.Y) / 2, (leftHip.Z + rightHip.Z) / 2));
 
             SetWristRotations(landmarks);
         }
@@ -122,30 +133,33 @@ namespace AvoidGame.Calibration.Player
         {
             // Left wrist rotation
             var leftWrist = landmarks[(int)LandmarkIndex.LEFT_WRIST];
+            var leftPinky = landmarks[(int)LandmarkIndex.LEFT_PINKY];
             var leftIndex = landmarks[(int)LandmarkIndex.LEFT_INDEX];
             var leftThumb = landmarks[(int)LandmarkIndex.LEFT_THUMB];
 
-            var leftWristRotation = CalculateRotation(leftWrist, leftIndex, leftThumb);
-            ikVisualizer.leftHand.localRotation = leftWristRotation;
+            var leftWristRotation = CalculateRotation(leftWrist, leftPinky, leftIndex, leftThumb);
+            ikVisualizer.leftWrist.localRotation = leftWristRotation;
 
             // Right wrist rotation
             var rightWrist = landmarks[(int)LandmarkIndex.RIGHT_WRIST];
+            var rightPinky = landmarks[(int)LandmarkIndex.RIGHT_PINKY];
             var rightIndex = landmarks[(int)LandmarkIndex.RIGHT_INDEX];
             var rightThumb = landmarks[(int)LandmarkIndex.RIGHT_THUMB];
 
-            var rightWristRotation = CalculateRotation(rightWrist, rightIndex, rightThumb);
-            ikVisualizer.rightHand.localRotation = rightWristRotation;
+            var rightWristRotation = CalculateRotation(rightWrist, rightPinky, rightIndex, rightThumb);
+            ikVisualizer.rightWrist.localRotation = rightWristRotation;
         }
 
         // Helper method to calculate quaternion rotation from three points
-        private Quaternion CalculateRotation(Landmark wrist, Landmark index, Landmark thumb)
+        private Quaternion CalculateRotation(Landmark wrist, Landmark pinky, Landmark index, Landmark thumb)
         {
-            var wristPos = new Vector3(wrist.X, -wrist.Y, wrist.Z);
-            var indexPos = new Vector3(index.X, -index.Y, index.Z);
-            var thumbPos = new Vector3(thumb.X, -thumb.Y, thumb.Z);
+            var wristPos = new Vector3(wrist.X, wrist.Y, wrist.Z);
+            var pinkyPos = new Vector3(pinky.X, pinky.Y, pinky.Z);
+            var indexPos = new Vector3(index.X, index.Y, index.Z);
+            var thumbPos = new Vector3(thumb.X, thumb.Y, thumb.Z);
 
             var forward = (indexPos - wristPos).normalized;
-            var up = (thumbPos - wristPos).normalized;
+            var up = (thumbPos - pinkyPos).normalized;
             var rotation = Quaternion.LookRotation(forward, up);
 
             return rotation;

@@ -21,7 +21,7 @@ namespace AvoidGame.Calibration
         public float WaitingDuration { get; } = 8f;
         public float CalibratingDuration { get; } = 6f;
         public float DissolvingDuration { get; } = 4f;
-        public float FinishedDuration { get; } = 30f;
+        public float FinishedDuration { get; } = 1000f;
         public float TransitioningDuration { get; } = 4f;
 
         public CalibrationState State
