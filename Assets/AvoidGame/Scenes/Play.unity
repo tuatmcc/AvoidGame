@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.037792422, g: 0.054712564, b: 0.0758769, a: 1}
+  m_IndirectSpecularColor: {r: 0.037812423, g: 0.054739274, b: 0.075913906, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -126,6 +126,12 @@ NavMeshSettings:
 --- !u!4 &1384622323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1218047897625857273, guid: 2e4ab6b90a180da4e835a211fb3ba349,
+    type: 3}
+  m_PrefabInstance: {fileID: 7060041107485347462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1416059162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4949896517555138634, guid: 2e4ab6b90a180da4e835a211fb3ba349,
     type: 3}
   m_PrefabInstance: {fileID: 7060041107485347462}
   m_PrefabAsset: {fileID: 0}
@@ -518,6 +524,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 840177248574773274, guid: a24a927bb803a69409f4884592cecc2c,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1416059162}
     - target: {fileID: 1670951319242434170, guid: a24a927bb803a69409f4884592cecc2c,
         type: 3}
       propertyPath: m_Offset.y
@@ -537,6 +548,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PreserveComposition
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629954426525404417, guid: a24a927bb803a69409f4884592cecc2c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.03376558
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629954426525404417, guid: a24a927bb803a69409f4884592cecc2c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00801416
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629954426525404417, guid: a24a927bb803a69409f4884592cecc2c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.972384
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629954426525404417, guid: a24a927bb803a69409f4884592cecc2c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.23079245
       objectReference: {fileID: 0}
     - target: {fileID: 3408249445323478914, guid: a24a927bb803a69409f4884592cecc2c,
         type: 3}
@@ -770,6 +801,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 132172624626960353, guid: 57cfed05e0713fa4ca969dcc778eabcc,
+        type: 3}
+      propertyPath: countdown
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1920646689330154793, guid: 57cfed05e0713fa4ca969dcc778eabcc,
         type: 3}
       propertyPath: m_LocalPosition.x
