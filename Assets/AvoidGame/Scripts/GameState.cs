@@ -6,7 +6,7 @@ namespace AvoidGame
     public enum GameState
     {
         Title,
-        Description,
+        // Description,
         Calibration,
         Play,
         Result,
