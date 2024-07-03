@@ -1,6 +1,5 @@
 using AvoidGame.MediaPipe;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace AvoidGame.Calibration.Player
@@ -11,12 +10,11 @@ namespace AvoidGame.Calibration.Player
     [RequireComponent(typeof(IKVisualizer))]
     public class IKController : MonoBehaviour
     {
-        [Inject] private PlayerInfo _playerInfo;
-
         [SerializeField] private IKVisualizer ikVisualizer;
 
         private Vector3 _bodyMultiplier = Vector3.one;
-        private float yBase = 0f;
+        [Inject] private PlayerInfo _playerInfo;
+        private float yBase;
 
         private void Awake()
         {
@@ -105,21 +103,22 @@ namespace AvoidGame.Calibration.Player
             var baseVec = new Vector3(hipX, 0, 0);
 
             // set ik positions
-            ikVisualizer.hip.localPosition = baseVec + ScaleBody(
-                (leftHip.X + rightHip.X) * 0.5f - hipX,
-                (leftHip.Y + rightHip.Y) * 0.5f,
-                (leftHip.Z + rightHip.Z) * 0.5f - hipZ);
+            ikVisualizer.hip.localPosition = ScaleBody(hipX, hipY, 0);
             ikVisualizer.leftFoot.localPosition = baseVec + ScaleBody(leftFoot.X - hipX, leftFoot.Y, leftFoot.Z - hipZ);
-            ikVisualizer.rightFoot.localPosition = baseVec + ScaleBody(rightFoot.X - hipX, rightFoot.Y, rightFoot.Z - hipZ);
+            ikVisualizer.rightFoot.localPosition =
+                baseVec + ScaleBody(rightFoot.X - hipX, rightFoot.Y, rightFoot.Z - hipZ);
             ikVisualizer.leftKnee.localPosition = baseVec + ScaleBody(leftShin.X - hipX, leftShin.Y, leftShin.Z - hipZ);
-            ikVisualizer.rightKnee.localPosition = baseVec +  ScaleBody(rightShin.X - hipX, rightShin.Y, rightShin.Z - hipZ);
+            ikVisualizer.rightKnee.localPosition =
+                baseVec + ScaleBody(rightShin.X - hipX, rightShin.Y, rightShin.Z - hipZ);
 
-            ikVisualizer.neck.localPosition =  baseVec + ScaleBody(neckX - hipX, neckY, neckZ - hipZ);
+            ikVisualizer.neck.localPosition = baseVec + ScaleBody(neckX - hipX, neckY, neckZ - hipZ);
             // ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
-            ikVisualizer.leftWrist.localPosition =  baseVec + ScaleBody(leftHand.X - hipX, leftHand.Y, leftHand.Z - hipZ);
-            ikVisualizer.rightWrist.localPosition = baseVec +  ScaleBody(rightHand.X - hipX, rightHand.Y, rightHand.Z - hipZ);
+            ikVisualizer.leftWrist.localPosition =
+                baseVec + ScaleBody(leftHand.X - hipX, leftHand.Y, leftHand.Z - hipZ);
+            ikVisualizer.rightWrist.localPosition =
+                baseVec + ScaleBody(rightHand.X - hipX, rightHand.Y, rightHand.Z - hipZ);
             ikVisualizer.leftElbow.localPosition =
-                baseVec +  ScaleBody(leftForearm.X - hipX, leftForearm.Y, leftForearm.Z - hipZ);
+                baseVec + ScaleBody(leftForearm.X - hipX, leftForearm.Y, leftForearm.Z - hipZ);
             ikVisualizer.rightElbow.localPosition =
                 baseVec + ScaleBody(rightForeArm.X - hipX, rightForeArm.Y, rightForeArm.Z - hipZ);
 
