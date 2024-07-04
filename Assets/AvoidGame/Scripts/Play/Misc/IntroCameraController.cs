@@ -7,7 +7,7 @@ namespace AvoidGame.Play.Misc
     {
         [SerializeField] private CinemachineVirtualCamera introCamera;
         [SerializeField] private Transform playerToLookAt;
-        private readonly float speed = 0.5f;
+        private readonly float _speed = 0.5f;
         private CinemachineTrackedDolly _dolly;
 
         private void Start()
@@ -19,7 +19,7 @@ namespace AvoidGame.Play.Misc
 
         private void Update()
         {
-            _dolly.m_PathPosition += speed * Time.deltaTime;
+            _dolly.m_PathPosition += _speed * Time.deltaTime;
         }
     }
 }
