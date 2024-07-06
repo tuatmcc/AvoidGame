@@ -96,23 +96,24 @@ namespace AvoidGame.Calibration.Player
             var neckZ = (leftShoulder.Z + rightShoulder.Z) * 0.5f;
             var headY = neckY + (nose.Y - neckY) * 0.2f;
 
+
             var hipY = (leftHip.Y + rightHip.Y) * 0.5f;
             var hipX = (leftHip.X + rightHip.X) * 0.5f;
             var hipZ = (leftHip.Z + rightHip.Z) * 0.5f;
 
-            var baseVec = new Vector3(hipX, 0, 0);
+            var shoulderRootMultiplier = 0.5f;
+            var baseVec = new Vector3(-hipX, 0, hipZ);
 
             // set ik positions
-            ikVisualizer.hip.localPosition = ScaleBody(hipX, hipY, 0);
+            // ikVisualizer.hip.localPosition = ScaleBody(hipX, hipY, 0);
+            ikVisualizer.hip.localPosition = baseVec + ScaleBody(hipX * 0.2f, hipY, 0);
             ikVisualizer.leftFoot.localPosition = baseVec + ScaleBody(leftFoot.X - hipX, leftFoot.Y, leftFoot.Z - hipZ);
             ikVisualizer.rightFoot.localPosition =
                 baseVec + ScaleBody(rightFoot.X - hipX, rightFoot.Y, rightFoot.Z - hipZ);
             ikVisualizer.leftKnee.localPosition = baseVec + ScaleBody(leftShin.X - hipX, leftShin.Y, leftShin.Z - hipZ);
             ikVisualizer.rightKnee.localPosition =
                 baseVec + ScaleBody(rightShin.X - hipX, rightShin.Y, rightShin.Z - hipZ);
-
             ikVisualizer.neck.localPosition = baseVec + ScaleBody(neckX - hipX, neckY, neckZ - hipZ);
-            // ik.head.localPosition = ScaleBody(neckX - xBase, headY, neckZ - zBase);
             ikVisualizer.leftWrist.localPosition =
                 baseVec + ScaleBody(leftHand.X - hipX, leftHand.Y, leftHand.Z - hipZ);
             ikVisualizer.rightWrist.localPosition =
@@ -121,10 +122,11 @@ namespace AvoidGame.Calibration.Player
                 baseVec + ScaleBody(leftForearm.X - hipX, leftForearm.Y, leftForearm.Z - hipZ);
             ikVisualizer.rightElbow.localPosition =
                 baseVec + ScaleBody(rightForeArm.X - hipX, rightForeArm.Y, rightForeArm.Z - hipZ);
+            // ikVisualizer.leftShoulder.localPosition = baseVec + ScaleBody(leftShoulderRootRelativeX, neckY, neckZ);
+            // ikVisualizer.rightShoulder.localPosition = baseVec + ScaleBody(rightShoulderRootRelativeX, neckY, neckZ);
 
-            ikVisualizer.hip.localRotation = Quaternion.Euler(new Vector3(neckX, neckY, neckZ) - new Vector3(
-                leftHip.X + rightHip.X,
-                (leftHip.Y + rightHip.Y) / 2, (leftHip.Z + rightHip.Z) / 2));
+            ikVisualizer.hip.localRotation =
+                Quaternion.Euler(new Vector3(neckX, neckY, neckZ) - new Vector3(hipX, hipY, hipZ));
 
             SetWristRotations(landmarks);
         }
